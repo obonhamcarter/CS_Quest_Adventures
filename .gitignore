@@ -21,6 +21,26 @@ pip-delete-this-directory.txt
 # JupyterLite
 /jupyterlite/.jupyterlite.doit.db
 /jupyterlite/_output/
+/jupyterlite/api/
+/jupyterlite/build/
+/jupyterlite/consoles/
+/jupyterlite/doc/
+/jupyterlite/edit/
+/jupyterlite/extensions/
+/jupyterlite/files/
+/jupyterlite/lab/
+/jupyterlite/notebooks/
+/jupyterlite/repl/
+/jupyterlite/static/
+/jupyterlite/tree/
+/jupyterlite/*.js
+/jupyterlite/*.png
+/jupyterlite/index.html
+/jupyterlite/jupyter-lite.ipynb
+/jupyterlite/*.json
+!/jupyterlite/jupyter-lite.json
+/jupyterlite/jupyterlite.schema.v0.json
+/jupyterlite/manifest.webmanifest
 
 # IDEs
 .vscode/

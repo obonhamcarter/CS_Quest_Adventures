@@ -3,12 +3,17 @@ project:
   output-dir: _site
   render:
     - "index.qmd"
+    - "jupyterlite.qmd"
+    - "tracks-overview.qmd"
+    - "downloads.qmd"
+    - "setup.qmd"
     - "intro/*.qmd"
     - "tracks/**/*.qmd"
     - "sitedocs/*.md"
   resources:
     - files/**
     - shared/**
+    - jupyterlite/**
 
 website:
   title: "CS Quest Adventures"

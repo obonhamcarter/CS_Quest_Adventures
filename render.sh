@@ -22,6 +22,20 @@ fi
 # Change to project directory
 cd "$PROJECT_DIR"
 
+# Build JupyterLite
+echo "🔨 Building JupyterLite environment..."
+if [ -d "jupyterlite" ]; then
+    cd jupyterlite
+    source "$PROJECT_DIR/venv/bin/activate"
+    jupyter lite build --contents content
+    cp -r _output/* .
+    rm -rf _output
+    cd "$PROJECT_DIR"
+    echo "✅ JupyterLite build complete"
+else
+    echo "⚠️  JupyterLite directory not found, skipping..."
+fi
+
 # Render the site
 echo "📝 Rendering site with Quarto..."
 QUARTO_PYTHON="$VENV_PYTHON" quarto render

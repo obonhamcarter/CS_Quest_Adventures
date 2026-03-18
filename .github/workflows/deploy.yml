@@ -42,22 +42,24 @@ jobs:
         with:
           version: '1.7.33'
       
-      - name: Render Quarto site
-        env:
-          QUARTO_PYTHON: python
-        run: quarto render
-      
       - name: Build JupyterLite environment
         run: |
           if [ -d "jupyterlite" ]; then
             echo "Building JupyterLite..."
             cd jupyterlite
-            jupyter lite build --contents content --output-dir ../_site/jupyterlite
+            jupyter lite build --contents content
+            cp -r _output/* .
+            rm -rf _output
             cd ..
           else
             echo "JupyterLite directory not found, skipping..."
           fi
-        continue-on-error: true
+        continue-on-error: false
+      
+      - name: Render Quarto site
+        env:
+          QUARTO_PYTHON: python
+        run: quarto render
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
