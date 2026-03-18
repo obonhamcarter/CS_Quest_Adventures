@@ -1,0 +1,54 @@
+---
+title: "Quest 12: Complexity - Why Speed Matters"
+subtitle: "Compare Simple Big-O Patterns"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+⚡ QUEST 12 | Difficulty: Beginner | Time: 8 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/12-complexity.ipynb)
+- 📥 [Download Notebook](../files/lessons/12-complexity.ipynb)
+:::
+
+## 📖 Introduction
+Some approaches scale better than others as data grows.
+The goal here is intuition, not memorizing symbols.
+
+## 💡 Example Comparison
+
+```rust
+fn linear_search(data: &[i32], target: i32) -> bool {
+    for item in data {
+        if *item == target {
+            return true;
+        }
+    }
+    false
+}
+
+fn main() {
+    let values = vec![3, 8, 12, 20, 44];
+    println!("Found 12? {}", linear_search(&values, 12));
+}
+```
+
+## 🎯 Gentle Challenge
+Explain why checking every item is $O(n)$.
+Write your explanation in one or two plain-language sentences.
+
+## ✅ One Possible Solution
+
+The loop may inspect each element once in the worst case, so time grows roughly with the number of items.
+
+::: {.quest-complete}
+### ✨ Quest 12 Complete
+You connected algorithm steps to growth rate.
+Next: [Quest 13: Iterative Loops](13-iterative-loops.qmd)
+:::

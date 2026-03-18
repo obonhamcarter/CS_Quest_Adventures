@@ -1,0 +1,85 @@
+---
+title: "Quest 19: Structs and Impl - Rust Blueprints"
+subtitle: "Model Data and Methods with Structs"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+🏗️ QUEST 19 | Difficulty: Beginner | Time: 10 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/19-classes.ipynb)
+- 📥 [Download Notebook](../files/lessons/19-classes.ipynb)
+:::
+
+## 📖 Introduction
+Rust uses `struct` + `impl` where Python uses classes.
+You can think of this as a clear data blueprint plus methods.
+
+## 💡 Struct Example
+
+```rust
+struct Hero {
+    name: String,
+    hp: i32,
+}
+
+impl Hero {
+    fn describe(&self) {
+        println!("{} has {} HP", self.name, self.hp);
+    }
+
+    fn heal(&mut self, amount: i32) {
+        self.hp += amount;
+    }
+}
+
+fn main() {
+    let mut hero = Hero {
+        name: String::from("Luna"),
+        hp: 50,
+    };
+
+    hero.describe();
+    hero.heal(10);
+    hero.describe();
+}
+```
+
+## 🎯 Gentle Challenge
+Create a `Book` struct with `title` and `pages`, then print one book.
+If that works, add one extra method such as `is_long()`.
+
+## ✅ One Possible Solution
+
+```rust
+struct Book {
+    title: String,
+    pages: u32,
+}
+
+impl Book {
+    fn show(&self) {
+        println!("{} ({} pages)", self.title, self.pages);
+    }
+}
+
+fn main() {
+    let book = Book {
+        title: String::from("Rust for Starters"),
+        pages: 120,
+    };
+    book.show();
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 19 Complete
+You completed the full Rust Quest sequence.
+Fantastic work—keep building small Rust projects to reinforce these ideas.
+:::

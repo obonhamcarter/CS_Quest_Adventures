@@ -1,0 +1,64 @@
+---
+title: "Quest 11: Recursion - Functions Calling Themselves"
+subtitle: "Understand Base Case and Recursive Step"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+🔁 QUEST 11 | Difficulty: Beginner | Time: 10 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/11-recursion.ipynb)
+- 📥 [Download Notebook](../files/lessons/11-recursion.ipynb)
+:::
+
+## 📖 Introduction
+Recursion means solving a problem by reducing it into smaller copies of itself.
+Keep your base case simple and visible.
+
+## 💡 Factorial Example
+
+```rust
+fn factorial(n: u64) -> u64 {
+    if n <= 1 {
+        1
+    } else {
+        n * factorial(n - 1)
+    }
+}
+
+fn main() {
+    println!("5! = {}", factorial(5));
+}
+```
+
+## 🎯 Gentle Challenge
+Write a recursive function to sum numbers from `1` to `n`.
+Test with a small value first, then try a larger one.
+
+## ✅ One Possible Solution
+
+```rust
+fn sum_to(n: u64) -> u64 {
+    if n == 0 {
+        0
+    } else {
+        n + sum_to(n - 1)
+    }
+}
+
+fn main() {
+    println!("sum_to(6) = {}", sum_to(6));
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 11 Complete
+You practiced recursive thinking with a clear base case.
+Next: [Quest 12: Complexity](12-complexity.qmd)
+:::

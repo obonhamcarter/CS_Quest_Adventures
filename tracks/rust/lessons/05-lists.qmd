@@ -1,0 +1,67 @@
+---
+title: "Quest 5: Vectors - Collecting Data"
+subtitle: "Store Many Values with Vec<T>"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+📦 QUEST 5 | Difficulty: Beginner | Time: 8 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/05-lists.ipynb)
+- 📥 [Download Notebook](../files/lessons/05-lists.ipynb)
+:::
+
+## 📖 Introduction
+A vector is Rust's growable list type.
+
+## 💡 Basic Vector Operations
+
+```rust
+fn main() {
+    let mut scores = vec![10, 20, 30];
+    scores.push(40);
+
+    println!("All scores: {:?}", scores);
+    println!("First score: {}", scores[0]);
+}
+```
+
+## 👨‍💻 Example
+
+```rust
+fn main() {
+    let tasks = vec!["read", "code", "rest"];
+
+    for task in tasks {
+        println!("Task: {}", task);
+    }
+}
+```
+
+## 🎯 Gentle Challenge
+Create a vector of 3 favorite foods, add one more with `push`, and print each item.
+
+## ✅ One Possible Solution
+
+```rust
+fn main() {
+    let mut foods = vec!["rice", "apples", "soup"];
+    foods.push("bread");
+
+    for food in foods {
+        println!("{}", food);
+    }
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 5 Complete
+You can create, grow, and iterate through vectors.
+Next: [Quest 6: Functions](06-functions.qmd)
+:::

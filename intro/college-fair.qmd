@@ -1,0 +1,211 @@
+---
+title: "College Fair Information"
+subtitle: "CS Quest Adventures for College Fairs"
+---
+
+# 🎓 College Fair - CS Quest Adventures
+
+Welcome to CS Quest Adventures! This page is designed for college fairs and recruitment events.
+
+---
+
+## 📱 Quick Start for Students
+
+Scan the QR code or visit this site to start learning computer science through interactive quests!
+
+### Try It Now (No Installation!)
+1. **Visit this website** on any device
+2. **Choose a track:** Python, Rust, or Pygame
+3. **Start coding** immediately in your browser
+
+[🚀 Get Started Now](../index.qmd){.btn .btn-primary .btn-lg}
+
+---
+
+## 🎯 What is CS Quest Adventures?
+
+An interactive, gamified platform for learning computer science through three distinct tracks:
+
+### 🐍 Python Track
+- **Perfect for:** Complete beginners
+- **Learn:** Programming fundamentals, data structures, algorithms
+- **Special Features:** In-browser Python execution, JupyterLite environment
+- **Time:** 15-30 hours to complete
+
+### 🦀 Rust Track
+- **Perfect for:** Students interested in systems programming
+- **Learn:** Memory safety, performance optimization, systems concepts
+- **Special Features:** Rust Playground integration, parallel curriculum to Python
+- **Time:** 20-40 hours to complete
+
+### 🎮 Pygame Track
+- **Perfect for:** Game development enthusiasts
+- **Learn:** Game loops, collision detection, sprite animation, game design
+- **Special Features:** 7 complete game projects, downloadable source code
+- **Time:** 10-20 hours to complete
+
+---
+
+## 🏆 Why Choose CS Quest Adventures?
+
+### ✅ No Installation Required
+- Code runs directly in your browser
+- No complex setup or configuration
+- Works on any device (laptop, tablet, phone)
+
+### ✅ Gamified Learning
+- Medieval quest theme throughout
+- Progress tracking
+- Challenges and achievements
+
+### ✅ Multiple Learning Paths
+- Three complete tracks to explore
+- Choose based on your interests
+- Self-paced learning
+
+### ✅ Real-World Skills
+- Industry-relevant languages
+- Practical projects
+- Portfolio-ready work
+
+---
+
+## 📊 Student Testimonials
+
+> "I went from zero coding experience to building my own games in just a few weeks!" 
+> — *Student, Python → Pygame Track*
+
+> "The quest format made learning Rust actually fun. I understand memory management now!"
+> — *Student, Rust Track*
+
+> "Being able to code in my browser without installing anything was a game-changer."
+> — *Student, Python Track*
+
+---
+
+## 🎓 For Educators
+
+CS Quest Adventures is designed to be:
+
+- **Self-contained:** No server setup required
+- **Scalable:** Hundreds of students can use simultaneously
+- **Free:** Open source and freely available
+- **Flexible:** Use as curriculum, supplement, or independent study
+
+### Integration Options
+- Classroom curriculum
+- After-school program
+- Independent study
+- Summer coding camp
+- College prep course
+
+### Download Materials
+All content is available for offline use:
+
+- Jupyter notebooks for each quest
+- Complete source code
+- Setup guides
+- Teaching resources
+
+[Download All Materials →](../downloads.qmd)
+
+---
+
+## 🚀 Demo for Fair Attendees
+
+### Live Demo Path (5 minutes)
+1. Open [Python Quest 1: Variables](../tracks/python/lessons/01-variables.qmd)
+2. Scroll to any code cell
+3. Click "Run Code" — see instant results!
+4. Modify the code and run again
+5. Complete the challenge boxes
+
+### Try These Highlights:
+- **[Interactive Python](../tracks/python/lessons/01-variables.qmd)** - Instant code execution
+- **[JupyterLite](../jupyterlite.qmd)** - Full Jupyter in browser
+- **[Pygame Preview](../tracks/pygame/quests/01-maze-explorer.qmd)** - Game tutorial walkthrough
+
+---
+
+## 📥 Take It With You
+
+### For Students:
+1. **Bookmark this site**: `[YOUR_SITE_URL]`
+2. **Start on phone**, continue on laptop
+3. **No account needed** to get started
+
+### QR Codes Available:
+- Main site homepage
+- Python track start
+- Rust track start  
+- Pygame track start
+
+[Generate QR Codes →](../src/generate_qr_codes.py) *(for fair organizers)*
+
+---
+
+## 🏫 School/University Programs
+
+Interested in bringing CS Quest Adventures to your institution?
+
+### We Offer:
+- Customization for your curriculum
+- Educator training materials
+- Progress tracking integration
+- Institutional hosting support
+
+**Contact:** obonhamcarter@allegheny.edu
+
+---
+
+## 📚 Quick Facts Sheet
+
+**Languages Covered:** Python, Rust  
+**Framework:** Pygame (game development)  
+**Total Quests:** 45+ lessons/projects  
+**Target Audience:** High school to university  
+**Prerequisites:** None (complete beginner friendly)  
+**Cost:** Free and open source  
+**Platform:** Web-based, no installation  
+**Browser Support:** Chrome, Firefox, Safari, Edge  
+**Offline Mode:** Available via downloads  
+
+---
+
+## 🎯 Next Steps for Students
+
+1. **[Try Python Quest 1](../tracks/python/lessons/01-variables.qmd)** - Start with variables (5 min)
+2. **[Explore All Tracks](../tracks-overview.qmd)** - Compare learning paths
+3. **[Read Setup Guide](../setup.qmd)** - Optional local development
+4. **[Download Materials](../downloads.qmd)** - Take quests offline
+
+---
+
+## 🔗 Quick Links
+
+| Resource | Link |
+|----------|------|
+| **Homepage** | [CS Quest Adventures](../index.qmd) |
+| **Python Track** | [Start Python Quests](../tracks/python/index.qmd) |
+| **Rust Track** | [Start Rust Quests](../tracks/rust/index.qmd) |
+| **Pygame Track** | [Start Game Development](../tracks/pygame/index.qmd) |
+| **JupyterLite** | [Launch Full Environment](../jupyterlite.qmd) |
+| **Setup Guide** | [Local Installation](../setup.qmd) |
+| **FAQ** | [Common Questions](../sitedocs/faq.md) |
+
+---
+
+## 📸 Fair Booth Materials
+
+For recruiters and educators staffing booths:
+
+- **[Presentation Slides]** *(create if needed)*
+- **[Printed Handouts]** *(create if needed)*
+- **[QR Code Sheet]** - Generate via `src/create_qr_sheet.py`
+- **[Demo Script]** *(this page serves as script)*
+
+---
+
+[🚀 Start Your Quest Now](../index.qmd){.btn .btn-success .btn-lg}
+
+[← Back to Home](../index.qmd)

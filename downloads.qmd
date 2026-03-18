@@ -1,0 +1,137 @@
+---
+title: "Downloads & Resources"
+subtitle: "Access All Learning Materials"
+---
+
+# 📥 Downloads & Resources
+
+Access all course materials for offline use or integration with your preferred tools.
+
+---
+
+## 🐍 Python Track Downloads
+
+### Jupyter Notebooks
+Download individual or all Python quest notebooks:
+
+- [Download All Python Notebooks (.zip)](#) - All 19 quests
+- [Individual Notebooks](files/python/lessons/) - Download specific quests
+
+### Additional Resources
+- [Python Quick Reference (PDF)](#)
+- [Python Cheat Sheet](#)
+- [Practice Exercises](#)
+
+[Browse Python Files →](files/python/)
+
+---
+
+## 🦀 Rust Track Downloads
+
+### Rust Example Code
+Download Rust quest examples:
+
+- [Download All Rust Examples (.zip)](#) - All 19 quests
+- [Individual Examples](files/rust/lessons/) - Download specific quests
+
+### Additional Resources
+- [Rust Quick Reference (PDF)](#)
+- [Rust Ownership Guide](#)
+- [Practice Projects](#)
+
+[Browse Rust Files →](files/rust/)
+
+---
+
+## 🎮 Pygame Track Downloads
+
+### Complete Game Projects
+Download full game projects with source code:
+
+- [Download All Games (.zip)](#) - All 7 complete games
+- Individual Games:
+  - [Quest 1: Maze Explorer](#)
+  - [Quest 2: Bouncing Ball](#)
+  - [Quest 3: Pong Game](#)
+  - [Quest 4: Snake Game](#)
+  - [Quest 5: Flappy Bird](#)
+  - [Quest 6: Frogger](#)
+  - [Quest 7: Dungeon Crawler](#)
+
+### Game Assets
+- [Sprite Sheets](#)
+- [Sound Effects](#)
+- [Background Music](#)
+
+[Browse Pygame Files →](files/pygame/)
+
+---
+
+## 📚 Documentation Downloads
+
+### Guides & References
+- [Complete Curriculum Guide (PDF)](#)
+- [Instructor's Manual (PDF)](#)
+- [Setup & Installation Guide](#)
+- [FAQ Document](#)
+
+---
+
+## 🔧 Setup Files
+
+### Development Environment
+- [requirements.txt](requirements.txt) - Python dependencies
+- [.python-version](.python-version) - Recommended Python version
+- [VS Code Settings](#) - Recommended editor configuration
+
+---
+
+## 💻 Using Downloaded Materials
+
+### Jupyter Notebooks
+```bash
+# Install Jupyter
+pip install jupyter
+
+# Navigate to notebook directory
+cd files/python/lessons
+
+# Launch Jupyter
+jupyter notebook
+```
+
+### Pygame Projects
+```bash
+# Install dependencies
+pip install pygame
+
+# Or use UV (recommended)
+uv sync
+
+# Run a game
+python src_instructor/game.py
+```
+
+### Rust Code
+```bash
+# Ensure Rust is installed
+rustc --version
+
+# Compile and run
+rustc example.rs
+./example
+```
+
+---
+
+## 🤝 Need Help?
+
+Having trouble with downloads?
+
+- 📧 [Email Support](mailto:obonhamcarter@allegheny.edu)
+- 🐛 [Report Issue](https://github.com/obonhamcarter/CS_Quest_Adventures/issues)
+- 💬 [Ask in Discussions](https://github.com/obonhamcarter/CS_Quest_Adventures/discussions)
+
+---
+
+[← Back to Home](index.qmd)

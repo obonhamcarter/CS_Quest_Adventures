@@ -1,0 +1,439 @@
+---
+title: "Day 07: Dungeon Crawler 🗡️"
+subtitle: "Tile-Based RPG with Enemies and Items!"
+author: "Pygame Tutorial Series"
+format:
+  html:
+    theme: light
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    css: ../../shared/styles/tutorial.css
+execute:
+  enabled: true
+  cache: false
+---
+
+::: {.hero-banner}
+# 🗡️ Welcome to Day 07!
+
+Build a **dungeon crawler RPG**! Learn tile maps, camera systems, AI pathfinding, and inventory management.
+
+**Time Required:** ~45 minutes | **Difficulty:** Advanced 🌟🌟🌟
+:::
+
+## 🎯 What You'll Learn
+- ✅ **Tile-based maps** with 2D arrays
+- ✅ **Camera system** following player
+- ✅ **Simple AI pathfinding**
+- ✅ **Health and combat**
+- ✅ **Item collection**
+
+## 🗺️ Tile Map System
+
+::: {.callout-note}
+## 🧩 What Are Tile Maps?
+
+**Think of it like graph paper:**
+- Each cell is a **tile** (floor, wall, door, etc.)
+- We use a **2D array** (list of lists) to store the map
+- `0` = walkable floor, `1` = solid wall, `2` = door, `3` = treasure
+
+**Example map reading:**
+```
+[1,1,1,1,1]  <- Top row: all walls
+[1,0,0,0,1]  <- Hallway: walls on sides, floor in middle
+[1,1,1,1,1]  <- Bottom row: all walls
+```
+
+**Benefits:**
+- **Easy to design** - just edit numbers in array
+- **Memory efficient** - store huge maps with small arrays
+- **Collision simple** - "Is tile[y][x] a wall? Don't move there!"
+
+**Drawing:** Loop through array, draw each tile at its grid position!
+:::
+
+```python
+DUNGEON_MAP = [
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,1,0,0,0,0,1],
+    [1,0,1,0,1,0,1,1,0,1],
+    [1,0,1,0,0,0,0,1,0,1],
+    [1,0,0,0,1,1,0,0,0,1],
+    [1,1,1,1,1,1,1,1,1,1],
+]
+# 0 = floor, 1 = wall, 2 = door, 3 = treasure
+
+def draw_tile(screen, tile_type, x, y, camera_x, camera_y):
+    pixel_x = x * TILE_SIZE - camera_x
+    pixel_y = y * TILE_SIZE - camera_y
+    
+    colors = {
+        0: (50, 50, 50),   # Floor
+        1: (100, 100, 100), # Wall
+        2: (139, 69, 19),   # Door
+        3: (255, 215, 0)    # Treasure
+    }
+    
+    pygame.draw.rect(screen, colors[tile_type],
+                    (pixel_x, pixel_y, TILE_SIZE, TILE_SIZE))
+```
+
+## 📷 Camera System
+
+::: {.callout-note}
+## 🎬 Why Do We Need a Camera?
+
+**The problem:**
+- Dungeon is HUGE (maybe 100x100 tiles)
+- Screen is small (only shows 20x15 tiles)
+- We can't draw the whole dungeon!
+
+**The solution: A camera**
+- Camera tracks the player
+- Only draws what's in camera view
+- When player moves, camera follows
+
+**How it works:**
+1. **Camera position** (x, y) = top-left corner of view
+2. **Update:** Center camera on player's position
+3. **Boundaries:** Don't show outside map edges
+4. **Draw:** Subtract camera position from everything's coordinates
+
+**Visual example:**
+- Player at (1000, 500) in world
+- Camera at (600, 300) 
+- Draw player at (1000-600, 500-300) = (400, 200) on screen
+
+**This creates the "scrolling world" effect!**
+:::
+
+```python
+class Camera:
+    def __init__(self, width, height):
+        self.x = 0
+        self.y = 0
+        self.width = width
+        self.height = height
+    
+    def update(self, target_x, target_y, map_width, map_height):
+        # Center on target
+        self.x = target_x - self.width // 2
+        self.y = target_y - self.height // 2
+        
+        # Keep within map bounds
+        self.x = max(0, min(self.x, map_width - self.width))
+        self.y = max(0, min(self.y, map_height - self.height))
+```
+
+## 🤖 Simple Enemy AI
+
+::: {.callout-note}
+## 🧠 How Enemy "Thinks"
+
+**Chase behavior - step by step:**
+
+1. **Calculate direction to player:**
+   - `dx = player_x - self.x` (how far right/left)
+   - `dy = player_y - self.y` (how far down/up)
+
+2. **Normalize the direction:**
+   - Find distance: `√(dx² + dy²)`
+   - Divide dx and dy by distance = direction vector of length 1
+   - Multiply by speed = moves exact speed amount toward player
+
+3. **Check if move is legal:**
+   - Convert new position to grid coordinates
+   - Check if that tile is floor (0) or wall (1)
+   - Only move if floor!
+
+**Why normalize?**
+Without it, enemy would move FASTER diagonally! Normalizing ensures consistent speed in all directions.
+
+**Enemy strategy:** Always chase player, but can't walk through walls. Simple but effective!
+:::
+
+```python
+class Enemy:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.health = 30
+        self.speed = 2
+    
+    def chase_player(self, player_x, player_y, dungeon_map):
+        # Simple AI: move toward player
+        dx = player_x - self.x
+        dy = player_y - self.y
+        
+        # Normalize and apply speed
+        distance = (dx**2 + dy**2) ** 0.5
+        if distance > 0:
+            dx = (dx / distance) * self.speed
+            dy = (dy / distance) * self.speed
+        
+        # Try to move (check collision with walls)
+        new_x = self.x + dx
+        new_y = self.y + dy
+        
+        grid_x = int(new_x // TILE_SIZE)
+        grid_y = int(new_y // TILE_SIZE)
+        
+        if dungeon_map[grid_y][grid_x] == 0:  # Floor
+            self.x = new_x
+            self.y = new_y
+```
+
+## ⚔️ Combat System
+
+::: {.callout-note}
+## 💥 RPG Combat Basics
+
+**Player stats:**
+- `health` - Current HP (hit points)
+- `max_health` - Maximum HP (can heal up to this)
+- `attack_power` - Damage dealt per hit
+- `inventory` - List of items collected
+
+**Combat mechanics:**
+1. **Check collision** with enemy
+2. **Deal damage** - subtract attack_power from enemy health
+3. **Take damage** - enemy attacks back
+4. **Death check** - if health ≤ 0, game over or respawn
+
+**Turn-based vs real-time:**
+- **Turn-based** (classic RPGs): Take turns attacking
+- **Real-time** (this game): Continuous combat, cooldowns prevent spam
+
+**Attack cooldown:** Can't attack every frame (would be instant death!). Use a timer to space out attacks.
+:::
+
+```python
+class Player:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.health = 100
+        self.max_health = 100
+        self.attack_power = 10
+        self.inventory = []
+    
+    def attack(self, enemy):
+        if self.distance_to(enemy) < 50:
+            enemy.health -= self.attack_power
+            return True
+        return False
+    
+    def take_damage(self, amount):
+        self.health -= amount
+        if self.health < 0:
+            self.health = 0
+    
+    def distance_to(self, other):
+        dx = self.x - other.x
+        dy = self.y - other.y
+        return (dx**2 + dy**2) ** 0.5
+    
+    def collect_item(self, item):
+        self.inventory.append(item)
+        if item.type == "health_potion":
+            self.health = min(self.health + 30, self.max_health)
+```
+
+## 🎨 Complete Game Loop
+```python
+def main():
+    screen = pygame.display.set_mode((800, 600))
+    clock = pygame.time.Clock()
+    
+    # Create game objects
+    player = Player(100, 100)
+    camera = Camera(800, 600)
+    enemies = [Enemy(300, 300), Enemy(500, 200)]
+    items = [Item("health_potion", 400, 400)]
+    
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    for enemy in enemies:
+                        player.attack(enemy)
+        
+        # Player movement
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_w]: player.y -= 3
+        if keys[pygame.K_s]: player.y += 3
+        if keys[pygame.K_a]: player.x -= 3
+        if keys[pygame.K_d]: player.x += 3
+        
+        # Update camera
+        camera.update(player.x, player.y, 
+                     len(DUNGEON_MAP[0]) * TILE_SIZE,
+                     len(DUNGEON_MAP) * TILE_SIZE)
+        
+        # Update enemies
+        for enemy in enemies:
+            enemy.chase_player(player.x, player.y, DUNGEON_MAP)
+            if player.distance_to(enemy) < 30:
+                player.take_damage(5)
+        
+        # Remove dead enemies
+        enemies = [e for e in enemies if e.health > 0]
+        
+        # Draw everything
+        screen.fill(BLACK)
+        draw_dungeon(screen, DUNGEON_MAP, camera.x, camera.y)
+        draw_player(screen, player, camera.x, camera.y)
+        for enemy in enemies:
+            draw_enemy(screen, enemy, camera.x, camera.y)
+        
+        # Draw HUD
+        draw_health_bar(screen, player.health, player.max_health)
+        draw_inventory(screen, player.inventory)
+        
+        pygame.display.flip()
+        clock.tick(60)
+```
+
+## 🎯 Challenges
+1. Add multiple dungeon levels
+2. Create different enemy types
+3. Implement weapon upgrades
+4. Add boss battles
+5. Create minimap system
+
+## 🏆 Congratulations!
+
+You've completed all 7 days of Pygame tutorials! You now know:
+- Game loops and input handling
+- Physics and collision detection
+- AI and pathfinding
+- State management
+- Complex game mechanics
+
+## 📚 Where to Go Next
+- **Advanced Topics**: Particle systems, shaders, networking
+- **Game Engines**: Try Godot or Unity
+- **Polish**: Add sounds, music, animations
+- **Portfolio**: Publish your games on itch.io!
+
+## 📋 Complete Starter Code!
+
+Full version in `Day_07/src_instr/dungeon_crawler.py`. Here's a simplified starter:
+
+```python
+import pygame
+import sys
+
+pygame.init()
+
+WIDTH, HEIGHT = 800, 600
+TILE_SIZE = 40
+FPS = 60
+
+BLACK = (0, 0, 0)
+GRAY = (100, 100, 100)
+WHITE = (255, 255, 255)
+BLUE = (0, 150, 255)
+RED = (255, 0, 0)
+GOLD = (255, 215, 0)
+
+DUNGEON = [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,1,1,1,0,1,0,1,1,1,1,1,0,1,1,1,1,0,1],
+    [1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+    [1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,0,0,1,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,1,1,1,0,1,1,1,0,1,1,1,1,1,1,1,1,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+]
+
+class Player:
+    def __init__(self, x, y):
+        self.x, self.y = x, y
+        self.size = 30
+        self.speed = 3
+        self.health = 100
+    
+    def move(self, dx, dy, dungeon):
+        new_x = self.x + dx * self.speed
+        new_y = self.y + dy * self.speed
+        
+        grid_x = int(new_x // TILE_SIZE)
+        grid_y = int(new_y // TILE_SIZE)
+        
+        if 0 <= grid_y < len(dungeon) and 0 <= grid_x < len(dungeon[0]):
+            if dungeon[grid_y][grid_x] == 0:
+                self.x, self.y = new_x, new_y
+    
+    def draw(self, screen, camera_x, camera_y):
+        pygame.draw.circle(screen, BLUE, (int(self.x - camera_x), int(self.y - camera_y)), self.size//2)
+
+class Camera:
+    def __init__(self):
+        self.x, self.y = 0, 0
+    
+    def update(self, target_x, target_y):
+        self.x = target_x - WIDTH // 2
+        self.y = target_y - HEIGHT // 2
+
+def draw_dungeon(screen, dungeon, camera_x, camera_y):
+    for y, row in enumerate(dungeon):
+        for x, tile in enumerate(row):
+            if tile == 1:
+                rect = pygame.Rect(x*TILE_SIZE - camera_x, y*TILE_SIZE - camera_y, TILE_SIZE, TILE_SIZE)
+                pygame.draw.rect(screen, GRAY, rect)
+
+def main():
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    clock = pygame.time.Clock()
+    font = pygame.font.Font(None, 28)
+    
+    player = Player(TILE_SIZE * 1.5, TILE_SIZE * 1.5)
+    camera = Camera()
+    
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+        
+        keys = pygame.key.get_pressed()
+        dx = keys[pygame.K_RIGHT] - keys[pygame.K_LEFT]
+        dy = keys[pygame.K_DOWN] - keys[pygame.K_UP]
+        
+        if dx or dy:
+            player.move(dx, dy, DUNGEON)
+        
+        camera.update(player.x, player.y)
+        
+        screen.fill(BLACK)
+        draw_dungeon(screen, DUNGEON, camera.x, camera.y)
+        player.draw(screen, camera.x, camera.y)
+        
+        # Health bar
+        pygame.draw.rect(screen, RED, (10, 10, player.health * 2, 20))
+        health_text = font.render(f"HP: {player.health}", True, WHITE)
+        screen.blit(health_text, (15, 12))
+        
+        pygame.display.flip()
+        clock.tick(FPS)
+    
+    pygame.quit()
+    sys.exit()
+
+if __name__ == "__main__":
+    main()
+```
+
+::: {.hero-banner}
+# You're now a game developer! 🎮🚀
+
+Keep creating, keep learning, and most importantly - keep having fun!
+:::

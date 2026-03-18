@@ -1,0 +1,310 @@
+---
+title: "All [Language] Quests"
+subtitle: "Complete Quest Overview & Learning Path"
+track: "trackname"
+format:
+  live-html:
+    toc: true
+    toc-depth: 2
+---
+
+::: {.hero-banner}
+# 📖 All [Language] Quests
+
+Your complete journey through [Language] programming - all quests in one place!
+:::
+
+---
+
+## 🗺️ Quest Overview
+
+This track contains **[X] quests** totaling approximately **[Y] hours** of learning.
+
+::: {.progress-indicator}
+**Your Progress:** [Quest tracking will be added here]
+:::
+
+---
+
+## 📚 Foundation Quests (1-X)
+
+Essential building blocks for [Language] programming.
+
+::: {.quest-list}
+
+### Quest 1: [Topic Name]
+**⏱️ Time:** 10 min | **🎯 Difficulty:** Beginner | **Status:** 🟢 Ready
+
+Learn about [brief description].
+
+**You'll Learn:**
+- Key concept 1
+- Key concept 2
+- Key concept 3
+
+[Start Quest 1 →](lessons/01-topic.qmd){.btn .btn-primary .btn-sm}
+[Download Notebook →](../../files/trackname/lessons/01-topic.ipynb){.btn .btn-outline .btn-sm}
+
+---
+
+### Quest 2: [Topic Name]
+**⏱️ Time:** 15 min | **🎯 Difficulty:** Beginner | **Status:** 🟢 Ready
+
+[Brief description]
+
+**You'll Learn:**
+- Key concept 1
+- Key concept 2
+
+[Start Quest 2 →](lessons/02-topic.qmd){.btn .btn-primary .btn-sm}
+[Download Notebook →](../../files/trackname/lessons/02-topic.ipynb){.btn .btn-outline .btn-sm}
+
+---
+
+*[Continue pattern for all foundation quests]*
+
+:::
+
+---
+
+## 🎯 Practice Quests (X-Y)
+
+Apply your foundational knowledge through hands-on projects.
+
+::: {.quest-list}
+
+### Quest [N]: [Topic Name]
+**⏱️ Time:** 20 min | **🎯 Difficulty:** Intermediate | **Status:** 🟢 Ready
+
+[Description]
+
+**You'll Build:**
+- Mini-project 1
+- Challenge exercise
+
+[Start Quest →](lessons/0N-topic.qmd){.btn .btn-primary .btn-sm}
+
+---
+
+*[Continue for practice quests]*
+
+:::
+
+---
+
+## 🚀 Advanced Quests (Y-Z)
+
+Master complex concepts and professional techniques.
+
+::: {.quest-list}
+
+### Quest [N]: [Topic Name]
+**⏱️ Time:** 30 min | **🎯 Difficulty:** Advanced | **Status:** 🟢 Ready
+
+[Description]
+
+**Advanced Topics:**
+- Complex concept 1
+- Professional pattern
+
+[Start Quest →](lessons/0N-topic.qmd){.btn .btn-primary .btn-sm}
+
+---
+
+*[Continue for advanced quests]*
+
+:::
+
+---
+
+## 📊 Learning Path Visualization
+
+```{mermaid}
+graph LR
+    A[Quest 1<br/>Foundation] --> B[Quest 2<br/>Building]
+    B --> C[Quest 3<br/>Practice]
+    C --> D[Quest 4<br/>Patterns]
+    D --> E[Quest 5<br/>Advanced]
+    E --> F[Quest 6<br/>Mastery]
+    
+    style A fill:#10b981
+    style B fill:#3b82f6
+    style C fill:#8b5cf6
+    style D fill:#ec4899
+    style E fill:#f59e0b
+    style F fill:#ef4444
+```
+
+---
+
+## 🎯 Quest Status Legend
+
+::: {.legend}
+- 🟢 **Ready** - Quest complete and tested
+- 🟡 **Beta** - Quest available, feedback welcome
+- 🔴 **Coming Soon** - Under development
+- ⭐ **Popular** - Highly rated by students
+:::
+
+---
+
+## 💡 Recommended Learning Paths
+
+::: {.learning-paths}
+
+### Path 1: Complete Beginner
+**For absolute beginners to programming**
+
+1. Start with [Getting Started Guide](../../intro/what-is-cs.qmd)
+2. Complete Foundation Quests 1-X in order
+3. Practice with challenges after each quest
+4. Move to Practice Quests once comfortable
+
+**Estimated time:** X weeks (1-2 hours/day)
+
+---
+
+### Path 2: Quick Learner
+**For those with programming experience in another language**
+
+1. Skim Foundation Quests 1-3
+2. Deep dive into language-specific features (Quests 4-X)
+3. Focus on Practice and Advanced Quests
+4. Build your own projects alongside
+
+**Estimated time:** X weeks (2-3 hours/day)
+
+---
+
+### Path 3: Specific Topics
+**For targeted learning**
+
+Jump directly to quests covering topics you need:
+- [Topic 1] → Quest X
+- [Topic 2] → Quest Y
+- [Topic 3] → Quest Z
+
+:::
+
+---
+
+## 📥 Bulk Downloads
+
+Download all quest materials at once:
+
+::: {.download-options}
+- [📓 All Notebooks (.zip)](../../files/trackname/all-notebooks.zip)
+- [📄 All PDFs (.zip)](../../files/trackname/all-pdfs.zip)
+- [💻 All Source Code (.zip)](../../files/trackname/all-code.zip)
+- [🎓 Complete Track Bundle (.zip)](../../files/trackname/complete-track.zip)
+:::
+
+---
+
+## 🎓 Quest Completion Checklist
+
+Track your progress:
+
+### Foundation
+- [ ] Quest 1: [Topic]
+- [ ] Quest 2: [Topic]
+- [ ] Quest 3: [Topic]
+- *[etc.]*
+
+### Practice
+- [ ] Quest X: [Topic]
+- [ ] Quest Y: [Topic]
+- *[etc.]*
+
+### Advanced
+- [ ] Quest Z: [Topic]
+- *[etc.]*
+
+---
+
+## 🏆 Milestones & Achievements
+
+::: {.achievements}
+
+### 🌟 Foundation Master
+Complete all Foundation Quests (1-X)
+
+### 🎯 Practice Champion
+Complete all Practice Quests (X-Y)
+
+### 🚀 Track Complete
+Finish all quests in the track
+
+### ⚔️ Quest Warrior
+Complete track with all bonus challenges
+
+:::
+
+---
+
+## 💪 Challenge Yourself
+
+### Optional Extensions
+
+Each quest includes:
+- 🎯 **Basic Challenge** - Test fundamental understanding
+- 🔥 **Advanced Challenge** - Push your skills further
+- 🏆 **Bonus Project** - Apply concepts creatively
+
+Try to complete at least the basic challenges for each quest!
+
+---
+
+## 📚 Additional Resources
+
+### Complementary Learning
+- [Track Setup Guide](setup.qmd)
+- [Interactive Coding Environment](interactive.qmd)
+- [Practice Exercises](exercises.qmd)
+- [Track FAQ](faq.qmd)
+
+### External Resources
+- Official [Language] Documentation
+- [Language] Style Guide
+- Community Forums
+- Recommended Books
+
+---
+
+## ➡️ Ready to Start?
+
+::: {.cta-section}
+
+### Begin Your Quest Journey!
+
+[🚀 Start Quest 1](lessons/01-first-topic.qmd){.btn .btn-primary .btn-lg}
+
+Or jump to a specific quest using the links above.
+
+:::
+
+---
+
+## 🤝 Study Tips
+
+::: {.tip-box}
+
+### Maximize Your Learning
+
+1. **Sequential Learning** - Complete quests in order for best results
+2. **Practice Daily** - Consistency beats intensity
+3. **Code Along** - Type every example yourself
+4. **Experiment** - Break things and learn from errors
+5. **Review** - Revisit earlier quests when concepts connect
+6. **Build Projects** - Apply learning to your own ideas
+7. **Help Others** - Teaching reinforces understanding
+
+:::
+
+---
+
+::: {.footer-navigation}
+
+[← Back to Track Home](index.qmd) | [Next: Setup Guide →](setup.qmd)
+
+:::

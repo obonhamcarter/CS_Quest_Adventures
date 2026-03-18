@@ -1,0 +1,67 @@
+---
+title: "Quest 6: Functions - Reusable Steps"
+subtitle: "Write Functions with Parameters and Returns"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+✨ QUEST 6 | Difficulty: Beginner | Time: 8 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/06-functions.ipynb)
+- 📥 [Download Notebook](../files/lessons/06-functions.ipynb)
+:::
+
+## 📖 Introduction
+Functions make code cleaner and reusable.
+
+## 💡 Function Shape
+
+```rust
+fn greet(name: &str) {
+    println!("Hello, {}!", name);
+}
+
+fn main() {
+    greet("Riley");
+}
+```
+
+Functions can return values:
+
+```rust
+fn double(n: i32) -> i32 {
+    n * 2
+}
+
+fn main() {
+    println!("{}", double(7));
+}
+```
+
+## 🎯 Gentle Challenge
+Write `add(a, b)` that returns the sum and print the result for `3` and `9`.
+
+## ✅ One Possible Solution
+
+```rust
+fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+fn main() {
+    let result = add(3, 9);
+    println!("Sum: {}", result);
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 6 Complete
+You used parameters, return types, and function calls.
+Next: [Quest 7: HashMaps](07-dictionaries.qmd)
+:::

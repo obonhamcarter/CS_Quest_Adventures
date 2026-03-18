@@ -1,0 +1,198 @@
+---
+title: "Why Study Computer Science?"
+subtitle: "Careers, Impact, and Opportunities"
+format:
+  live-html:
+    toc: false
+---
+
+::: {.quest-badge}
+💼 INTRO | Difficulty: None | Time: 4 minutes | **Perfect for College Fair Visitors**
+:::
+
+::: {.tip-box}
+**💻 Interactive Options:**
+
+- 📓 **[Open in JupyterLite](../jupyterlite/lab/index.html?path=why-study-cs.ipynb)** - Full Jupyter environment in your browser
+- 📥 **[Download Notebook](../files/intro/why-study-cs.ipynb)** - For use in local Jupyter or Google Colab
+:::
+
+## 🎯 Five Great Reasons to Study CS
+
+::: {.hero}
+Computer Science opens doors to careers that are **in-demand**, **well-paid**, **creative**, and **meaningful**. Let's explore why!
+:::
+
+### 1. 📈 High Demand & Job Security
+
+::: {.highlight-box .highlight-info}
+**The Stats:**
+
+- 💼 **13% job growth** projected through 2030 (faster than average)
+- 🌐 **1.4 million** CS job openings expected by 2030
+- 🏢 **Every industry** needs tech talent—from hospitals to Hollywood
+- 🌍 **Work anywhere**—remote work is common in tech
+
+The world needs more computer scientists. Companies are competing for graduates!
+:::
+
+### 2. 💰 Strong Career Prospects
+
+::: {.concept-box}
+**Average Starting Salaries** (US, 2026):
+
+- **Software Engineer**: $75,000 - $120,000
+- **Data Scientist**: $85,000 - $130,000
+- **Cybersecurity Analyst**: $70,000 - $110,000
+- **Game Developer**: $65,000 - $100,000
+- **AI/ML Engineer**: $90,000 - $150,000
+
+**Mid-Career** (5-10 years experience): $100,000 - $200,000+
+
+*Note: Salaries vary by location, company size, and specialization. But CS consistently ranks among the highest-paying fields for college graduates.*
+:::
+
+### 3. 🎨 Creativity & Innovation
+
+Computer Science is a **creative field**! You get to:
+
+<div class="quest-grid">
+
+::: {.quest-card}
+### 🎮 Build Games
+Create immersive worlds, compelling stories, and engaging gameplay experiences.
+:::
+
+::: {.quest-card}
+### 📱 Design Apps
+Invent the next viral app that solves a problem or brings joy to millions.
+:::
+
+::: {.quest-card}
+### 🤖 Develop AI
+Teach computers to see, understand language, and make intelligent decisions.
+:::
+
+::: {.quest-card}
+### 🌐 Create Websites
+Design beautiful, functional online experiences that people love to use.
+:::
+
+</div>
+
+::: {.story-box}
+**💡 Student Success Story:**
+
+*"I never thought of myself as 'technical.' I loved art and wanted to design characters. Then I discovered that game companies need people who understand both art AND code. Now I'm a technical artist at a game studio—I bring characters to life using programming!"*
+
+— Jordan, CS Minor + Art Major → Technical Artist at Epic Games
+:::
+
+### 4. 🌍 Make Real Impact
+
+Use CS to solve problems that matter:
+
+| Problem Area | CS Solutions |
+|--------------|--------------|
+| 🏥 **Healthcare** | AI for cancer detection, telemedicine apps, genomic analysis, medical records systems |
+| 🌱 **Environment** | Climate modeling, renewable energy optimization, conservation drones, smart agriculture |
+| 📚 **Education** | Personalized learning platforms, accessibility tools, virtual classrooms |
+| 🏛️ **Social Justice** | Bias detection in algorithms, voting security, transparency tools, accessibility technologies |
+| 🚀 **Space** | Mars rover programming, satellite systems, space exploration simulations |
+
+::: {.highlight-box .highlight-info}
+**✨ Your code can literally save lives, protect the environment, and create opportunities for others.**
+:::
+
+### 5. 🔄 Flexibility & Options
+
+A CS degree gives you **choices**:
+
+**Work Settings:**
+
+- 🏢 Big tech companies (Google, Microsoft, Apple)
+- 🚀 Startups (be employee #5 at the next unicorn!)
+- 💼 Any industry (finance, healthcare, entertainment, government)
+- 🏠 Remote work / freelance
+- 🎓 Research & academia
+- 💡 Start your own company
+
+**Career Paths:**
+
+- Software Engineer
+- Data Scientist
+- Cybersecurity Specialist
+- AI/ML Engineer
+- Product Manager
+- UX/UI Designer
+- DevOps Engineer
+- Technical Writer
+- Game Developer
+- Research Scientist
+
+**And the best part?** You can **switch** between these paths throughout your career!
+
+## 🎓 Major vs. Minor at Allegheny
+
+::: {.concept-box}
+### CS Major 🎯
+**For students who want to dive deep into computing.**
+
+**You'll learn:**
+
+- Advanced algorithms and data structures
+- Software engineering and system design
+- AI, machine learning, and data science
+- Database systems and web technologies
+- Computer architecture and operating systems
+
+**Career path:** Software Engineer, Research, Graduate School, Tech Leadership
+
+**Sample courses:**
+
+- Data Structures
+- Algorithms
+- Database Systems
+- Artificial Intelligence
+- Software Engineering
+- Computer Graphics
+
+---
+
+### CS Minor 💡
+**Perfect for combining CS with another passion!**
+
+**Core CS courses PLUS flexibility to focus on:**
+
+- Your major field enhanced with tech skills
+- Web development, data analysis, or digital design
+
+**Career path:** Field specialist with tech skills (bioinformatics, digital marketing, computational finance, etc.)
+
+**Great combinations:**
+
+- Biology + CS = Bioinformatics Researcher
+- Business + CS = Tech Entrepreneur / Product Manager
+- Art + CS = Game Designer / Digital Artist
+- Math + CS = Data Scientist / Quantitative Analyst
+- Psychology + CS = UX Researcher / Human-Computer Interaction Specialist
+:::
+
+## 🚀 Ready to Start?
+
+::: {.tip-box}
+**Choose Your Adventure:**
+
+1. 🎮 **[Try Coding Now!](try-it-now.qmd)** - Experience CS in 30 seconds
+2. 🎒 **[Start Quest 1](../lessons/01-variables.qmd)** - Begin learning Python
+3. 📋 **[Major vs Minor Details](major-vs-minor.qmd)** - Compare programs
+4. 🏠 **[Back to Home](../index.qmd)** - Explore all quests
+:::
+
+---
+
+**Questions?** Reach out to the Allegheny CS Department:
+
+- 📧 Email: obonhamcarter@allegheny.edu
+- 🌐 Website: [https://cs.allegheny.edu](https://cs.allegheny.edu)
+- 📍 Visit: Alden Hall, Allegheny College

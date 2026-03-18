@@ -1,0 +1,73 @@
+---
+title: "Quest 2: Data Types - The Shape of Data"
+subtitle: "Choose the Right Rust Type for the Job"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+🔷 QUEST 2 | Difficulty: Beginner | Time: 8 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/02-data-types.ipynb)
+- 📥 [Download Notebook](../files/lessons/02-data-types.ipynb)
+:::
+
+## 📖 Introduction
+Rust likes clear types. This helps catch bugs early.
+
+## 💡 Core Types
+
+```rust
+fn main() {
+    let lives: i32 = 3;
+    let pi: f64 = 3.14;
+    let is_ready: bool = true;
+    let grade: char = 'A';
+    let title: &str = "Rust Rookie";
+
+    println!("{} {} {} {} {}", lives, pi, is_ready, grade, title);
+}
+```
+
+## 👨‍💻 Example
+
+```rust
+fn main() {
+    let first_name = "Kai";
+    let age = 14;
+    let height_m = 1.62;
+    let likes_rust = true;
+
+    println!("{} is {} years old", first_name, age);
+    println!("Height: {} m", height_m);
+    println!("Likes Rust: {}", likes_rust);
+}
+```
+
+## 🎯 Gentle Challenge
+Create one value of each type: `i32`, `f64`, `bool`, `char`, and `&str`. Print them.
+
+## ✅ One Possible Solution
+
+```rust
+fn main() {
+    let score: i32 = 42;
+    let temp: f64 = 21.5;
+    let passed: bool = true;
+    let level: char = 'B';
+    let label: &str = "Beginner";
+
+    println!("{} {} {} {} {}", score, temp, passed, level, label);
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 2 Complete
+You can now read and create common Rust data types.
+Next: [Quest 3: Conditionals](03-conditionals.qmd)
+:::

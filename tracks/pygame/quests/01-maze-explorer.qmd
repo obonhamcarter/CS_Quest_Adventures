@@ -1,0 +1,527 @@
+---
+title: "Quest 1: The Maze of Ancient Wisdom"
+subtitle: "Your First Game Development Adventure!"
+track: "pygame"
+quest-number: 1
+difficulty: "Beginner"
+estimated-time: "45 min"
+format:
+  live-html:
+    theme:
+      - cosmo
+      - ../../../custom.scss
+    css: ../../../styles.css
+    toc: true
+    toc-depth: 3
+    code-copy: true
+---
+
+::: {.quest-badge}
+Game Dev Quest 1 of 7
+:::
+
+# 🏰 Quest 1: The Maze of Ancient Wisdom
+
+::: {.story-box}
+**Greetings, brave Code Warrior!**
+
+Your journey into the mystical realm of game creation begins in the ancient Maze of Wisdom. Legend tells of a magical artifact hidden deep within its walls, but only those who master the sacred arts of the **Game Loop**, **Collision Detection**, and **Keyboard Mastery** may navigate its treacherous corridors.
+
+The Oracle has chosen you to learn these ancient techniques. Your quest: create a living maze where a hero (represented by a noble circle) can move freely, avoiding the stone walls that guard the artifact's chamber.
+
+Are you ready to breathe life into your first game? The adventure begins now!
+:::
+
+---
+
+## 🎯 Skills You'll Master
+
+By completing this quest, you shall become proficient in:
+
+- ⚔️ **Project Summoning** - Conjure a Python game project with UV magic
+- 🎨 **Pygame Initialization** - Awaken the game engine
+- 🪟 **Window Creation** - Open a portal to the game realm
+- 🔁 **The Sacred Game Loop** - Keep your world alive with eternal updates
+- 🎨 **Shape Drawing** - Paint rectangles and circles with code
+- ⌨️ **Input Detection** - Respond to the player's commands
+- 💥 **Collision Detection** - Check if objects touch
+- 🏆 **Complete Maze Game** - Your first fully playable creation!
+
+**Difficulty:** 🌟 Beginner  
+**Time Required:** ~45 minutes  
+**Prerequisites:** Basic Python knowledge (variables, functions, loops)
+
+---
+
+## 📚 Part 1: Summoning Your Project (5 minutes)
+
+### The Tools of Creation
+
+Before we can build games, we must prepare our workspace. We'll use **UV** (Ultra-fast Virtualenv), a powerful tool that manages our game's magical components (called "dependencies").
+
+::: {.concept-box}
+### 🔮 What is UV?
+
+Think of UV as your **quest quartermaster** — it keeps track of all the tools and supplies your game project needs. When you tell UV "I need Pygame," it fetches, organizes, and maintains that tool for you automatically.
+
+Without UV, you'd have to manually gather and organize every component yourself, which is tedious and error-prone.
+:::
+
+### Step 1: Create Your Project Directory
+
+Open your terminal (the command-line portal) and cast these spells:
+
+```bash
+# Create a new directory for today's project
+mkdir quest01-maze-explorer
+cd quest01-maze-explorer
+
+# Initialize a new UV project
+uv init
+
+# Add Pygame as a dependency  
+uv add pygame
+
+# Add pytest for testing (optional but recommended)
+uv add pytest --dev
+```
+
+::: {.tip-box}
+### 💡 Understanding the Incantations
+
+- `mkdir quest01-maze-explorer` - Creates a new folder
+- `cd quest01-maze-explorer` - Moves into that folder
+- `uv init` - Initializes a Python project with configuration
+- `uv add pygame` - Installs the Pygame game engine
+- `uv add pytest --dev` - Adds testing tools (for development only)
+:::
+
+::: {.challenge-box}
+### 🎯 Quick Challenge
+
+After running these commands, look at your project folder. What files did UV create?
+
+<details>
+<summary>Show Answer</summary>
+
+UV created several files:
+- `pyproject.toml` - Your project configuration (like a recipe)
+- `uv.lock` - Exact versions of all dependencies (ensures consistency)
+- `.python-version` - Specifies which Python version to use
+- `src/` directory - Where your code will live
+
+These files ensure anyone can recreate your project environment exactly!
+</details>
+:::
+
+---
+
+## 🎨 Part 2: The Color Codex (5 minutes)
+
+### How the Ancient Ones Perceived Color
+
+In the digital realm, colors are conjured through the mystical **RGB system** (Red, Green, Blue). Every color you see is a blend of these three primaries, each with power ranging from 0 (none) to 255 (maximum).
+
+::: {.concept-box}
+### 🌈 RGB Color Magic
+
+```python
+# Pure primary colors
+RED = (255, 0, 0)      # Full red, no green, no blue
+GREEN = (0, 255, 0)    # No red, full green, no blue
+BLUE = (0, 0, 255)     # No red, no green, full blue
+
+# Mixed colors (alchemy!)
+PURPLE = (128, 0, 128)  # Mix red + blue
+YELLOW = (255, 255, 0)  # Mix red + green
+CYAN = (0, 255, 255)    # Mix green + blue
+
+# Grayscale (when all colors agree)
+WHITE = (255, 255, 255) # All at maximum = white
+BLACK = (0, 0, 0)       # All at minimum = black
+GRAY = (128, 128, 128)  # All equal and middle = gray
+```
+:::
+
+### Coordinate System - The Game Map
+
+Your game window is a grid with coordinates:
+- **(0, 0)** is the **top-left corner**
+- **X increases** going **right** →
+- **Y increases** going **down** ↓
+
+```
+(0,0) ────────────────→ X (800, 0)
+  │
+  │
+  │
+  ↓
+  Y
+(0,600)                    (800, 600)
+```
+
+::: {.tip-box}
+### 💡 Why is Y inverted?
+
+In math class, Y usually goes up. But in computer graphics, Y goes down because screens are drawn from top to bottom. Think of it like reading a book — you start at the top and work your way down!
+:::
+
+---
+
+## 🎮 Part 3: Your First Pygame Spell (10 minutes)
+
+Now we write our first game code! Create a file called `maze_game.py` in your project.
+
+### The Minimal Game
+
+```python
+import pygame
+import sys
+
+# Initialize Pygame
+pygame.init()
+
+# Define colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+
+# Screen dimensions
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+
+# Create the game window
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Quest 1: Maze Explorer")
+
+# Clock to control frame rate
+clock = pygame.time.Clock()
+
+# Game loop
+running = True
+while running:
+    # Handle events
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    
+    # Fill screen with white
+    screen.fill(WHITE)
+    
+    # Update display
+    pygame.display.flip()
+    
+    # 60 frames per second
+    clock.tick(60)
+
+# Quit
+pygame.quit()
+sys.exit()
+```
+
+### Run Your Game!
+
+```bash
+uv run python maze_game.py
+```
+
+::: {.solution-box}
+### 🎊 Success!
+
+You should see a white window appear. It might not do much yet, but **you just created your first game window!** This is the foundation upon which all games are built.
+
+Press the X button to close it and continue the quest.
+:::
+
+---
+
+## 🔮 Part 4: Understanding the Sacred Game Loop (10 minutes)
+
+The code above contains the most important pattern in game development: **The Game Loop**.
+
+::: {.concept-box}
+### 🔁 The Eternal Loop
+
+Every game runs in an infinite loop that repeats ~60 times per second:
+
+```
+┌──────────────────────────────────┐
+│ 1. Handle player input           │
+│    (keyboard, mouse, quit, etc.) │
+│                                   │
+│ 2. Update game state              │
+│    (move characters, check       │
+│     collisions, update scores)   │
+│                                   │
+│ 3. Draw everything                │
+│    (render to screen)            │
+│                                   │
+│ 4. Control timing                 │
+│    (maintain consistent speed)   │
+└───────────┬──────────────────────┘
+            │
+            └──→ REPEAT FOREVER! ←──┐
+                                    │
+                                    │
+     (until player quits) ──────────┘
+```
+
+This is how games create the illusion of motion and interactivity!
+:::
+
+### Analyzing Our Loop
+
+Let's break down each section:
+
+```python
+# EVENT HANDLING - Listen to player
+for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+        running = False
+```
+
+This checks if the player clicked the "X" button to quit.
+
+```python
+# UPDATE - Update game state (we'll add this soon!)
+# (movement, collision, scoring, etc.)
+```
+
+```python
+# RENDER - Draw everything
+screen.fill(WHITE)  # Clear screen
+pygame.display.flip()  # Show what we drew
+```
+
+```python
+# TIMING - Control speed
+clock.tick(60)  # Run at 60 FPS
+```
+
+---
+
+## ⚔️ Part 5: Drawing Your Hero (10 minutes)
+
+Let's add a player character — a red circle that can move!
+
+### Add Player Variables
+
+```python
+# Player properties
+player_x = 400  # Center of screen
+player_y = 300
+player_radius = 15
+player_speed = 5
+```
+
+### Draw the Player
+
+In your game loop, after `screen.fill(WHITE)`, add:
+
+```python
+# Draw player
+pygame.draw.circle(screen, RED, (player_x, player_y), player_radius)
+```
+
+### Add Movement
+
+Update your event handling to detect key presses:
+
+```python
+# Handle events
+for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+        running = False
+
+# Get keys pressed (continuous)
+keys = pygame.key.get_pressed()
+
+# Update player position
+if keys[pygame.K_UP]:
+    player_y -= player_speed
+if keys[pygame.K_DOWN]:
+    player_y += player_speed
+if keys[pygame.K_LEFT]:
+    player_x -= player_speed
+if keys[pygame.K_RIGHT]:
+    player_x += player_speed
+```
+
+::: {.challenge-box}
+### 🎯 Test Your Powers!
+
+Run the game now. You should be able to move the red circle with arrow keys!
+
+**Bonus Challenge:** What happens if you drive the circle off the screen? How might you prevent this? (We'll fix this in the next section!)
+:::
+
+---
+
+## 🏰 Part 6: Building the Maze Walls (15 minutes)
+
+Now let's create maze walls that block the player!
+
+### Define Walls
+
+After your player variables:
+
+```python
+# Maze walls (x, y, width, height)
+walls = [
+    pygame.Rect(0, 0, 800, 20),        # Top wall
+    pygame.Rect(0, 580, 800, 20),      # Bottom wall
+    pygame.Rect(0, 0, 20, 600),        # Left wall
+    pygame.Rect(780, 0, 20, 600),      # Right wall
+    
+    # Inner maze walls
+    pygame.Rect(100, 100, 20, 200),
+    pygame.Rect(200, 300, 300, 20),
+    pygame.Rect(400, 100, 20, 200),
+    pygame.Rect(600, 200, 20, 300),
+]
+```
+
+### Draw the Walls
+
+In your render section:
+
+```python
+# Draw walls
+for wall in walls:
+    pygame.draw.rect(screen, BLACK, wall)
+```
+
+### Add Collision Detection
+
+Before updating player position, save the old position:
+
+```python
+# Save old position
+old_x, old_y = player_x, player_y
+
+# Get keys and update position
+keys = pygame.key.get_pressed()
+if keys[pygame.K_UP]:
+    player_y -= player_speed
+if keys[pygame.K_DOWN]:
+    player_y += player_speed
+if keys[pygame.K_LEFT]:
+    player_x -= player_speed
+if keys[pygame.K_RIGHT]:
+    player_x += player_speed
+
+# Check collision
+player_rect = pygame.Rect(player_x - player_radius,
+                          player_y - player_radius,
+                          player_radius * 2,
+                          player_radius * 2)
+
+# If collision, revert to old position
+for wall in walls:
+    if player_rect.colliderect(wall):
+        player_x, player_y = old_x, old_y
+        break
+```
+
+::: {.solution-box}
+### 🎊 Victory!
+
+Run your game now! You should have:
+- A red circle (player)
+- Black walls forming a maze
+- Player can move with arrow keys
+- Player cannot pass through walls
+
+**Congratulations, Code Warrior! You've created your first complete game!**
+:::
+
+---
+
+## 🏆 Quest Complete!
+
+::: {.story-box}
+**Well done, brave adventurer!**
+
+You have mastered the fundamental arts of game creation:
+- ✅ The Sacred Game Loop
+- ✅ Input Handling
+- ✅ Rendering Graphics
+- ✅ Collision Detection
+
+The Maze of Ancient Wisdom is now yours to command. But this is only the beginning of your journey...
+
+**Next Quest:** [Quest 2: Physics of the Bouncing Orb](02-bouncing-ball.qmd) awaits!
+:::
+
+---
+
+## 📚 What You Learned
+
+::: {.concept-box}
+### Core Concepts Mastered
+
+1. **Game Loop Pattern** - The eternal cycle of input → update → render
+2. **Pygame Basics** - Initialization, window creation, drawing
+3. **Coordinate System** - X/Y positioning in 2D space
+4. **RGB Colors** - How computers create colors
+5. **Event Handling** - Detecting player input
+6. **Collision Detection** - Checking if objects overlap
+7. **Rectangle Collision** - Using `colliderect()` for walls
+:::
+
+---
+
+## 💪 Bonus Challenges
+
+Ready to level up? Try these challenges:
+
+::: {.challenge-box}
+### 🌟 Challenge 1: Add a Goal
+
+Create a green circle at the maze exit. When the player reaches it, print "Victory!" to the console.
+
+Hint: Check distance between player and goal:
+```python
+import math
+distance = math.sqrt((player_x - goal_x)**2 + (player_y - goal_y)**2)
+```
+
+---
+
+### 🌟🌟 Challenge 2: Add a Timer
+
+Display how long it takes to complete the maze. Use `pygame.time.get_ticks()` to track time.
+
+---
+
+### 🌟🌟🌟 Challenge 3: Multiple Levels
+
+Create different maze layouts and let the player progress through them.
+
+:::
+
+---
+
+## 📥 Download Complete Code
+
+[Download complete maze_game.py →](../../projects/Day_01/src_instr/maze_game.py)
+
+---
+
+## ➡️ Next Quest
+
+Ready for more? Continue your adventure:
+
+[🚀 Quest 2: Physics of the Bouncing Orb →](02-bouncing-ball.qmd){.btn .btn-primary}
+
+Or return to see all quests: [📖 All Game Dev Quests](../all-quests.qmd)
+
+---
+
+::: {.footer-note}
+**Quest Created By:** Oliver Bonham-Carter  
+**Difficulty:** Beginner 🌟  
+**Estimated Time:** 45 minutes  
+
+Questions? [obonhamcarter@allegheny.edu](mailto:obonhamcarter@allegheny.edu)
+:::

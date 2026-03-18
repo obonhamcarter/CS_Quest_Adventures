@@ -1,0 +1,61 @@
+---
+title: "Quest 16: Closures - Quick Function Tools"
+subtitle: "Use Inline Anonymous Functions"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+⚡ QUEST 16 | Difficulty: Beginner | Time: 9 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/16-lambda-functions.ipynb)
+- 📥 [Download Notebook](../files/lessons/16-lambda-functions.ipynb)
+:::
+
+## 📖 Introduction
+Rust uses **closures** for compact function behavior.
+Start small, then chain operations when you feel ready.
+
+## 💡 Example
+
+```rust
+fn main() {
+    let add_one = |x: i32| x + 1;
+    println!("{}", add_one(9));
+}
+```
+
+Closures are useful with iterators:
+
+```rust
+fn main() {
+    let nums = vec![1, 2, 3, 4];
+    let doubled: Vec<i32> = nums.iter().map(|n| n * 2).collect();
+    println!("{:?}", doubled);
+}
+```
+
+## 🎯 Gentle Challenge
+Use a closure to square values in a vector.
+Print the original vector and the squared vector.
+
+## ✅ One Possible Solution
+
+```rust
+fn main() {
+    let nums = vec![2, 3, 4];
+    let squares: Vec<i32> = nums.iter().map(|n| n * n).collect();
+    println!("{:?}", squares);
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 16 Complete
+You built and used closures with iterators.
+Next: [Quest 17: Higher-Order Functions](17-higher-order-functions.qmd)
+:::

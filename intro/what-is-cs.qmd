@@ -1,0 +1,128 @@
+---
+title: "What is Computer Science?"
+subtitle: "More Than Just Coding!"
+format:
+  live-html:
+    toc: false
+---
+
+::: {.quest-badge}
+🌟 INTRO | Difficulty: None | Time: 3 minutes | **Perfect for College Fair Visitors**
+:::
+
+::: {.tip-box}
+**💻 Interactive Options:**
+
+- 📓 **[Open in JupyterLite](../jupyterlite/lab/index.html?path=what-is-cs.ipynb)** - Full Jupyter environment in your browser
+- 📥 **[Download Notebook](../files/intro/what-is-cs.ipynb)** - For use in local Jupyter or Google Colab
+:::
+
+## 🎯 What is Computer Science Really?
+
+::: {.hero}
+Computer Science is the art and science of **solving problems** using computational thinking. It's about creating technology that changes the world!
+:::
+
+### It's NOT Just About...
+
+- ❌ Sitting alone in a dark room typing code
+- ❌ Fixing your family's printer
+- ❌ Being a "math genius"
+
+### It IS About...
+
+- ✅ **Creating** things people use every day
+- ✅ **Solving** real-world problems
+- ✅ **Collaborating** with diverse teams
+- ✅ **Innovating** in ANY field you're passionate about
+
+::: {.highlight-box .highlight-info}
+**💡 Fun Fact**: Computer Scientists created:
+
+- The smartphone in your pocket 📱
+- Your favorite video games 🎮
+- Netflix's recommendation algorithm 🎬
+- Medical imaging that saves lives 🏥
+- Climate change modeling software 🌍
+- The apps you use to stay connected 💬
+:::
+
+## 🧩 What Makes CS Unique?
+
+Computer Science combines:
+
+<div class="quest-grid">
+
+::: {.quest-card}
+### 🎨 Creativity
+Design apps, games, and experiences that millions enjoy. Every project is a blank canvas!
+:::
+
+::: {.quest-card}
+### 🧮 Logic
+Use problem-solving and structured thinking to make things work efficiently.
+:::
+
+::: {.quest-card}
+### 🌍 Impact
+Build technology that addresses climate change, healthcare, education, and social justice.
+:::
+
+::: {.quest-card}
+### 🤝 Collaboration
+Work in diverse teams, combining different perspectives to create amazing solutions.
+:::
+
+</div>
+
+## 💭 What Do Computer Scientists Actually Do?
+
+::: {.story-box}
+**Real Examples from Real People:**
+
+- **Maya** - Game Developer: "I build virtual worlds where players can be heroes!"
+- **James** - AI Researcher: "I teach computers to understand human language and help doctors diagnose diseases."
+- **Priya** - Cybersecurity Expert: "I protect companies and people from hackers—like a digital detective!"
+- **Alex** - Mobile App Developer: "I created an app that helps students organize their homework. 100,000 downloads so far!"
+:::
+
+## 🚀 CS + Your Passion = Amazing Career
+
+Computer Science isn't just for "computer people"—it enhances **any** field:
+
+| Your Interest | + CS = Career Possibilities |
+|---------------|----------------------------|
+| 🎨 **Art** | Digital artist, UX designer, game graphics programmer, animation engineer |
+| 🧬 **Biology** | Bioinformatician, computational biologist, medical software developer |
+| 💼 **Business** | Tech entrepreneur, data analyst, product manager, business intelligence developer |
+| 📚 **Education** | Educational technology developer, online learning platform creator |
+| 🎵 **Music** | Music software developer (Spotify!), audio engineer, DJ software creator |
+| ⚖️ **Law** | Legal tech developer, cybersecurity lawyer, IP attorney |
+| 🌍 **Environment** | Climate modeling programmer, conservation data scientist, green tech developer |
+
+## 🎮 Ready to Try It?
+
+Computer Science is best learned by **doing**. Let's get hands-on!
+
+::: {.concept-box}
+**Choose Your Next Step:**
+
+1. 🎯 **[Why Study CS?](why-study-cs.qmd)** - Learn about careers and opportunities
+2. 🎮 **[Try It Now!](try-it-now.qmd)** - Write your first code in 30 seconds
+3. 🚀 **[Start Quest 1](../lessons/01-variables.qmd)** - Begin your coding journey
+:::
+
+---
+
+::: {.tip-box}
+**🎓 Visiting Allegheny College?**
+
+Our Computer Science department offers:
+
+- Small class sizes with personal attention
+- Hands-on research opportunities
+- Internships with leading tech companies
+- A supportive, collaborative community
+
+📧 Questions? Contact: **obonhamcarter@allegheny.edu**
+:::

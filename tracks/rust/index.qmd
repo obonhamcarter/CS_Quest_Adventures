@@ -1,0 +1,317 @@
+---
+title: "Rust Quest Track"
+subtitle: "Master Systems Programming with Rust"
+track-id: "rust"
+track-icon: "🦀"
+track-color: "#f97316"
+difficulty: "Intermediate"
+total-quests: 19
+estimated-hours: 25
+format:
+  live-html:
+    toc: false
+---
+
+::: {.hero}
+# 🦀 Welcome to the Rust Quest Track!
+
+*Learn the language of performance, safety, and modern systems programming!*
+:::
+
+## 🎯 About This Track
+
+Rust is a revolutionary systems programming language that guarantees memory safety without garbage collection. This track teaches you Rust fundamentals through 19 engaging quests, building on programming concepts to master Rust's unique features like ownership, borrowing, and lifetimes.
+
+### What You'll Master
+
+- ✅ **Rust Fundamentals** - Variables, types, and syntax
+- ✅ **Ownership System** - Rust's killer feature for memory safety
+- ✅ **Data Structures** - Vectors, HashMaps, and collections
+- ✅ **Pattern Matching** - Powerful control flow
+- ✅ **Error Handling** - Result and Option types
+- ✅ **Advanced Features** - Closures, traits, and generics
+
+### Prerequisites
+
+::: {.callout-note}
+## Before You Begin
+
+**Programming experience recommended** - This track assumes basic familiarity with programming concepts.
+
+**Ideal preparation:**
+- Complete [Python Quest Track](../python/index.qmd) first
+- Or have experience with another programming language
+- Understanding of variables, loops, functions
+
+**New to programming?** [Start with Python](../python/index.qmd)!
+:::
+
+---
+
+## 🗺️ Your Learning Path
+
+This track contains **19 quests** organized into progressive sections, paralleling the Python track but with Rust's unique features.
+
+<div class="quest-grid">
+
+::: {.quest-card}
+### 📚 Foundation (Quests 1-8)
+Core Rust concepts
+
+- Variables and mutability
+- Data types and ownership
+- Control flow patterns
+- Vectors and HashMaps
+- Functions and modules
+
+**Estimated time:** 10 hours
+:::
+
+::: {.quest-card}
+### 🎯 Practice (Quests 9-12)
+Apply Rust patterns
+
+- Sorting algorithms in Rust
+- Build a guessing game
+- Recursion with ownership
+- Performance analysis
+
+**Estimated time:** 7 hours
+:::
+
+::: {.quest-card}
+### 🚀 Mastery (Quests 13-19)
+Advanced Rust features
+
+- Advanced iteration
+- Closures and captured state
+- Higher-order functions
+- Error handling patterns
+- Structs and implementations
+
+**Estimated time:** 8 hours
+:::
+
+</div>
+
+---
+
+## 🚀 Quick Start
+
+Ready to begin your Rust adventure? Choose your path:
+
+::: {.highlight-box .highlight-info}
+### Option 1: Start Quest 1 → (Recommended!)
+
+Begin with Rust fundamentals and progress systematically.
+
+[Begin Quest 1: Variables →](lessons/01-variables.qmd){.btn .btn-primary}
+:::
+
+::: {.highlight-box .highlight-success}
+### Option 2: Use Rust Playground
+
+Try Rust code online without installing anything locally.
+
+[Try Rust Playground →](interactive.qmd){.btn .btn-success}
+:::
+
+::: {.highlight-box .highlight-warning}
+### Option 3: Explore All Quests
+
+See the complete Rust curriculum before starting.
+
+[View All Rust Quests →](all-quests.qmd){.btn .btn-warning}
+:::
+
+---
+
+## 💻 Interactive Features
+
+::: {.feature-grid}
+
+::: {.feature-card}
+### 🔧 Rust Playground
+Try code online via official Rust Playground
+:::
+
+::: {.feature-card}
+### 📓 Notebook Examples
+Downloadable examples for your local environment
+:::
+
+::: {.feature-card}
+### 🎯 Guided Challenges
+Progressive exercises with solutions
+:::
+
+::: {.feature-card}
+### ⚡ Performance Focus
+Learn to write efficient, safe code
+:::
+
+:::
+
+---
+
+## 🎓 Who Is This Track For?
+
+::: {.audience-grid}
+
+::: {.audience-card}
+### 📚 Python Graduates
+Completed Python track? Level up with systems programming!
+:::
+
+::: {.audience-card}
+### 💻 Experienced Programmers
+Know another language? Learn Rust's unique approach.
+:::
+
+::: {.audience-card}
+### ⚙️ Systems Enthusiasts
+Want to understand low-level programming with safety.
+:::
+
+::: {.audience-card}
+### 🚀 Performance Seekers
+Build fast, reliable, memory-safe applications.
+:::
+
+:::
+
+---
+
+## 🏆 What Makes Rust Special?
+
+Rust offers unique advantages:
+
+::: {.advantage-grid}
+
+**🛡️ Memory Safety**  
+No null pointers, no data races, guaranteed at compile time
+
+**⚡ Performance**  
+Zero-cost abstractions, comparable to C/C++
+
+**🔧 Modern Tooling**  
+Cargo, rustfmt, clippy — best-in-class development experience
+
+**📦 Package Ecosystem**  
+Growing community with quality crates (libraries)
+
+**🌐 Versatility**  
+Systems, web, embedded, WebAssembly — Rust does it all
+
+:::
+
+---
+
+## 🗺️ Rust vs Python: Key Differences
+
+Coming from Python? Here are the main differences:
+
+| Feature | Python 🐍 | Rust 🦀 |
+|---------|-----------|---------|
+| **Type System** | Dynamic | Static, strict |
+| **Memory** | Garbage collected | Ownership system |
+| **Speed** | Interpreted | Compiled, very fast |
+| **Error Handling** | Exceptions | Result/Option types |
+| **Learning Curve** | Gentle | Steeper initially |
+| **Use Cases** | Scripting, data, AI | Systems, performance |
+
+---
+
+## 📚 Track Resources
+
+::: {.resource-links}
+- [📖 All Quests Overview](all-quests.qmd)
+- [🔧 Rust Playground](interactive.qmd)
+- [📥 Download Examples](../../files/rust/lessons/)
+- [⚙️ Install Rust Locally](setup.qmd)
+- [❓ Rust FAQ](faq.qmd)
+- [📘 Official Rust Book](https://doc.rust-lang.org/book/)
+:::
+
+---
+
+## 🎯 Learning Tips
+
+::: {.tip-box}
+### 💡 Mastering Rust
+
+1. **Fight the borrow checker** - It's frustrating at first, but teaches great habits
+2. **Read compiler messages** - Rust's errors are incredibly helpful
+3. **Practice ownership** - This is Rust's most important concept
+4. **Use Rust Playground** - Quick iteration without local setup
+5. **Check the docs** - Rust documentation is excellent
+6. **Join the community** - Rust has one of the friendliest programming communities
+:::
+
+---
+
+## 🗺️ After This Track
+
+Once you complete the Rust track, explore:
+
+::: {.next-steps}
+
+### 🎮 Build Rust Projects
+Apply your knowledge to real-world applications:
+- CLI tools with `clap`
+- Web servers with `actix-web` or `rocket`
+- Systems utilities
+
+---
+
+### ⚙️ Systems Programming
+Dive deeper into Rust's strengths:
+- Operating system components
+- Network programming
+- Embedded systems
+
+---
+
+### 🌐 Web Development
+Use Rust for web:
+- WebAssembly applications
+- Backend APIs
+- Full-stack with Yew
+
+:::
+
+---
+
+## 🤝 Community & Support
+
+::: {.callout-tip}
+## Need Help?
+
+- 📧 [Email Support](mailto:obonhamcarter@allegheny.edu)
+- 📖 [FAQ](faq.qmd) - Common Rust questions
+- 💬 [Rust Users Forum](https://users.rust-lang.org/)
+- 🐛 [Report Issues](https://github.com/obonhamcarter/CS_Quest_Adventures/issues)
+:::
+
+---
+
+## ➡️ Ready to Begin?
+
+Your Rust quest awaits! Click below to start your first adventure:
+
+::: {.cta-large}
+[🚀 Start Quest 1: Variables - Your Starter Toolkit](lessons/01-variables.qmd){.btn .btn-primary .btn-lg}
+:::
+
+Or [view all quests →](all-quests.qmd) to see the complete learning path.
+
+---
+
+::: {.footer-note}
+**About This Track**
+
+Created by [Oliver Bonham-Carter](https://www.oliverbonhamcarter.com)  
+Department of Computer and Information Science, Allegheny College  
+
+Questions? [obonhamcarter@allegheny.edu](mailto:obonhamcarter@allegheny.edu)
+:::

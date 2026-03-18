@@ -1,0 +1,969 @@
+---
+title: "Day 01: Maze Explorer 🎮"
+subtitle: "Your First Pygame Adventure!"
+author: "Pygame Tutorial Series"
+format:
+  html:
+    theme: light
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    css: ../../shared/styles/tutorial.css
+execute:
+  enabled: true
+  cache: false
+---
+
+::: {.hero-banner}
+# 🎮 Welcome to Day 01!
+
+Today, you'll create your very first game: **Maze Explorer**! You'll learn how to create a game window, draw shapes, handle keyboard input, and detect collisions. By the end of this tutorial, you'll have a fully functional game where a dot navigates through a maze!
+
+**Time Required:** ~45 minutes  
+**Difficulty:** Beginner 🌟
+:::
+
+---
+
+## 🎯 What You'll Learn Today
+
+By the end of this tutorial, you'll be able to:
+
+- ✅ Set up a Python project using UV
+- ✅ Install and initialize Pygame
+- ✅ Create a game window with a main loop
+- ✅ Draw shapes and colors on the screen
+- ✅ Handle keyboard input for movement
+- ✅ Detect collisions between objects
+- ✅ Create a simple maze game!
+
+---
+
+## 🚀 Part 1: Setting Up Your Project (5 minutes)
+
+### What is UV?
+
+**UV** is a super-fast Python package manager that makes it easy to manage your project dependencies. Think of it as a helpful assistant that keeps track of all the tools (packages) your project needs!
+
+### Step 1: Create Your Project
+
+Open your terminal and run these commands:
+
+```bash
+# Create a new directory for today's project
+mkdir day01-maze-explorer
+cd day01-maze-explorer
+
+# Initialize a new UV project
+uv init
+
+# Add Pygame as a dependency
+uv add pygame
+
+# Add pytest for testing
+uv add pytest --dev
+```
+
+::: {.callout-tip}
+## 💡 What Just Happened?
+
+- `uv init` created a new Python project with all the necessary configuration files
+- `uv add pygame` installed Pygame (a library for making games!)
+- `uv add pytest --dev` installed pytest for testing (we'll use this later)
+:::
+
+::: {.callout-consider}
+## 🤔 Consider This Corner
+
+**Why do we need a package manager like UV?**
+
+Imagine you're building with LEGO blocks. UV is like your organizer box that keeps track of which LEGO sets you're using and makes sure you have all the pieces you need. Without it, you'd have to manually find and organize every piece yourself!
+:::
+
+---
+
+## 🎨 Part 2: Understanding Colors and Coordinates (5 minutes)
+
+### How Computers See Colors
+
+Computers use **RGB** (Red, Green, Blue) to create colors. Each color is a mix of these three, with values from 0 to 255.
+
+::: {.callout-note}
+## 🎨 What You're About to Learn
+
+You're about to write your first Python code! This code will:
+1. **Define colors** using three numbers (Red, Green, Blue)
+2. **Create a helper class** to display colors in your terminal
+3. **Print colored blocks** so you can see the colors come to life
+
+Don't worry if you don't understand everything at first - we'll explain each part!
+:::
+
+```{python}
+# Let's explore RGB colors with actual colored output!
+# The '#' symbol starts a comment - these are notes for humans, not the computer
+
+class ColorPrinter:
+    """Helper to print colored text in terminal"""
+    
+    @staticmethod
+    def rgb_to_ansi(r, g, b):
+        """Convert RGB to ANSI escape code for terminal colors"""
+        return f"\033[38;2;{r};{g};{b}m"
+    
+    @staticmethod
+    def reset():
+        """Reset terminal color"""
+        return "\033[0m"
+    
+    @staticmethod
+    def print_color(name, rgb):
+        """Print color name in that actual color!"""
+        r, g, b = rgb
+        colored_text = f"{ColorPrinter.rgb_to_ansi(r, g, b)}■■■■■{ColorPrinter.reset()}"
+        print(f"{name:12} {rgb} {colored_text}")
+
+# Pure colors
+red = (255, 0, 0)      # Maximum red, no green, no blue
+green = (0, 255, 0)    # No red, maximum green, no blue
+blue = (0, 0, 255)     # No red, no green, maximum blue
+
+# Mixed colors
+purple = (128, 0, 128)  # Equal red and blue
+yellow = (255, 255, 0)  # Red and green make yellow
+cyan = (0, 255, 255)    # Green and blue make cyan
+
+# Gray shades
+white = (255, 255, 255) # All colors at maximum
+black = (0, 0, 0)       # No colors
+gray = (128, 128, 128)  # Equal amounts of all
+
+print("Color Name   RGB Values        Visual")
+print("=" * 45)
+ColorPrinter.print_color("Red", red)
+ColorPrinter.print_color("Green", green)
+ColorPrinter.print_color("Blue", blue)
+print()
+ColorPrinter.print_color("Purple", purple)
+ColorPrinter.print_color("Yellow", yellow)
+ColorPrinter.print_color("Cyan", cyan)
+print()
+ColorPrinter.print_color("White", white)
+ColorPrinter.print_color("Black", black)
+ColorPrinter.print_color("Gray", gray)
+```
+
+::: {.callout-important}
+## 📖 What Did We Just Learn?
+
+**From this output, you learned:**
+1. **Tuples** - Groups of numbers in parentheses like `(255, 0, 0)` store RGB values
+2. **Variables** - Names like `red`, `green` that store data so we can reuse it
+3. **Functions** - `print_color()` is a reusable piece of code that does work for us
+4. **Classes** - `ColorPrinter` is a container that organizes related functions
+
+**How the code created this:**
+- Each color is stored as three numbers (R, G, B)
+- The `ColorPrinter` class converts these numbers to terminal color codes
+- The `print_color()` function displays both the numbers AND the actual color
+- You saw colored blocks (■■■■■) showing what each RGB combination looks like!
+:::
+
+::: {.callout-tip}
+## 💡 Color Mixing Magic!
+
+Notice how:
+- **Red + Green = Yellow** (255, 255, 0)
+- **Red + Blue = Purple** (128, 0, 128)
+- **Green + Blue = Cyan** (0, 255, 255)
+
+This is called **additive color mixing** - it's how screens create millions of colors from just three!
+:::
+
+### Understanding the Coordinate System
+
+In Pygame, the screen uses a coordinate system where:
+
+- **(0, 0)** is the **top-left corner**
+- **X increases** as you move **right**
+- **Y increases** as you move **down**
+
+::: {.callout-note}
+## 📍 About This Code
+
+We're going to write a **function** - a reusable piece of code that takes inputs and gives us back useful information. This function will:
+- Accept X and Y coordinates (positions on screen)
+- Figure out which region of the screen that position is in
+- Return a description like "left-top" or "center-middle"
+
+Think of it like giving someone directions: "The store is in the right-bottom part of town!"
+:::
+
+```{python}
+# Let's visualize positions
+# This function takes x, y coordinates and describes where they are
+def describe_position(x, y, screen_width=800, screen_height=600):
+    position = ""
+    
+    if x < screen_width / 3:
+        position += "left"
+    elif x > screen_width * 2 / 3:
+        position += "right"
+    else:
+        position += "center"
+    
+    position += "-"
+    
+    if y < screen_height / 3:
+        position += "top"
+    elif y > screen_height * 2 / 3:
+        position += "bottom"
+    else:
+        position += "middle"
+    
+    return f"Position ({x}, {y}) is in the {position} of the screen"
+
+# Try different positions
+print(describe_position(100, 100))
+print(describe_position(400, 300))
+print(describe_position(700, 500))
+```
+
+::: {.callout-important}
+## 📖 What Did This Teach Us?
+
+**From the output, you learned:**
+1. **Coordinates** - Two numbers (x, y) pinpoint any location on screen
+2. **If statements** - The code uses conditions to decide which region a position is in
+3. **String building** - The function builds descriptions piece by piece
+4. **Function calls** - We called `describe_position()` three times with different inputs
+
+**How it works:**
+- (100, 100) is **left-top** because 100 is in the left third AND top third
+- (400, 300) is **center-middle** because it's right in the middle of an 800x600 screen
+- (700, 500) is **right-bottom** because 700 is near the right edge and 500 is near the bottom
+
+**Try it yourself:** What would (0, 0) give? How about (800, 600)?
+:::
+
+::: {.callout-consider}
+## 🤔 Consider This Corner
+
+**Why does Y increase downward instead of upward like in math class?**
+
+This dates back to old TV screens! Electron beams would scan from top to bottom, left to right. Computer graphics kept this convention. Pretty cool how history shapes our technology! 📺
+:::
+
+---
+
+## 🎮 Part 3: Building Your First Game (25 minutes)
+
+### Understanding the Game Structure
+
+Every Pygame game has three main parts:
+
+1. **Initialization** - Set up the game
+2. **Game Loop** - Continuously update and draw
+3. **Cleanup** - Properly shut down
+
+Let's build our game step by step!
+
+### Step 1: Create Your Game File
+
+Create a new file called `maze_game.py` in your project directory.
+
+### Step 2: Import and Initialize
+
+Copy this code to start your game:
+
+```python
+"""
+Day 01: Maze Explorer
+Your first Pygame adventure!
+"""
+
+import pygame
+import sys
+
+# Initialize Pygame
+pygame.init()
+
+# Constants
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
+FPS = 60
+
+# Colors (RGB)
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+BLUE = (50, 150, 255)
+GREEN = (50, 255, 150)
+RED = (255, 50, 50)
+DARK_GRAY = (40, 40, 40)
+
+# Player settings
+PLAYER_SIZE = 20
+PLAYER_SPEED = 5
+```
+
+::: {.callout-tip}
+## 💡 Pro Tip
+
+Using constants (CAPITAL_LETTERS) makes it easy to adjust your game later. Want a bigger window? Just change WINDOW_WIDTH and WINDOW_HEIGHT!
+:::
+
+### Step 3: Create the Maze
+
+Let's define our maze walls:
+
+```python
+# Maze walls (x, y, width, height)
+WALLS = [
+    pygame.Rect(0, 0, WINDOW_WIDTH, 10),  # Top border
+    pygame.Rect(0, 0, 10, WINDOW_HEIGHT),  # Left border
+    pygame.Rect(0, WINDOW_HEIGHT - 10, WINDOW_WIDTH, 10),  # Bottom border
+    pygame.Rect(WINDOW_WIDTH - 10, 0, 10, WINDOW_HEIGHT),  # Right border
+    
+    # Internal walls - these make it challenging!
+    pygame.Rect(100, 100, 200, 20),
+    pygame.Rect(100, 100, 20, 150),
+    pygame.Rect(400, 100, 20, 200),
+    pygame.Rect(200, 250, 200, 20),
+    pygame.Rect(500, 200, 150, 20),
+    pygame.Rect(600, 220, 20, 200),
+    pygame.Rect(300, 400, 250, 20),
+    pygame.Rect(100, 450, 20, 100),
+]
+
+# Goal area
+GOAL = pygame.Rect(700, 500, 60, 60)
+```
+
+### Understanding pygame.Rect
+
+Let's explore how rectangles work:
+
+::: {.callout-note}
+## 📝 What This Code Shows You
+
+Rectangles are **everywhere** in games - they represent players, enemies, walls, and items!
+
+This code will:
+1. **Create a simple rectangle class** (like pygame.Rect but easier to understand)
+2. **Show how collision detection works** - how we know when two things touch
+3. **Test collisions** between different rectangles
+
+**Key concept:** A rectangle needs 4 numbers - (x, y) for position and (width, height) for size.
+:::
+
+```{python}
+# Simulate pygame.Rect behavior
+# This class represents a rectangle - like a box on screen
+class SimpleRect:
+    def __init__(self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        
+    def __repr__(self):
+        return f"Rect(x={self.x}, y={self.y}, w={self.width}, h={self.height})"
+    
+    def collides_with(self, other):
+        """Check if this rectangle overlaps with another."""
+        return (self.x < other.x + other.width and
+                self.x + self.width > other.x and
+                self.y < other.y + other.height and
+                self.y + self.height > other.y)
+
+# Create two rectangles
+rect1 = SimpleRect(10, 10, 50, 50)
+rect2 = SimpleRect(40, 40, 50, 50)  # Overlapping
+rect3 = SimpleRect(100, 100, 50, 50)  # Not overlapping
+
+print(f"Rectangle 1: {rect1}")
+print(f"Rectangle 2: {rect2}")
+print(f"Do rect1 and rect2 collide? {rect1.collides_with(rect2)}")
+print(f"Do rect1 and rect3 collide? {rect1.collides_with(rect3)}")
+```
+
+::: {.callout-important}
+## 📖 Understanding The Output
+
+**What just happened:**
+1. **Rectangle 1** is at position (10, 10) with size 50x50
+2. **Rectangle 2** starts at (40, 40) - notice it overlaps with rect1!
+3. **Rectangle 3** is at (100, 100) - far away from rect1
+
+**The collision detection:**
+- Rect1 and rect2 **DO collide** (return True) because they overlap
+  - Rect1 goes from x=10 to x=60
+  - Rect2 starts at x=40, so they share space from x=40 to x=60
+- Rect1 and rect3 **DON'T collide** (return False) because they're separate
+
+**How the math works:**
+The `collides_with` function checks if:
+- Rect1's left edge is left of rect2's right edge AND
+- Rect1's right edge is right of rect2's left edge AND  
+- Same logic for top and bottom edges
+
+If ALL four conditions are true, the rectangles overlap!
+
+**Real game use:** This is how we detect if your character hits a wall or touches an enemy!
+:::
+
+::: {.callout-consider}
+## 🤔 Consider This Corner
+
+**How would you design your own maze?**
+
+Try sketching a maze on paper first! Think about:
+- How many walls should there be?
+- Should there be multiple paths or just one?
+- Where should dead ends be?
+
+After this tutorial, try modifying the WALLS list to create your own unique maze!
+:::
+
+### Step 4: Create the Player Class
+
+```python
+class Player:
+    """Represents the player dot that moves through the maze."""
+    
+    def __init__(self, x, y):
+        """Initialize the player at position (x, y)."""
+        self.rect = pygame.Rect(x, y, PLAYER_SIZE, PLAYER_SIZE)
+        self.color = BLUE
+        
+    def move(self, dx, dy, walls):
+        """
+        Move the player by dx and dy, checking for wall collisions.
+        
+        Args:
+            dx: Change in x position
+            dy: Change in y position
+            walls: List of wall rectangles to check collision against
+        """
+        # Store original position
+        original_x = self.rect.x
+        original_y = self.rect.y
+        
+        # Try to move
+        self.rect.x += dx
+        self.rect.y += dy
+        
+        # Check for collisions with walls
+        for wall in walls:
+            if self.rect.colliderect(wall):
+                # Collision detected, revert to original position
+                self.rect.x = original_x
+                self.rect.y = original_y
+                break
+                
+    def draw(self, surface):
+        """Draw the player on the given surface."""
+        pygame.draw.circle(surface, self.color, self.rect.center, PLAYER_SIZE // 2)
+```
+
+### Step 5: Create the Main Game Loop
+
+```python
+def main():
+    """Main game loop."""
+    # Create the game window
+    screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+    pygame.display.set_caption("Day 01: Maze Explorer")
+    
+    # Create clock for controlling frame rate
+    clock = pygame.time.Clock()
+    
+    # Create player
+    player = Player(50, 50)
+    
+    # Game state
+    game_won = False
+    
+    # Main game loop
+    running = True
+    while running:
+        # Handle events
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+        
+        # Get keyboard input
+        if not game_won:
+            keys = pygame.key.get_pressed()
+            dx, dy = 0, 0
+            
+            if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+                dx = -PLAYER_SPEED
+            if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+                dx = PLAYER_SPEED
+            if keys[pygame.K_UP] or keys[pygame.K_w]:
+                dy = -PLAYER_SPEED
+            if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+                dy = PLAYER_SPEED
+            
+            # Move player
+            player.move(dx, dy, WALLS)
+            
+            # Check if player reached the goal
+            if player.rect.colliderect(GOAL):
+                game_won = True
+                player.color = GREEN
+        
+        # Drawing
+        screen.fill(BLACK)
+        
+        # Draw walls
+        for wall in WALLS:
+            pygame.draw.rect(screen, DARK_GRAY, wall)
+        
+        # Draw goal
+        goal_color = GREEN if game_won else RED
+        pygame.draw.rect(screen, goal_color, GOAL)
+        
+        # Draw player
+        player.draw(screen)
+        
+        # Draw win message
+        if game_won:
+            font = pygame.font.Font(None, 72)
+            text = font.render("You Win!", True, GREEN)
+            text_rect = text.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))
+            screen.blit(text, text_rect)
+        
+        # Update display
+        pygame.display.flip()
+        
+        # Control frame rate
+        clock.tick(FPS)
+    
+    # Quit
+    pygame.quit()
+    sys.exit()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+## 🏃 Part 4: Running Your Game (3 minutes)
+
+Now let's run your game!
+
+```bash
+# Run your game using UV
+uv run python maze_game.py
+```
+
+::: {.callout-tip}
+## 🎮 How to Play
+
+- Use **Arrow Keys** or **WASD** to move
+- Navigate through the maze to reach the **red goal**
+- The goal turns **green** when you win!
+- The **blue dot** is you!
+:::
+
+---
+
+## 🧪 Part 5: Testing Your Game (5 minutes)
+
+Let's make sure everything works correctly! Create a file called `test_maze_game.py`:
+
+```python
+"""
+Tests for Day 01: Maze Explorer
+"""
+
+import pytest
+import pygame
+from maze_game import Player, WALLS, GOAL, PLAYER_SIZE
+
+
+def test_player_initialization():
+    """Test that player starts at the correct position."""
+    pygame.init()
+    player = Player(50, 50)
+    assert player.rect.x == 50
+    assert player.rect.y == 50
+    pygame.quit()
+
+
+def test_player_movement():
+    """Test that player can move."""
+    pygame.init()
+    player = Player(50, 50)
+    player.move(10, 0, [])  # Move right with no walls
+    assert player.rect.x == 60
+    pygame.quit()
+
+
+def test_wall_collision():
+    """Test that player stops at walls."""
+    pygame.init()
+    player = Player(50, 50)
+    wall = pygame.Rect(60, 50, 100, 20)
+    original_x = player.rect.x
+    player.move(50, 0, [wall])  # Try to move through wall
+    assert player.rect.x == original_x  # Shouldn't have moved
+    pygame.quit()
+
+
+def test_goal_exists():
+    """Test that goal is defined."""
+    assert GOAL is not None
+    assert GOAL.width > 0
+
+
+if __name__ == "__main__":
+    pytest.main([__file__, "-v"])
+```
+
+Run your tests:
+
+```bash
+# Run tests using UV
+uv run pytest test_maze_game.py -v
+```
+
+::: {.callout-tip}
+## ✅ What Do Tests Do?
+
+Tests automatically check if your code works correctly. They're like having a robot friend double-check your homework! If all tests pass (show green checkmarks), your game is working great! ✨
+:::
+
+::: {.callout-consider}
+## 🤔 Consider This Corner
+
+**Why is testing important?**
+
+Imagine building a house. Would you wait until it's completely finished to check if the doors open? Of course not! Tests let us check each piece as we build, catching problems early when they're easy to fix.
+
+**What other things could we test in our game?**
+- Does the player start at the correct position?
+- Can the player reach all parts of the maze?
+- Does the win message appear at the right time?
+:::
+
+---
+
+## 🎓 What You Learned Today
+
+Congratulations! 🎉 You've just created your first game! Let's review what you learned:
+
+### Core Concepts
+
+1. **Project Management with UV**
+   - Setting up a Python project
+   - Managing dependencies
+   - Running Python programs
+
+2. **Pygame Basics**
+   - Initializing Pygame
+   - Creating a game window
+   - The game loop pattern
+
+3. **Graphics**
+   - RGB color system
+   - Drawing shapes (rectangles and circles)
+   - Screen coordinates
+
+4. **User Input**
+   - Detecting keyboard presses
+   - Handling movement
+
+5. **Collision Detection**
+   - Checking if objects overlap
+   - Preventing movement through walls
+
+6. **Game Logic**
+   - Win conditions
+   - State management (game_won variable)
+
+### The Game Loop Pattern
+
+Every game follows this pattern:
+
+```python
+while game_is_running:
+    # 1. Handle input
+    # 2. Update game state
+    # 3. Draw everything
+    # 4. Control timing
+```
+
+This pattern is used in **ALL** games, from simple 2D games to complex 3D games!
+
+---
+
+## 🚀 Challenges & Extensions
+
+Ready to level up? Try these challenges:
+
+### 🌟 Easy Challenges
+
+1. **Change the Colors**: Make the player purple and the walls orange
+2. **Adjust the Speed**: Make the player move faster or slower
+3. **Resize**: Make the window bigger (try 1000x800)
+
+### 🌟🌟 Medium Challenges
+
+4. **Design Your Own Maze**: Modify the WALLS list to create a new maze
+5. **Add a Timer**: Show how long it takes to complete the maze
+6. **Create Checkpoints**: Add multiple goals that must be reached in order
+
+### 🌟🌟🌟 Hard Challenges
+
+7. **Multiple Levels**: Create 3 different mazes that unlock after completing each one
+8. **Obstacles**: Add moving obstacles that reset the player if touched
+9. **Score System**: Award points based on time and add a high score
+
+---
+
+## 📚 Key Terms to Remember
+
+- **UV**: A fast Python package manager
+- **Pygame**: A library for creating games in Python
+- **Game Loop**: The continuous cycle of input→update→draw
+- **RGB**: Red, Green, Blue color system (0-255 for each)
+- **Collision Detection**: Checking if two objects overlap
+- **FPS** (Frames Per Second): How many times the screen updates per second
+- **Rect**: Rectangle - a basic shape used for collision detection
+
+---
+
+## 💡 Tips for Next Time
+
+1. **Save your work frequently!** Use Git or just make copies
+2. **Experiment!** Try changing numbers and see what happens
+3. **Comment your code**: Future you will thank present you
+4. **Ask questions**: If something doesn't make sense, ask!
+5. **Have fun**: Games should be fun to make AND play! 🎮
+
+---
+
+## 🏁 Wrapping Up
+
+You did it! You've created a complete, working game from scratch. This is just the beginning of your game development journey!
+
+### What's Coming Next?
+
+**Day 02: Bouncing Ball Physics** - We'll explore physics, velocity, and create a game with bouncing balls!
+
+::: {.callout-important}
+## 📝 Homework (Optional)
+
+Before Day 02:
+1. Customize your maze with your own design
+2. Try changing at least 3 colors
+3. Show your game to a friend or family member!
+4. Think about what kind of game you'd like to create eventually
+:::
+
+---
+
+## � Complete Code - Ready to Copy!
+
+Here's the complete, working code for the Maze Explorer game. Copy and paste this into a file called `maze_game.py`:
+
+```python
+"""
+Day 01: Maze Explorer - Complete Working Version
+A simple game where the player moves a dot through a maze using arrow keys.
+"""
+
+import pygame
+import sys
+
+# Initialize Pygame
+pygame.init()
+
+# Constants
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
+FPS = 60
+
+# Colors (RGB)
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+BLUE = (50, 150, 255)
+GREEN = (50, 255, 150)
+RED = (255, 50, 50)
+DARK_GRAY = (40, 40, 40)
+
+# Player settings
+PLAYER_SIZE = 20
+PLAYER_SPEED = 5
+
+# Maze walls (x, y, width, height)
+WALLS = [
+    pygame.Rect(0, 0, WINDOW_WIDTH, 10),  # Top border
+    pygame.Rect(0, 0, 10, WINDOW_HEIGHT),  # Left border
+    pygame.Rect(0, WINDOW_HEIGHT - 10, WINDOW_WIDTH, 10),  # Bottom border
+    pygame.Rect(WINDOW_WIDTH - 10, 0, 10, WINDOW_HEIGHT),  # Right border
+    
+    # Internal walls
+    pygame.Rect(100, 100, 200, 20),
+    pygame.Rect(100, 100, 20, 150),
+    pygame.Rect(400, 100, 20, 200),
+    pygame.Rect(200, 250, 200, 20),
+    pygame.Rect(500, 200, 150, 20),
+    pygame.Rect(600, 220, 20, 200),
+    pygame.Rect(300, 400, 250, 20),
+    pygame.Rect(100, 450, 20, 100),
+]
+
+# Goal area
+GOAL = pygame.Rect(700, 500, 60, 60)
+
+
+class Player:
+    """Represents the player dot that moves through the maze."""
+    
+    def __init__(self, x, y):
+        """Initialize the player at position (x, y)."""
+        self.rect = pygame.Rect(x, y, PLAYER_SIZE, PLAYER_SIZE)
+        self.color = BLUE
+        
+    def move(self, dx, dy, walls):
+        """
+        Move the player by dx and dy, checking for wall collisions.
+        
+        Args:
+            dx: Change in x position
+            dy: Change in y position
+            walls: List of wall rectangles to check collision against
+        """
+        # Store original position
+        original_x = self.rect.x
+        original_y = self.rect.y
+        
+        # Try to move
+        self.rect.x += dx
+        self.rect.y += dy
+        
+        # Check for collisions with walls
+        for wall in walls:
+            if self.rect.colliderect(wall):
+                # Collision detected, revert to original position
+                self.rect.x = original_x
+                self.rect.y = original_y
+                break
+                
+    def draw(self, surface):
+        """Draw the player on the given surface."""
+        pygame.draw.circle(surface, self.color, self.rect.center, PLAYER_SIZE // 2)
+
+
+def main():
+    """Main game loop."""
+    # Create the game window
+    screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+    pygame.display.set_caption("Day 01: Maze Explorer")
+    
+    # Create clock for controlling frame rate
+    clock = pygame.time.Clock()
+    
+    # Create player
+    player = Player(50, 50)
+    
+    # Game state
+    game_won = False
+    
+    # Main game loop
+    running = True
+    while running:
+        # Handle events
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+        
+        # Get keyboard input
+        if not game_won:
+            keys = pygame.key.get_pressed()
+            dx, dy = 0, 0
+            
+            if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+                dx = -PLAYER_SPEED
+            if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+                dx = PLAYER_SPEED
+            if keys[pygame.K_UP] or keys[pygame.K_w]:
+                dy = -PLAYER_SPEED
+            if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+                dy = PLAYER_SPEED
+            
+            # Move player
+            player.move(dx, dy, WALLS)
+            
+            # Check if player reached the goal
+            if player.rect.colliderect(GOAL):
+                game_won = True
+                player.color = GREEN
+        
+        # Drawing
+        screen.fill(BLACK)
+        
+        # Draw walls
+        for wall in WALLS:
+            pygame.draw.rect(screen, DARK_GRAY, wall)
+        
+        # Draw goal
+        goal_color = GREEN if game_won else RED
+        pygame.draw.rect(screen, goal_color, GOAL)
+        
+        # Draw player
+        player.draw(screen)
+        
+        # Draw win message
+        if game_won:
+            font = pygame.font.Font(None, 72)
+            text = font.render("You Win!", True, GREEN)
+            text_rect = text.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))
+            screen.blit(text, text_rect)
+        
+        # Update display
+        pygame.display.flip()
+        
+        # Control frame rate
+        clock.tick(FPS)
+    
+    # Quit
+    pygame.quit()
+    sys.exit()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+**To run this code:**
+```bash
+cd Day_01
+uv sync
+uv run python maze_game.py
+```
+
+---
+
+## �📖 Additional Resources
+
+- [Pygame Documentation](https://www.pygame.org/docs/)
+- [UV Documentation](https://github.com/astral-sh/uv)
+- [Python Official Tutorial](https://docs.python.org/3/tutorial/)
+- [RGB Color Picker](https://www.w3schools.com/colors/colors_picker.asp)
+
+---
+
+::: {.hero-banner}
+# See you on Day 02! 🚀
+
+Keep coding, keep creating, and most importantly - keep having fun!
+
+*"The only way to learn a new programming language is by writing programs in it."* - Dennis Ritchie
+:::

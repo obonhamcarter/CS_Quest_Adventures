@@ -1,0 +1,245 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - "index.qmd"
+    - "intro/*.qmd"
+    - "tracks/**/*.qmd"
+    - "sitedocs/*.md"
+  resources:
+    - files/**
+    - shared/**
+
+website:
+  title: "CS Quest Adventures"
+  description: "Epic journeys through Computer Science - Learn Python, Rust, Game Dev, and more!"
+  
+  navbar:
+    background: primary
+    search: true
+    left:
+      - text: "🏰 Home"
+        file: index.qmd
+      - text: "🌟 Getting Started"
+        menu:
+          - text: "What is CS?"
+            file: intro/what-is-cs.qmd
+          - text: "Why Study CS?"
+            file: intro/why-study-cs.qmd
+          - text: "Try It Now!"
+            file: intro/try-it-now.qmd
+          - text: "---"
+          - text: "College Fair Guide"
+            file: intro/college-fair.qmd
+      - text: "Learning Tracks"
+        menu:
+          - text: "🐍 Python Track"
+            file: tracks/python/index.qmd
+          - text: "🦀 Rust Track"
+            file: tracks/rust/index.qmd
+          - text: "🎮 Pygame Track"
+            file: tracks/pygame/index.qmd
+          - text: "---"
+          - text: "📚 All Tracks Overview"
+            file: tracks-overview.qmd
+      - text: "Resources"
+        menu:
+          - text: "📥 Downloads"
+            file: downloads.qmd
+          - text: "🚀 JupyterLite (Python)"
+            file: jupyterlite.qmd
+          - text: "🔧 Setup Guides"
+            file: setup.qmd
+          - text: "❓ FAQ"
+            file: sitedocs/faq.md
+    right:
+      - icon: github
+        href: https://github.com/obonhamcarter/CS_Quest_Adventures
+  
+  # Dynamic sidebar - changes based on current track
+  sidebar:
+    - id: python-sidebar
+      title: "🐍 Python Quests"
+      style: "docked"
+      search: true
+      contents:
+        - section: "Begin Your Journey"
+          contents:
+            - text: "Quest 1: Variables"
+              file: tracks/python/lessons/01-variables.qmd
+            - text: "Quest 2: Data Types"
+              file: tracks/python/lessons/02-data-types.qmd
+            - text: "Quest 3: Conditionals"
+              file: tracks/python/lessons/03-conditionals.qmd
+            - text: "Quest 4: Loops"
+              file: tracks/python/lessons/04-loops.qmd
+            - text: "Quest 5: Lists"
+              file: tracks/python/lessons/05-lists.qmd
+            - text: "Quest 6: Functions"
+              file: tracks/python/lessons/06-functions.qmd
+            - text: "Quest 7: Dictionaries"
+              file: tracks/python/lessons/07-dictionaries.qmd
+            - text: "Quest 8: Fibonacci"
+              file: tracks/python/lessons/08-fibonacci.qmd
+            - text: "Quest 9: Sorting"
+              file: tracks/python/lessons/09-sorting.qmd
+            - text: "Quest 10: Number Game"
+              file: tracks/python/lessons/10-number-game.qmd
+            - text: "Quest 11: Recursion"
+              file: tracks/python/lessons/11-recursion.qmd
+            - text: "Quest 12: Big O"
+              file: tracks/python/lessons/12-complexity.qmd
+        - section: "Advanced Adventures"
+          contents:
+            - text: "Quest 13: Iterative Loops"
+              file: tracks/python/lessons/13-iterative-loops.qmd
+            - text: "Quest 14: Non-Returning Functions"
+              file: tracks/python/lessons/14-functions-non-returning.qmd
+            - text: "Quest 15: Returning Functions"
+              file: tracks/python/lessons/15-functions-returning.qmd
+            - text: "Quest 16: Lambda Functions"
+              file: tracks/python/lessons/16-lambda-functions.qmd
+            - text: "Quest 17: Higher-Order Functions"
+              file: tracks/python/lessons/17-higher-order-functions.qmd
+            - text: "Quest 18: Decorators"
+              file: tracks/python/lessons/18-decorators.qmd
+            - text: "Quest 19: Classes"
+              file: tracks/python/lessons/19-classes.qmd
+        - section: "Track Resources"
+          contents:
+            - text: "📖 All Python Quests"
+              file: tracks/python/all-quests.qmd
+            - text: "🚀 JupyterLite"
+              file: tracks/python/interactive.qmd
+            - text: "📥 Downloads"
+              file: tracks/python/downloads.qmd
+        - section: "Next Adventure"
+          contents:
+            - text: "➡️ Try Rust Track"
+              file: tracks/rust/index.qmd
+    
+    - id: rust-sidebar
+      title: "🦀 Rust Quests"
+      style: "docked"
+      search: true
+      contents:
+        - section: "Foundation Quests"
+          contents:
+            - text: "Quest 1: Variables"
+              file: tracks/rust/lessons/01-variables.qmd
+            - text: "Quest 2: Data Types"
+              file: tracks/rust/lessons/02-data-types.qmd
+            - text: "Quest 3: Conditionals"
+              file: tracks/rust/lessons/03-conditionals.qmd
+            - text: "Quest 4: Loops"
+              file: tracks/rust/lessons/04-loops.qmd
+            - text: "Quest 5: Vectors"
+              file: tracks/rust/lessons/05-lists.qmd
+            - text: "Quest 6: Functions"
+              file: tracks/rust/lessons/06-functions.qmd
+            - text: "Quest 7: HashMaps"
+              file: tracks/rust/lessons/07-dictionaries.qmd
+            - text: "Quest 8: Fibonacci"
+              file: tracks/rust/lessons/08-fibonacci.qmd
+        - section: "Practice Quests"
+          contents:
+            - text: "Quest 9: Sorting"
+              file: tracks/rust/lessons/09-sorting.qmd
+            - text: "Quest 10: Number Game"
+              file: tracks/rust/lessons/10-number-game.qmd
+        - section: "Intermediate Quests"
+          contents:
+            - text: "Quest 11: Recursion"
+              file: tracks/rust/lessons/11-recursion.qmd
+            - text: "Quest 12: Complexity"
+              file: tracks/rust/lessons/12-complexity.qmd
+            - text: "Quest 13: Iterative Loops"
+              file: tracks/rust/lessons/13-iterative-loops.qmd
+        - section: "Advanced Quests"
+          contents:
+            - text: "Quest 14: Non-Returning Functions"
+              file: tracks/rust/lessons/14-functions-non-returning.qmd
+            - text: "Quest 15: Returning Functions"
+              file: tracks/rust/lessons/15-functions-returning.qmd
+            - text: "Quest 16: Closures"
+              file: tracks/rust/lessons/16-lambda-functions.qmd
+            - text: "Quest 17: Higher-Order Functions"
+              file: tracks/rust/lessons/17-higher-order-functions.qmd
+            - text: "Quest 18: Wrappers"
+              file: tracks/rust/lessons/18-decorators.qmd
+            - text: "Quest 19: Structs & Impl"
+              file: tracks/rust/lessons/19-classes.qmd
+        - section: "Track Resources"
+          contents:
+            - text: "📖 All Rust Quests"
+              file: tracks/rust/all-quests.qmd
+            - text: "🔧 Rust Playground"
+              file: tracks/rust/interactive.qmd
+            - text: "📥 Downloads"
+              file: tracks/rust/downloads.qmd
+        - section: "Next Adventure"
+          contents:
+            - text: "➡️ Try Pygame Track"
+              file: tracks/pygame/index.qmd
+    
+    - id: pygame-sidebar
+      title: "🎮 Pygame Quests"
+      style: "docked"
+      search: true
+      contents:
+        - section: "Game Development Quests"
+          contents:
+            - text: "Quest 1: Maze Explorer"
+              file: tracks/pygame/quests/01-maze-explorer.qmd
+            - text: "Quest 2: Bouncing Ball"
+              file: tracks/pygame/quests/02-bouncing-ball.qmd
+            - text: "Quest 3: Pong Game"
+              file: tracks/pygame/quests/03-pong-game.qmd
+            - text: "Quest 4: Snake Game"
+              file: tracks/pygame/quests/04-snake-game.qmd
+            - text: "Quest 5: Flappy Bird"
+              file: tracks/pygame/quests/05-flappy-bird.qmd
+            - text: "Quest 6: Frogger"
+              file: tracks/pygame/quests/06-frogger.qmd
+            - text: "Quest 7: Dungeon Crawler"
+              file: tracks/pygame/quests/07-dungeon-crawler.qmd
+        - section: "Track Resources"
+          contents:
+            - text: "📖 All Game Quests"
+              file: tracks/pygame/all-quests.qmd
+            - text: "🔧 Setup Guide"
+              file: tracks/pygame/setup.qmd
+            - text: "📥 Download Projects"
+              file: tracks/pygame/downloads.qmd
+        - section: "What's Next?"
+          contents:
+            - text: "🎯 Your Learning Path"
+              file: tracks-overview.qmd
+
+format:
+  live-html:
+    theme: 
+      - cosmo
+      - custom.scss
+    css: styles.css
+    include-in-header:
+      - theme-toggle.js
+    toc: true
+    toc-depth: 2
+    code-copy: true
+    code-tools: true
+    smooth-scroll: true
+    fontsize: 1.1em
+    linestretch: 1.7
+    fig-cap-location: bottom
+    pyodide:
+      cell-options:
+        edit: true
+        runbutton: true
+        startover: true
+    
+execute:
+  freeze: auto
+  echo: true
+  warning: false
+  message: false

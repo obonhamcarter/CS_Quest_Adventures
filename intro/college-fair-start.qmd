@@ -1,0 +1,197 @@
+---
+title: "Welcome to CS Quest!"
+subtitle: "Your Introduction to Computer Science at Allegheny College"
+format:
+  live-html:
+    toc: false
+---
+
+::: {.hero}
+# 🎓 Welcome College Fair Visitors!
+
+New to Computer Science? You're in the right place! Let's explore what CS is all about and try some real coding!
+:::
+
+::: {.quest-badge}
+🌟 START HERE | No Experience Needed | 5 Minutes to Get Started
+:::
+
+::: {.tip-box}
+**💻 Interactive Options:**
+
+- 📓 **[Open in JupyterLite](../jupyterlite/lab/index.html?path=college-fair-start.ipynb)** - Full Jupyter environment in your browser
+- 📥 **[Download Notebook](../files/intro/college-fair-start.ipynb)** - For use in local Jupyter or Google Colab
+:::
+
+## 🚀 Quick Start: Choose Your Adventure
+
+<div class="quest-grid">
+
+::: {.quest-card}
+### 🌟 What is CS?
+**Never thought about studying CS?**
+
+Discover what Computer Science really is (hint: it's not just coding!).
+
+[Learn More →](what-is-cs.qmd)
+
+⏱️ 3 minutes
+:::
+
+::: {.quest-card}
+### 💼 Why Study CS?
+**Curious about careers?**
+
+Explore job opportunities, salaries, and the impact CS professionals make.
+
+[Explore Careers →](why-study-cs.qmd)
+
+⏱️ 4 minutes
+:::
+
+::: {.quest-card}
+### 🎮 Try It Now!
+**Want to code RIGHT NOW?**
+
+Write your first program in 30 seconds—no installation needed!
+
+[Start Coding →](try-it-now.qmd)
+
+⏱️ 5 minutes
+:::
+
+::: {.quest-card}
+### 🎯 Major vs Minor
+**Deciding on a program?**
+
+Compare CS Major and CS Minor to find your perfect fit.
+
+[Compare Programs →](major-vs-minor.qmd)
+
+⏱️ 5 minutes
+:::
+
+</div>
+
+---
+
+## 📚 Ready to Learn Python?
+
+Once you've explored the basics above, dive into our interactive coding quests!
+
+::: {.highlight-box .highlight-info}
+**🎒 Beginner-Friendly Quests** (Start here!)
+
+Each quest is a 5-minute coding adventure with interactive challenges:
+
+1. **[Quest 1: Variables](../lessons/01-variables.qmd)** - Your coding backpack
+2. **[Quest 2: Data Types](../lessons/02-data-types.qmd)** - Shapes of information
+3. **[Quest 3: Conditionals](../lessons/03-conditionals.qmd)** - Choose your path
+4. **[Quest 4: Loops](../lessons/04-loops.qmd)** - The power of repetition
+5. **[Quest 5: Lists](../lessons/05-lists.qmd)** - Collecting treasures
+
+[View All 19 Quests →](../all-quests.qmd)
+:::
+
+---
+
+## 🎓 About Allegheny College Computer Science
+
+::: {.concept-box}
+### Why Allegheny?
+
+✅ **Small Classes** - Personal attention from expert faculty  
+✅ **Hands-On Research** - Work on real projects from day one  
+✅ **Supportive Community** - Collaborative, not competitive  
+✅ **Career Success** - Strong job placement and grad school admissions  
+✅ **Flexible Programs** - Major, minor, or just explore!  
+
+### Quick Stats
+- 📊 **13:1** student-to-faculty ratio
+- 🎓 **100%** of CS majors complete a capstone project
+- 💼 **95%+** employment or grad school placement
+- 🌍 **Remote internships** available worldwide
+:::
+
+---
+
+## 💡 Three Ways to Code Interactively
+
+All our lessons include **live code** you can edit and run!
+
+::: {.tip-box}
+**Choose Your Coding Style:**
+
+1. **📝 On Lesson Pages** - Click code cells and run them directly
+2. **🚀 JupyterLite** - Full Jupyter environment in your browser  
+   [Launch JupyterLite →](../jupyterlite/lab/index.html)
+3. **📥 Download Notebooks** - Use locally or in Google Colab  
+   [Download Files →](../files/)
+
+[Learn More About Interactive Features →](../interactive.qmd)
+:::
+
+---
+
+## 📞 Connect With Us
+
+::: {.highlight-box .highlight-info}
+**Have Questions? We're Here to Help!**
+
+**Computer Science Department**
+- 📧 **Email**: obonhamcarter@allegheny.edu
+- 🌐 **Website**: [https://cs.allegheny.edu](https://cs.allegheny.edu)
+- 👨‍💻 **Website**: [https://www.oliverbonhamcarter.com](https://www.oliverbonhamcarter.com)
+- 📍 **Location**: Alden Hall, Allegheny College
+
+**Visit Campus**
+- 🏫 Schedule a tour
+- 💬 Meet current CS students
+- 🎓 Sit in on a class
+- 🔬 See our labs and projects
+
+**General Admissions**
+- 🌐 [allegheny.edu/admissions](https://allegheny.edu/admissions)
+- ☎️ (814) 332-4351
+:::
+
+---
+
+## 🎯 Your Next Step
+
+::: {.story-box}
+**Ready to Start Your CS Journey?**
+
+1. ✅ **Explore the intro pages** above (5-15 minutes total)
+2. ✅ **Try coding** in the [Try It Now](try-it-now.qmd) section
+3. ✅ **Start Quest 1** if you want to keep learning
+4. ✅ **Contact us** with questions!
+
+**Remember**: Every expert programmer started exactly where you are now. The only difference? They took the first step. 
+
+**Your first step starts today!** 🚀
+:::
+
+---
+
+<div style="text-align: center; margin-top: 2em;">
+
+### 🌟 Start Your Adventure
+
+<div class="quest-grid" style="margin-top: 1em;">
+
+::: {.quest-card}
+[🌟 What is CS?](what-is-cs.qmd)
+:::
+
+::: {.quest-card}
+[🎮 Try Coding Now](try-it-now.qmd)
+:::
+
+::: {.quest-card}
+[🎒 Quest 1: Variables](../lessons/01-variables.qmd)
+:::
+
+</div>
+
+</div>

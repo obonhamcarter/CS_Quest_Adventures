@@ -1,0 +1,123 @@
+---
+title: "JupyterLite - Python in Your Browser"
+subtitle: "Full Jupyter Environment Without Installation"
+---
+
+# 🚀 JupyterLite - Python in Your Browser
+
+Experience a complete Jupyter environment running entirely in your browser — no installation required!
+
+---
+
+## What is JupyterLite?
+
+JupyterLite is a full-featured Jupyter environment that runs using WebAssembly. It provides:
+
+- ✅ Complete Python runtime (via Pyodide)
+- ✅ Jupyter notebooks and console
+- ✅ File management
+- ✅ Package installation
+- ✅ All Python Quest notebooks pre-loaded
+
+**Best part:** Everything runs locally in your browser. No server, no setup!
+
+---
+
+## 🎯 Launch JupyterLite
+
+Click below to open the full Python environment:
+
+[🚀 Launch JupyterLite](jupyterlite/lab/index.html){.btn .btn-primary .btn-lg}
+
+---
+
+## 📚 What's Included
+
+All Python Quest notebooks are available:
+
+- Variables & Data Types
+- Control Flow & Loops
+- Functions & Modules
+- Data Structures
+- Algorithms
+- Object-Oriented Programming
+- And all 19 Python quests!
+
+---
+
+## 💡 Tips for Using JupyterLite
+
+### Getting Started
+1. Click the launch button above
+2. Navigate to the file browser on the left
+3. Open any `.ipynb` notebook
+4. Run cells with Shift+Enter
+
+### Installing Packages
+```python
+import micropip
+await micropip.install('package-name')
+```
+
+### Saving Your Work
+- Files are saved in browser local storage
+- Download notebooks to keep them permanently
+- Use File → Download to save your work
+
+---
+
+## 🆚 JupyterLite vs Local Jupyter
+
+| Feature | JupyterLite | Local Jupyter |
+|---------|-------------|---------------|
+| **Installation** | None | Required |
+| **Internet** | Initial load only | Not required |
+| **Speed** | Good | Better |
+| **Packages** | Limited | All packages |
+| **Files** | Browser storage | Full file system |
+| **Persistence** | Browser-based | Permanent |
+
+---
+
+## ⚠️ Limitations
+
+JupyterLite is powerful but has some limits:
+
+- Not all Python packages available
+- Limited to browser storage
+- Slower than native Python for heavy computations
+- Files stored in browser (not on disk)
+
+For complex projects, consider [local setup →](setup.qmd)
+
+---
+
+## 🔄 Alternative: In-Page Execution
+
+Prefer coding directly on lesson pages?
+
+Each Python quest has executable code cells embedded right in the page. No separate environment needed!
+
+[View Python Quests →](tracks/python/index.qmd)
+
+---
+
+## 📥 Local Development
+
+Want to use Jupyter on your computer?
+
+```bash
+# Install Jupyter
+pip install jupyter
+
+# Launch
+jupyter lab
+```
+
+[Full Setup Guide →](setup.qmd)
+
+---
+
+[🚀 Launch JupyterLite Now](jupyterlite/lab/index.html){.btn .btn-success .btn-lg}
+
+[← Back to Python Track](tracks/python/index.qmd) | [← Back to Home](index.qmd)

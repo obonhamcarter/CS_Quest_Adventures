@@ -1,0 +1,317 @@
+---
+title: "Day 06: Frogger Game 🐸"
+subtitle: "Multi-Lane Platformer with Complex Collision!"
+author: "Pygame Tutorial Series"
+format:
+  html:
+    theme: light
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    css: ../../shared/styles/tutorial.css
+execute:
+  enabled: true
+  cache: false
+---
+
+::: {.hero-banner}
+# 🐸 Welcome to Day 06!
+
+Create **Frogger** with cars, logs, and rivers! Master multi-zone collision and platform riding mechanics.
+
+**Time Required:** ~45 minutes | **Difficulty:** Advanced 🌟🌟🌟
+:::
+
+## 🎯 What You'll Learn
+- ✅ **Multi-lane system** with different behaviors
+- ✅ **Platform riding** (moving with logs)
+- ✅ **Zone-based collision**
+- ✅ **Reset mechanics**
+- ✅ **Level progression**
+
+## 🚗 Lane System
+
+::: {.callout-note}
+## 🛣️ Understanding Lanes
+
+**What is a lane?**
+Think of a highway with multiple lanes. Each lane in Frogger:
+- Has a **Y position** (height on screen)
+- Has **speed** (how fast objects move)
+- Can be **road** (cars) or **water** (logs)
+- Contains **moving objects** (cars/logs)
+
+**The Lane class manages:**
+1. **Spawning** - Creates new cars/logs periodically
+2. **Moving** - Scrolls all objects left or right
+3. **Cleanup** - Removes objects that go off-screen
+
+**Different lanes move different speeds** - some fast, some slow - creating varied difficulty!
+
+**Spawn timer:** Every 120 frames (2 seconds at 60 FPS), spawn a new object in this lane.
+:::
+
+```python
+class Lane:
+    def __init__(self, y, speed, is_water=False):
+        self.y = y
+        self.speed = speed
+        self.is_water = is_water
+        self.objects = []
+        self.spawn_timer = 0
+        self.spawn_interval = 120  # frames
+    
+    def update(self):
+        # Move objects
+        for obj in self.objects:
+            obj.x += self.speed
+        
+        # Remove off-screen objects
+        self.objects = [obj for obj in self.objects 
+                       if -100 < obj.x < 900]
+        
+        # Spawn new objects
+        self.spawn_timer += 1
+        if self.spawn_timer >= self.spawn_interval:
+            self.spawn_object()
+            self.spawn_timer = 0
+```
+
+::: {.callout-important}
+## ⚠️ Critical Game Design Rule
+
+**Every water lane MUST have logs!**
+
+If you define water lanes (rows 1-6) but only spawn logs in some of them (e.g., rows 2-5), the frog will drown in rows 1 and 6 with no way to cross. This makes the level **impossible to win**!
+
+**Best practice:**
+```python
+# Water spans rows 1-6
+water_rows = range(1, 7)
+
+# Logs MUST cover ALL water rows
+log_lanes = [
+    (1, 1.2),   # Row 1 - logs moving right
+    (2, 1.5),   # Row 2
+    (3, -1),    # Row 3 - logs moving left
+    (4, 2),     # Row 4
+    (5, -1.5),  # Row 5
+    (6, -1.2)   # Row 6 - logs moving left
+]
+```
+
+**Why this matters:** The frog dies if in water without a log. Every water lane needs logs spawning regularly, or the level becomes unwinnable!
+
+**Pro tip for playability:**
+- Start with 2-3 logs already on each lane (so players don't wait)
+- Spawn new logs every 1.5 seconds (not too sparse, not too crowded)
+- This creates a **challenging but fair** gameplay experience!
+:::
+
+## 🐸 Frog with Platform Riding
+
+::: {.callout-note}
+## 🎯 The Key Mechanic: Platform Riding
+
+**What makes Frogger unique:**
+- On **road lanes** - avoid cars (collision = death)
+- On **water lanes** - MUST be on a log (or you drown!)
+- When on log - **move with the log** automatically
+
+**How platform riding works:**
+1. Check if frog is in a water lane
+2. Check if frog overlaps with any log in that lane
+3. If yes: store reference to log in `self.on_log`
+4. Each frame: if `on_log` exists, move frog with log's speed
+
+**Challenge:** Logs move different directions and speeds. Time your jumps carefully!
+
+**Collision zones:**
+- `abs(self.y - lane.y) < 30` - "Is frog in this lane's Y range?"
+- If yes, check X overlap with lane objects
+:::
+
+```python
+class Frog:
+    def __init__(self):
+        self.x = 400
+        self.y = 550
+        self.size = 30
+        self.on_log = None
+    
+    def move(self, dx, dy):
+        self.x += dx
+        self.y += dy
+        # Keep on screen
+        self.x = max(0, min(770, self.x))
+        self.y = max(0, min(570, self.y))
+    
+    def update(self, lanes):
+        # Check if on log
+        self.on_log = None
+        for lane in lanes:
+            if lane.is_water and abs(self.y - lane.y) < 30:
+                for obj in lane.objects:
+                    if (obj.x < self.x < obj.x + obj.width):
+                        self.on_log = obj
+                        self.x += lane.speed  # Ride the log!
+                        break
+    
+    def check_death(self, lanes):
+        # In water without log
+        for lane in lanes:
+            if lane.is_water and abs(self.y - lane.y) < 30:
+                if not self.on_log:
+                    return True
+        
+        # Hit by car
+        for lane in lanes:
+            if not lane.is_water:
+                for obj in lane.objects:
+                    if (abs(self.y - lane.y) < 30 and 
+                        obj.x < self.x < obj.x + obj.width):
+                        return True
+        return False
+```
+
+## 📋 Complete Working Code!
+
+For full implementation see `Day_06/src_instr/frogger_game.py`. Copy this starter version:
+
+::: {.callout-tip}
+## 🎮 Gameplay Improvements in Full Version
+
+The complete code includes important enhancements:
+- **Pre-spawned logs**: 2-3 logs per lane at start (no waiting!)
+- **Faster spawn rate**: New logs every 1.5 seconds (vs 3 seconds)
+- **Better coverage**: All 6 water lanes have logs
+- **Result**: Challenging but fair gameplay!
+
+These tweaks transform the game from frustrating to fun!
+:::
+
+```python
+import pygame
+import sys
+import random
+
+pygame.init()
+
+WIDTH, HEIGHT = 800, 600
+LANE_HEIGHT = 60
+FPS = 60
+
+GREEN = (0, 255, 0)
+BLUE = (0, 100, 255)
+BROWN = (139, 69, 19)
+RED = (255, 0, 0)
+BLACK = (0, 0, 0)
+GRAY = (50, 50, 50)
+YELLOW = (255, 255, 0)
+
+class Frog:
+    def __init__(self):
+        self.x, self.y = 400, 540
+        self.size = 30
+        self.move_dist = LANE_HEIGHT
+    
+    def move(self, dx, dy):
+        self.x += dx * self.move_dist
+        self.y += dy * self.move_dist
+        self.x = max(0, min(WIDTH-self.size, self.x))
+        self.y = max(0, min(HEIGHT-self.size, self.y))
+    
+    def draw(self, screen):
+        pygame.draw.circle(screen, GREEN, (int(self.x), int(self.y)), self.size//2)
+
+class Car:
+    def __init__(self, x, y, speed):
+        self.x, self.y = x, y
+        self.width, self.height = 60, 40
+        self.speed = speed
+    
+    def update(self):
+        self.x += self.speed
+        if self.speed > 0 and self.x > WIDTH:
+            self.x = -self.width
+        elif self.speed < 0 and self.x < -self.width:
+            self.x = WIDTH
+    
+    def draw(self, screen):
+        pygame.draw.rect(screen, RED, (self.x, self.y, self.width, self.height))
+
+def main():
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    clock = pygame.time.Clock()
+    font = pygame.font.Font(None, 36)
+    
+    frog = Frog()
+    cars = [
+        Car(random.randint(0, WIDTH), 300, 3),
+        Car(random.randint(0, WIDTH), 240, -3),
+        Car(random.randint(0, WIDTH), 180, 4),
+    ]
+    
+    score = 0
+    lives = 3
+    
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP: 
+                    frog.move(0, -1)
+                    score += 10
+                elif event.key == pygame.K_DOWN: frog.move(0, 1)
+                elif event.key == pygame.K_LEFT: frog.move(-1, 0)
+                elif event.key == pygame.K_RIGHT: frog.move(1, 0)
+        
+        for car in cars:
+            car.update()
+            # Simple collision check
+            if (abs(frog.x - car.x) < 50 and abs(frog.y - car.y) < 40):
+                frog.x, frog.y = 400, 540
+                lives -= 1
+        
+        if lives <= 0:
+            running = False
+        
+        screen.fill(BLACK)
+        
+        # Draw lanes
+        pygame.draw.rect(screen, GRAY, (0, 0, WIDTH, 120))  # Safe zone
+        pygame.draw.rect(screen, GRAY, (0, 120, WIDTH, 240))  # Road
+        pygame.draw.rect(screen, BLUE, (0, 360, WIDTH, 180))  # Water
+        pygame.draw.rect(screen, GREEN, (0, 540, WIDTH, 60))  # Start
+        
+        frog.draw(screen)
+        for car in cars:
+            car.draw(screen)
+        
+        # HUD
+        score_text = font.render(f"Score: {score}", True, YELLOW)
+        lives_text = font.render(f"Lives: {lives}", True, YELLOW)
+        screen.blit(score_text, (10, 10))
+        screen.blit(lives_text, (10, 50))
+        
+        pygame.display.flip()
+        clock.tick(FPS)
+    
+    pygame.quit()
+    sys.exit()
+
+if __name__ == "__main__":
+    main()
+```
+
+## 🎯 Challenges
+1. Add lily pads as safe spots
+2. Create timer for urgency
+3. Add multiple frogs (lives system)
+4. Design custom level layouts
+
+::: {.hero-banner}
+# Day 07: Dungeon Crawler next! 🗡️
+:::

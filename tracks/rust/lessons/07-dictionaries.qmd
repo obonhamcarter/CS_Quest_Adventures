@@ -1,0 +1,77 @@
+---
+title: "Quest 7: HashMaps - Keys and Values"
+subtitle: "Store and Look Up Data Quickly"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+🗝️ QUEST 7 | Difficulty: Beginner | Time: 10 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/07-dictionaries.ipynb)
+- 📥 [Download Notebook](../files/lessons/07-dictionaries.ipynb)
+:::
+
+## 📖 Introduction
+Need to look up data by name? Use a `HashMap`.
+
+## 💡 Basic HashMap
+
+```rust
+use std::collections::HashMap;
+
+fn main() {
+    let mut hp = HashMap::new();
+    hp.insert("slime", 8);
+    hp.insert("wolf", 20);
+
+    println!("{:?}", hp);
+}
+```
+
+## 👨‍💻 Example Lookup
+
+```rust
+use std::collections::HashMap;
+
+fn main() {
+    let mut prices = HashMap::new();
+    prices.insert("apple", 2);
+    prices.insert("banana", 1);
+
+    if let Some(cost) = prices.get("apple") {
+        println!("Apple costs {}", cost);
+    }
+}
+```
+
+## 🎯 Gentle Challenge
+Create a map of 3 school subjects and your confidence level (1-5). Print one lookup.
+
+## ✅ One Possible Solution
+
+```rust
+use std::collections::HashMap;
+
+fn main() {
+    let mut confidence = HashMap::new();
+    confidence.insert("math", 4);
+    confidence.insert("science", 3);
+    confidence.insert("history", 5);
+
+    if let Some(level) = confidence.get("science") {
+        println!("Science confidence: {}", level);
+    }
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 7 Complete
+You created, inserted, and looked up values in a `HashMap`.
+Next: [Quest 8: Fibonacci](08-fibonacci.qmd)
+:::

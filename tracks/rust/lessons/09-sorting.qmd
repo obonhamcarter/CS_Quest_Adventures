@@ -1,0 +1,59 @@
+---
+title: "Quest 9: Sorting - Organizing Data"
+subtitle: "Sort Vectors with Built-in Methods"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+📊 QUEST 9 | Difficulty: Beginner | Time: 8 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/09-sorting.ipynb)
+- 📥 [Download Notebook](../files/lessons/09-sorting.ipynb)
+:::
+
+## 📖 Introduction
+Sorting helps you present data clearly and search faster.
+Take it one step at a time—you've got this.
+
+## 💡 Rust Sorting
+
+```rust
+fn main() {
+    let mut numbers = vec![9, 2, 7, 1, 5];
+    numbers.sort();
+    println!("Ascending: {:?}", numbers);
+
+    numbers.sort_by(|a, b| b.cmp(a));
+    println!("Descending: {:?}", numbers);
+}
+```
+
+## 🎯 Gentle Challenge
+Sort a list of 6 test scores from low to high, then print the top score.
+Try changing one number and run again to confirm the order updates.
+
+## ✅ One Possible Solution
+
+```rust
+fn main() {
+    let mut scores = vec![88, 72, 95, 67, 91, 84];
+    scores.sort();
+    println!("Sorted: {:?}", scores);
+
+    if let Some(top) = scores.last() {
+        println!("Top score: {}", top);
+    }
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 9 Complete
+You used Rust sorting tools on vectors.
+Next: [Quest 10: Number Game](10-number-game.qmd)
+:::

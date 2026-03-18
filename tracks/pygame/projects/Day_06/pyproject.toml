@@ -1,0 +1,9 @@
+[project]
+name = "pygame-day06-frogger"
+version = "0.1.0"
+description = "Day 06: Frogger Clone - Multi-lane platformer"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "pygame==2.5.2",
+    "pytest>=7.4.0",
+]

@@ -1,0 +1,584 @@
+---
+title: "Day 03: Pong Game 🏓"
+subtitle: "Build a Classic Two-Player Game!"
+author: "Pygame Tutorial Series"
+format:
+  html:
+    theme: light
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    css: ../../shared/styles/tutorial.css
+execute:
+  enabled: true
+  cache: false
+---
+
+::: {.hero-banner}
+# 🏓 Welcome to Day 03!
+
+Today, you'll create a **classic Pong game**! You'll learn about game states, AI opponents, collision angles, and score tracking. By the end of this tutorial, you'll have a fully playable two-player game!
+
+**Time Required:** ~45 minutes  
+**Difficulty:** Intermediate 🌟🌟
+:::
+
+---
+
+## 🎯 What You'll Learn Today
+
+- ✅ Create **player vs AI** gameplay
+- ✅ Implement **paddle controls**
+- ✅ Handle **ball-paddle collisions** with angles
+- ✅ Build a **scoring system**
+- ✅ Design **simple AI** behavior
+
+---
+
+## 📚 Building on Previous Days
+
+- **Day 01**: Game loop, keyboard input, collision detection
+- **Day 02**: Velocity, physics, object movement
+
+Today we combine these concepts to create a competitive game!
+
+---
+
+## 🎓 Part 1: Understanding Game Design (10 minutes)
+
+### The Classic Pong Mechanics
+
+Pong has simple but engaging gameplay:
+1. Two paddles on opposite sides
+2. Ball bounces between them
+3. Miss the ball = opponent scores
+4. First to X points wins
+
+### AI Design Philosophy
+
+::: {.callout-note}
+## 🤖 How We'll Make the Computer Play
+
+Creating an AI (Artificial Intelligence) opponent sounds complex, but it's actually simple logic!
+
+**Our AI strategy:**
+1. **Look at where the ball is** (ball_y position)
+2. **Look at where the paddle is** (paddle_y position)
+3. **Move the paddle toward the ball**
+   - If ball is above paddle → move up
+   - If ball is below paddle → move down
+   - If ball is close enough → stay still
+
+**The tolerance:** We add a "tolerance zone" so the AI doesn't jitter. If the ball is within 10 pixels, that's close enough!
+:::
+
+```{python}
+# Simple AI logic demonstration
+# This is the "brain" of our computer opponent!
+
+def simple_ai_decision(paddle_y, ball_y, speed=5):
+    """
+    Decide how AI paddle should move
+    
+    Args:
+        paddle_y: Center Y position of AI paddle
+        ball_y: Y position of ball
+        speed: How fast AI can move
+    
+    Returns:
+        Movement direction (-speed, 0, or +speed)
+    """
+    tolerance = 10  # How close is "good enough"
+    
+    if ball_y < paddle_y - tolerance:
+        return -speed  # Move up
+    elif ball_y > paddle_y + tolerance:
+        return speed   # Move down
+    else:
+        return 0       # Stay put
+    
+    # Test AI decisions
+print("AI Decision Examples:")
+print(f"Ball at 100, Paddle at 200: Move {simple_ai_decision(200, 100)}")
+print(f"Ball at 300, Paddle at 200: Move {simple_ai_decision(200, 300)}")
+print(f"Ball at 205, Paddle at 200: Move {simple_ai_decision(200, 205)}")
+```
+
+::: {.callout-important}
+## 📖 Understanding AI Decisions
+
+**Reading the output:**
+1. **Ball at 100, Paddle at 200: Move -5**
+   - Ball is 100 pixels from top, paddle is at 200
+   - Ball is ABOVE paddle (smaller Y = higher up)
+   - AI returns -5 (negative = move up toward ball)
+
+2. **Ball at 300, Paddle at 200: Move 5**
+   - Ball is at 300, paddle at 200  
+   - Ball is BELOW paddle (larger Y = lower down)
+   - AI returns +5 (positive = move down toward ball)
+
+3. **Ball at 205, Paddle at 200: Move 0**
+   - Ball is only 5 pixels away from paddle
+   - Within our tolerance of 10 pixels
+   - AI returns 0 (don't move, it's close enough!)
+
+**How this creates gameplay:**
+- The AI **tracks the ball** automatically
+- The **tolerance** prevents jerky movement
+- You can adjust `speed` to make AI easier or harder
+- This same logic is used in many classic games!
+
+**Try it:** What would happen if tolerance was 0? The paddle would move constantly!
+:::
+
+---
+
+## 🎮 Part 2: Building the Pong Game (25 minutes)
+
+### Step 1: Setup and Constants
+
+::: {.callout-note}
+## 🛠️ What These Constants Mean
+
+**Window settings:**
+- `WINDOW_WIDTH/HEIGHT` - Size of our game window (800x600 pixels)
+- `FPS = 60` - Game updates 60 times per second (smooth motion!)
+
+**Paddle settings:**
+- `PADDLE_WIDTH = 15` - How wide the paddle is
+- `PADDLE_HEIGHT = 100` - How tall (easier to hit ball)
+- `PADDLE_SPEED = 7` - How many pixels to move each frame
+
+**Ball settings:**
+- `BALL_SIZE = 15` - Diameter of the ball
+- `BALL_SPEED_X/Y = 6` - How fast ball moves (try changing this!)
+
+**Why constants?** Writing `PADDLE_SPEED` is clearer than `7`, and you can change all speeds at once!
+:::
+
+```python
+import pygame
+import sys
+import random
+
+pygame.init()
+
+# Window settings
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
+FPS = 60
+
+# Colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+CYAN = (0, 255, 255)
+MAGENTA = (255, 0, 255)
+
+# Game settings
+PADDLE_WIDTH = 15
+PADDLE_HEIGHT = 100
+PADDLE_SPEED = 7
+BALL_SIZE = 15
+BALL_SPEED_X = 6
+BALL_SPEED_Y = 6
+AI_SPEED = 5
+```
+
+### Step 2: Create the Paddle Class
+
+```python
+class Paddle:
+    """Represents a paddle controlled by player or AI."""
+    
+    def __init__(self, x, y, color):
+        self.rect = pygame.Rect(x, y, PADDLE_WIDTH, PADDLE_HEIGHT)
+        self.color = color
+        self.speed = 0
+        
+    def move(self):
+        """Move paddle and keep it on screen."""
+        self.rect.y += self.speed
+        
+        # Keep on screen
+        if self.rect.top < 0:
+            self.rect.top = 0
+        if self.rect.bottom > WINDOW_HEIGHT:
+            self.rect.bottom = WINDOW_HEIGHT
+            
+    def draw(self, surface):
+        """Draw the paddle with glow effect."""
+        pygame.draw.rect(surface, self.color, self.rect)
+        # Add glow
+        glow_rect = self.rect.inflate(4, 4)
+        pygame.draw.rect(surface, self.color, glow_rect, 2)
+```
+
+### Step 3: Create the Ball Class
+
+```python
+class Ball:
+    """Represents the game ball."""
+    
+    def __init__(self):
+        self.rect = pygame.Rect(
+            WINDOW_WIDTH // 2, 
+            WINDOW_HEIGHT // 2, 
+            BALL_SIZE, 
+            BALL_SIZE
+        )
+        self.speed_x = BALL_SPEED_X * random.choice([-1, 1])
+        self.speed_y = BALL_SPEED_Y * random.choice([-1, 1])
+        
+    def move(self):
+        """Move ball and handle wall bounces."""
+        self.rect.x += self.speed_x
+        self.rect.y += self.speed_y
+        
+        # Bounce off top and bottom walls
+        if self.rect.top <= 0 or self.rect.bottom >= WINDOW_HEIGHT:
+            self.speed_y *= -1
+            
+    def reset(self):
+        """Reset ball to center with random direction."""
+        self.rect.center = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2)
+        self.speed_x = BALL_SPEED_X * random.choice([-1, 1])
+        self.speed_y = BALL_SPEED_Y * random.choice([-1, 1])
+        
+    def draw(self, surface):
+        """Draw the ball with trail effect."""
+        pygame.draw.ellipse(surface, WHITE, self.rect)
+        # Trail effect
+        trail_rect = self.rect.inflate(4, 4)
+        pygame.draw.ellipse(surface, WHITE, trail_rect, 2)
+```
+
+### Step 4: Implement Collision Detection
+
+```python
+def handle_paddle_collision(ball, paddle):
+    """
+    Handle ball collision with paddle.
+    Changes ball direction based on hit location.
+    """
+    if ball.rect.colliderect(paddle.rect):
+        # Determine where ball hit paddle (top, middle, bottom)
+        relative_intersect_y = (paddle.rect.centery - ball.rect.centery)
+        normalized_intersect = relative_intersect_y / (PADDLE_HEIGHT / 2)
+        
+        # Change angle based on hit location
+        bounce_angle = normalized_intersect * 60  # Max 60 degrees
+        
+        # Reverse horizontal direction
+        ball.speed_x *= -1
+        
+        # Apply angle to vertical speed
+        ball.speed_y = -bounce_angle * 0.2
+        
+        # Ensure minimum speed
+        if abs(ball.speed_x) < BALL_SPEED_X:
+            ball.speed_x = BALL_SPEED_X if ball.speed_x > 0 else -BALL_SPEED_X
+```
+
+::: {.callout-consider}
+## 🤔 Consider This Corner
+
+**Why calculate bounce angle?**
+
+This makes the game more strategic! Hitting the ball with the edge of your paddle sends it at a sharper angle, making it harder for your opponent to return. It's the difference between a boring game and an exciting one!
+:::
+
+### Step 5: Main Game Loop
+
+```python
+def main():
+    """Main game loop."""
+    screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+    pygame.display.set_caption("Day 03: Pong")
+    clock = pygame.time.Clock()
+    
+    # Create game objects
+    player = Paddle(30, WINDOW_HEIGHT // 2 - PADDLE_HEIGHT // 2, CYAN)
+    ai = Paddle(WINDOW_WIDTH - 30 - PADDLE_WIDTH, 
+                WINDOW_HEIGHT // 2 - PADDLE_HEIGHT // 2, MAGENTA)
+    ball = Ball()
+    
+    # Scores
+    player_score = 0
+    ai_score = 0
+    winning_score = 5
+    
+    # Font for score display
+    font = pygame.font.Font(None, 74)
+    small_font = pygame.font.Font(None, 36)
+    
+    game_over = False
+    
+    # Main game loop
+    running = True
+    while running:
+        # Handle events
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE and game_over:
+                    # Restart game
+                    player_score = 0
+                    ai_score = 0
+                    game_over = False
+                    ball.reset()
+        
+        if not game_over:
+            # Player controls
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_w] or keys[pygame.K_UP]:
+                player.speed = -PADDLE_SPEED
+            elif keys[pygame.K_s] or keys[pygame.K_DOWN]:
+                player.speed = PADDLE_SPEED
+            else:
+                player.speed = 0
+            
+            # Simple AI logic
+            if ball.rect.centery < ai.rect.centery:
+                ai.speed = -AI_SPEED
+            elif ball.rect.centery > ai.rect.centery:
+                ai.speed = AI_SPEED
+            else:
+                ai.speed = 0
+            
+            # Update positions
+            player.move()
+            ai.move()
+            ball.move()
+            
+            # Check paddle collisions
+            handle_paddle_collision(ball, player)
+            handle_paddle_collision(ball, ai)
+            
+            # Check scoring
+            if ball.rect.left <= 0:
+                ai_score += 1
+                ball.reset()
+                if ai_score >= winning_score:
+                    game_over = True
+                    
+            elif ball.rect.right >= WINDOW_WIDTH:
+                player_score += 1
+                ball.reset()
+                if player_score >= winning_score:
+                    game_over = True
+        
+        # Draw everything
+        screen.fill(BLACK)
+        
+        # Draw center line
+        for y in range(0, WINDOW_HEIGHT, 20):
+            pygame.draw.rect(screen, WHITE, (WINDOW_WIDTH // 2 - 2, y, 4, 10))
+        
+        # Draw game objects
+        player.draw(screen)
+        ai.draw(screen)
+        ball.draw(screen)
+        
+        # Draw scores
+        player_text = font.render(str(player_score), True, CYAN)
+        ai_text = font.render(str(ai_score), True, MAGENTA)
+        screen.blit(player_text, (WINDOW_WIDTH // 4, 20))
+        screen.blit(ai_text, (WINDOW_WIDTH * 3 // 4, 20))
+        
+        # Draw game over message
+        if game_over:
+            winner = "Player" if player_score >= winning_score else "AI"
+            winner_text = font.render(f"{winner} Wins!", True, WHITE)
+            restart_text = small_font.render("Press SPACE to restart", True, WHITE)
+            screen.blit(winner_text, 
+                       (WINDOW_WIDTH // 2 - winner_text.get_width() // 2, 
+                        WINDOW_HEIGHT // 2 - 50))
+            screen.blit(restart_text,
+                       (WINDOW_WIDTH // 2 - restart_text.get_width() // 2,
+                        WINDOW_HEIGHT // 2 + 20))
+        
+        pygame.display.flip()
+        clock.tick(FPS)
+    
+    pygame.quit()
+    sys.exit()
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+## 🎯 Challenges
+
+### 🌟 Easy
+1. Change paddle colors and sizes
+2. Adjust game speed
+3. Modify winning score
+
+### 🌟🌟 Medium
+4. Add sound effects
+5. Create difficulty levels (easy/medium/hard AI)
+6. Add power-ups that increase ball speed
+
+### 🌟🌟🌟 Hard
+7. Implement two-player mode
+8. Add spin mechanics (ball curves)
+9. Create tournament mode with multiple rounds
+
+---
+
+## 📋 Complete Code - Ready to Copy!
+
+```python
+"""
+Day 03: Pong Game - Complete Working Version
+"""
+
+import pygame
+import sys
+import random
+
+pygame.init()
+
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
+FPS = 60
+
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+CYAN = (0, 255, 255)
+MAGENTA = (255, 0, 255)
+
+PADDLE_WIDTH = 15
+PADDLE_HEIGHT = 100
+PADDLE_SPEED = 7
+BALL_SIZE = 15
+BALL_SPEED_X = 6
+BALL_SPEED_Y = 6
+AI_SPEED = 5
+
+
+class Paddle:
+    def __init__(self, x, y, color):
+        self.rect = pygame.Rect(x, y, PADDLE_WIDTH, PADDLE_HEIGHT)
+        self.color = color
+        self.speed = 0
+        
+    def move(self):
+        self.rect.y += self.speed
+        if self.rect.top < 0:
+            self.rect.top = 0
+        if self.rect.bottom > WINDOW_HEIGHT:
+            self.rect.bottom = WINDOW_HEIGHT
+            
+    def draw(self, surface):
+        pygame.draw.rect(surface, self.color, self.rect)
+        glow_rect = self.rect.inflate(4, 4)
+        pygame.draw.rect(surface, self.color, glow_rect, 2)
+
+
+class Ball:
+    def __init__(self):
+        self.rect = pygame.Rect(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2, BALL_SIZE, BALL_SIZE)
+        self.speed_x = BALL_SPEED_X * random.choice([-1, 1])
+        self.speed_y = BALL_SPEED_Y * random.choice([-1, 1])
+        
+    def move(self):
+        self.rect.x += self.speed_x
+        self.rect.y += self.speed_y
+        if self.rect.top <= 0 or self.rect.bottom >= WINDOW_HEIGHT:
+            self.speed_y *= -1
+            
+    def reset(self):
+        self.rect.center = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2)
+        self.speed_x = BALL_SPEED_X * random.choice([-1, 1])
+        self.speed_y = BALL_SPEED_Y * random.choice([-1, 1])
+        
+    def draw(self, surface):
+        pygame.draw.ellipse(surface, WHITE, self.rect)
+
+
+def main():
+    screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+    pygame.display.set_caption("Day 03: Pong")
+    clock = pygame.time.Clock()
+    
+    player = Paddle(30, WINDOW_HEIGHT // 2 - PADDLE_HEIGHT // 2, CYAN)
+    ai = Paddle(WINDOW_WIDTH - 30 - PADDLE_WIDTH, WINDOW_HEIGHT // 2 - PADDLE_HEIGHT // 2, MAGENTA)
+    ball = Ball()
+    
+    player_score = 0
+    ai_score = 0
+    
+    font = pygame.font.Font(None, 74)
+    
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+                
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_w] or keys[pygame.K_UP]:
+            player.speed = -PADDLE_SPEED
+        elif keys[pygame.K_s] or keys[pygame.K_DOWN]:
+            player.speed = PADDLE_SPEED
+        else:
+            player.speed = 0
+            
+        if ai.rect.centery < ball.rect.centery:
+            ai.speed = AI_SPEED
+        elif ai.rect.centery > ball.rect.centery:
+            ai.speed = -AI_SPEED
+        else:
+            ai.speed = 0
+            
+        player.move()
+        ai.move()
+        ball.move()
+        
+        if ball.rect.colliderect(player.rect) or ball.rect.colliderect(ai.rect):
+            ball.speed_x *= -1
+            
+        if ball.rect.left <= 0:
+            ai_score += 1
+            ball.reset()
+        elif ball.rect.right >= WINDOW_WIDTH:
+            player_score += 1
+            ball.reset()
+            
+        screen.fill(BLACK)
+        
+        for y in range(0, WINDOW_HEIGHT, 20):
+            pygame.draw.rect(screen, WHITE, (WINDOW_WIDTH // 2 - 2, y, 4, 10))
+            
+        player.draw(screen)
+        ai.draw(screen)
+        ball.draw(screen)
+        
+        player_text = font.render(str(player_score), True, CYAN)
+        ai_text = font.render(str(ai_score), True, MAGENTA)
+        screen.blit(player_text, (WINDOW_WIDTH // 4, 20))
+        screen.blit(ai_text, (3 * WINDOW_WIDTH // 4 - ai_text.get_width(), 20))
+        
+        pygame.display.flip()
+        clock.tick(FPS)
+        
+    pygame.quit()
+    sys.exit()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+::: {.hero-banner}
+# See you on Day 04! 🐍
+
+Next up: Snake Game with grid-based movement!
+:::

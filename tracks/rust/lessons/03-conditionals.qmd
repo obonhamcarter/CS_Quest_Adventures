@@ -1,0 +1,79 @@
+---
+title: "Quest 3: Conditionals - Choose Your Path"
+subtitle: "Make Decisions with if and else"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+🛤️ QUEST 3 | Difficulty: Beginner | Time: 8 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/03-conditionals.ipynb)
+- 📥 [Download Notebook](../files/lessons/03-conditionals.ipynb)
+:::
+
+## 📖 Introduction
+Programs become useful when they make decisions.
+
+## 💡 Rust `if` Basics
+
+```rust
+fn main() {
+    let coins = 12;
+
+    if coins >= 10 {
+        println!("You can buy a potion.");
+    } else {
+        println!("Keep collecting coins.");
+    }
+}
+```
+
+## 👨‍💻 Example
+
+```rust
+fn main() {
+    let temperature = 28;
+
+    if temperature >= 30 {
+        println!("Very warm day");
+    } else if temperature >= 20 {
+        println!("Comfortable day");
+    } else {
+        println!("Cool day");
+    }
+}
+```
+
+## 🎯 Gentle Challenge
+Make a program that checks a `battery` value:
+- 80 or more: "High"
+- 30 to 79: "Medium"
+- below 30: "Low"
+
+## ✅ One Possible Solution
+
+```rust
+fn main() {
+    let battery = 45;
+
+    if battery >= 80 {
+        println!("High");
+    } else if battery >= 30 {
+        println!("Medium");
+    } else {
+        println!("Low");
+    }
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 3 Complete
+You used `if`, `else if`, and `else` to branch logic.
+Next: [Quest 4: Loops](04-loops.qmd)
+:::

@@ -1,0 +1,64 @@
+---
+title: "Quest 17: Higher-Order Functions"
+subtitle: "Pass Behavior into Reusable Functions"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+🧠 QUEST 17 | Difficulty: Beginner | Time: 10 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/17-higher-order-functions.ipynb)
+- 📥 [Download Notebook](../files/lessons/17-higher-order-functions.ipynb)
+:::
+
+## 📖 Introduction
+Higher-order functions accept functions/closures as inputs.
+This pattern helps you write flexible, reusable logic.
+
+## 💡 Example
+
+```rust
+fn apply_twice<F>(value: i32, f: F) -> i32
+where
+    F: Fn(i32) -> i32,
+{
+    f(f(value))
+}
+
+fn main() {
+    let plus_two = |x| x + 2;
+    println!("{}", apply_twice(5, plus_two));
+}
+```
+
+## 🎯 Gentle Challenge
+Create a closure that multiplies by 3 and pass it into `apply_twice`.
+Then test a second closure with a different operation.
+
+## ✅ One Possible Solution
+
+```rust
+fn apply_twice<F>(value: i32, f: F) -> i32
+where
+    F: Fn(i32) -> i32,
+{
+    f(f(value))
+}
+
+fn main() {
+    let times_three = |x| x * 3;
+    println!("{}", apply_twice(2, times_three));
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 17 Complete
+You passed behavior as data using closures.
+Next: [Quest 18: Wrappers](18-decorators.qmd)
+:::

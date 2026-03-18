@@ -1,0 +1,60 @@
+---
+title: "Quest 14: Functions Part 2 - Non-Returning"
+subtitle: "Use Functions for Actions"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+🧩 QUEST 14 | Difficulty: Beginner | Time: 8 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/14-functions-non-returning.ipynb)
+- 📥 [Download Notebook](../files/lessons/14-functions-non-returning.ipynb)
+:::
+
+## 📖 Introduction
+Some functions perform work and do not return data.
+They are great for clear output and reusable routines.
+
+## 💡 Example
+
+```rust
+fn show_banner(name: &str) {
+    println!("====================");
+    println!("Welcome, {}!", name);
+    println!("====================");
+}
+
+fn main() {
+    show_banner("Rust Learner");
+}
+```
+
+## 🎯 Gentle Challenge
+Write a function that prints three study tips.
+Keep each tip short and positive.
+
+## ✅ One Possible Solution
+
+```rust
+fn print_tips() {
+    println!("1) Read compiler messages fully");
+    println!("2) Change one thing at a time");
+    println!("3) Practice daily");
+}
+
+fn main() {
+    print_tips();
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 14 Complete
+You used functions for clean side-effect actions.
+Next: [Quest 15: Returning Functions](15-functions-returning.qmd)
+:::

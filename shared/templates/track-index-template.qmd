@@ -1,0 +1,246 @@
+---
+title: "[LANGUAGE] Quest Track"
+subtitle: "Your descriptive subtitle here"
+track-id: "trackname"           # lowercase, no spaces
+track-icon: "🔷"                 # Choose an appropriate emoji
+track-color: "#6366f1"          # Primary color for this track
+difficulty: "Beginner"          # Beginner | Intermediate | Advanced
+total-quests: 0                 # Number of lessons in track
+estimated-hours: 0              # Total learning time
+format:
+  live-html:
+    toc: false
+---
+
+::: {.hero}
+# {{< meta track-icon >}} Welcome to {{< meta title >}}!
+
+*Your compelling introduction here - What makes this track exciting?*
+:::
+
+## 🎯 About This Track
+
+[Brief description of what students will learn and why it matters]
+
+### What You'll Master
+
+- ✅ Core concept 1
+- ✅ Core concept 2
+- ✅ Core concept 3
+- ✅ Real-world applications
+
+### Prerequisites
+
+::: {.callout-note}
+## Before You Begin
+
+**Recommended background:**
+- [Link to prerequisite track](../othertrack/index.qmd) (optional but helpful)
+- Basic understanding of programming concepts
+
+**New to programming?** [Start here](../../intro/what-is-cs.qmd)!
+:::
+
+---
+
+## 🗺️ Your Learning Path
+
+This track contains **{{< meta total-quests >}} quests** organized into progressive sections.
+
+<div class="quest-grid">
+
+::: {.quest-card}
+### 📚 Foundation (Quests 1-X)
+Master the fundamentals
+
+- Variables and data types
+- Control flow
+- Functions
+- Core concepts
+
+**Estimated time:** X hours
+:::
+
+::: {.quest-card}
+### 🎯 Practice (Quests X-Y)
+Apply what you've learned
+
+- Build mini-projects
+- Solve challenges
+- Practice patterns
+
+**Estimated time:** X hours
+:::
+
+::: {.quest-card}
+### 🚀 Mastery (Quests Y-Z)
+Advanced techniques
+
+- Complex applications
+- Best practices
+- Professional skills
+
+**Estimated time:** X hours
+:::
+
+</div>
+
+---
+
+## 🚀 Quick Start
+
+Ready to begin your adventure? Choose your path:
+
+::: {.highlight-box .highlight-info}
+### Option 1: Start Quest 1 →
+
+Jump right in! Our interactive lessons let you code in your browser.
+
+[Begin Quest 1 →](lessons/01-first-lesson.qmd){.btn .btn-primary}
+:::
+
+::: {.highlight-box .highlight-success}
+### Option 2: Setup Local Environment
+
+Prefer working locally? Get set up first.
+
+[Setup Guide →](setup.qmd){.btn .btn-success}
+:::
+
+::: {.highlight-box .highlight-warning}
+### Option 3: Explore All Quests
+
+See the full curriculum before starting.
+
+[View All Quests →](all-quests.qmd){.btn .btn-warning}
+:::
+
+---
+
+## 💻 Interactive Features
+
+::: {.feature-grid}
+
+::: {.feature-card}
+### 🎮 In-Browser Coding
+Edit and run code directly in each lesson
+:::
+
+::: {.feature-card}
+### 📓 Downloadable Notebooks
+Practice offline or in your preferred environment
+:::
+
+::: {.feature-card}
+### 🎯 Challenges & Solutions
+Test your skills with guided exercises
+:::
+
+::: {.feature-card}
+### 📊 Progress Tracking
+Monitor your advancement through quests
+:::
+
+:::
+
+---
+
+## 🎓 Who Is This For?
+
+::: {.audience-grid}
+
+::: {.audience-card}
+### 🌟 Complete Beginners
+No prior experience? Perfect! We start from the basics.
+:::
+
+::: {.audience-card}
+### 📚 Students
+Supplement your coursework with interactive practice.
+:::
+
+::: {.audience-card}
+### 💼 Career Switchers
+Learn marketable skills for tech careers.
+:::
+
+::: {.audience-card}
+### 🔧 Developers
+Add a new language to your toolkit.
+:::
+
+:::
+
+---
+
+## 🏆 What You'll Build
+
+By completing this track, you'll create:
+
+1. **Project 1 Name** - Description
+2. **Project 2 Name** - Description
+3. **Project 3 Name** - Description
+4. **Final Capstone** - Comprehensive application
+
+---
+
+## 📚 Track Resources
+
+::: {.resource-links}
+- [📖 All Quests Overview](all-quests.qmd)
+- [🔧 Setup & Installation](setup.qmd)
+- [📥 Download All Materials](downloads.qmd)
+- [💻 Interactive Environment](interactive.qmd)
+- [❓ Track FAQ](faq.qmd)
+- [📝 Practice Exercises](exercises.qmd)
+:::
+
+---
+
+## 🎯 Learning Tips
+
+::: {.tip-box}
+### 💡 Make the Most of This Track
+
+1. **Code along** - Type every example yourself
+2. **Experiment** - Try modifying the code to see what happens
+3. **Challenge yourself** - Attempt puzzles before checking solutions
+4. **Practice daily** - Even 10 minutes helps!
+5. **Build projects** - Apply concepts to your own ideas
+:::
+
+---
+
+## 🤝 Community & Support
+
+::: {.callout-tip}
+## Need Help?
+
+- 💬 [Discussion Forum](#) - Ask questions, share projects
+- 📧 [Email Support](mailto:obonhamcarter@allegheny.edu)
+- 📖 [FAQ](faq.qmd) - Common questions answered
+- 🐛 [Report Issues](https://github.com/obonhamcarter/CS_Quest_Adventures/issues)
+:::
+
+---
+
+## ➡️ Ready to Begin?
+
+Your quest awaits! Click below to start your first adventure:
+
+::: {.cta-large}
+[🚀 Start Quest 1: [Topic Name]](lessons/01-first-lesson.qmd){.btn .btn-primary .btn-lg}
+:::
+
+Or [view all quests →](all-quests.qmd) to see the complete learning path.
+
+---
+
+::: {.footer-note}
+**About This Track**
+
+Created by [Oliver Bonham-Carter](https://www.oliverbonhamcarter.com)  
+Department of Computer and Information Science, Allegheny College  
+
+Questions? [obonhamcarter@allegheny.edu](mailto:obonhamcarter@allegheny.edu)
+:::

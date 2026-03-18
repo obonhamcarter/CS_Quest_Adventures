@@ -1,0 +1,369 @@
+---
+title: "All Pygame Quests"
+subtitle: "Complete Overview of Game Development Challenges"
+---
+
+# 🎮 All Pygame Quests
+
+Seven epic game development quests, from beginner to advanced. Each quest teaches fundamental game development concepts while creating a complete, playable game.
+
+---
+
+## 🗺️ Quest Overview
+
+| Quest | Title | Difficulty | Concepts | Time |
+|-------|-------|------------|----------|------|
+| **1** | [Maze of Ancient Wisdom](#quest-1) | ⭐ Beginner | Game loop, movement, collision | 1-2 hrs |
+| **2** | [Bouncing Ball Arena](#quest-2) | ⭐ Beginner | Physics, velocity, screen bounds | 1-2 hrs |
+| **3** | [Brick Breaking Temple](#quest-3) | ⭐⭐ Intermediate | Paddles, ball physics, object destruction | 2-3 hrs |
+| **4** | [Snake Serpent Challenge](#quest-4) | ⭐⭐ Intermediate | Grid movement, growth mechanics, collision | 2-3 hrs |
+| **5** | [Pong Tournament](#quest-5) | ⭐⭐ Intermediate | Two-player, AI, scoring | 2-3 hrs |
+| **6** | [Asteroid Defense](#quest-6) | ⭐⭐⭐ Advanced | Rotation, shooting, multiple objects | 3-4 hrs |
+| **7** | [Dungeon Crawler](#quest-7) | ⭐⭐⭐ Advanced | Multiple rooms, enemies, items | 4-6 hrs |
+
+**Total Quest Time:** ~15-25 hours
+
+---
+
+## 📚 Learning Path
+
+### Beginner Path (Quests 1-2)
+Start here if you're new to game development:
+1. **Quest 1: Maze** - Learn the fundamentals
+2. **Quest 2: Bouncing Ball** - Add physics
+
+**You'll Learn:**
+- Game loops and FPS
+- Event handling (keyboard input)
+- Basic collision detection
+- Screen boundaries
+- Simple physics
+
+**Prerequisites:** Basic Python knowledge (variables, functions, loops)
+
+---
+
+### Intermediate Path (Quests 3-5)
+Ready for more complex games:
+3. **Quest 3: Brick Breaker** - Destroy objects
+4. **Quest 4: Snake** - Grid-based movement
+5. **Quest 5: Pong** - Multiplayer mechanics
+
+**You'll Learn:**
+- Complex collision detection
+- Score tracking and UI
+- Grid-based movement systems
+- AI opponents
+- Two-player input handling
+- Game state management
+
+**Prerequisites:** Complete beginner quests or equivalent experience
+
+---
+
+### Advanced Path (Quests 6-7)
+Master game development:
+6. **Quest 6: Asteroids** - Rotation and shooting
+7. **Quest 7: Dungeon Crawler** - Complete RPG
+
+**You'll Learn:**
+- Rotation and angular movement
+- Projectile systems
+- Multiple game objects (sprites)
+- Room/level transitions
+- Enemy AI behaviors
+- Inventory systems
+- Camera systems (for dungeon)
+
+**Prerequisites:** Complete intermediate quests
+
+---
+
+## 🎯 Quest Details
+
+### Quest 1: The Maze of Ancient Wisdom {#quest-1}
+**Status:** ✅ Complete Tutorial Available
+
+Navigate your hero through ancient maze corridors using keyboard controls.
+
+**What You'll Build:**
+- Character that responds to arrow keys
+- Maze with walls and collision detection
+- Goal/exit system
+- Victory screen
+
+**Key Concepts:**
+- Pygame initialization
+- Game loop structure
+- Event handling (keyboard)
+- Rectangle collision detection
+- Screen rendering
+
+**Files:**
+- 📄 [Tutorial: 01-maze-explorer.qmd](quests/01-maze-explorer.qmd)
+- 💾 [Source Code: projects/Day_01/](projects/Day_01/)
+
+[🚀 Start Quest 1 →](quests/01-maze-explorer.qmd)
+
+---
+
+### Quest 2: Bouncing Ball Arena {#quest-2}
+**Status:** 🚧 Tutorial Coming Soon
+
+Control a ball that bounces realistically around the arena.
+
+**What You'll Build:**
+- Ball with physics (velocity, acceleration)
+- Screen boundary collision with bouncing
+- Damping effects (friction)
+- Visual effects (motion blur)
+
+**Key Concepts:**
+- Velocity and acceleration vectors
+- Physics simulation
+- Boundary collision detection
+- Frame-rate independent movement
+
+**Files:**
+- 📄 Tutorial: Coming Soon
+- 💾 [Source Code: projects/Day_02/](projects/Day_02/)
+
+[💾 Download Source Code →](../../downloads.qmd#pygame-projects)
+
+---
+
+### Quest 3: Brick Breaking Temple {#quest-3}
+**Status:** 🚧 Tutorial Coming Soon
+
+Break through ancient brick walls with a ball and paddle.
+
+**What You'll Build:**
+- Paddle controlled by mouse/keyboard
+- Ball that bounces off paddle and bricks
+- Destructible brick wall
+- Score tracking and lives system
+
+**Key Concepts:**
+- Paddle collision with angle adjustment
+- Object removal (destroyed bricks)
+- Score and UI rendering
+- Game over conditions
+- Level design
+
+**Files:**
+- 📄 Tutorial: Coming Soon
+- 💾 [Source Code: projects/Day_03/](projects/Day_03/)
+
+---
+
+### Quest 4: Snake Serpent Challenge {#quest-4}
+**Status:** 🚧 Tutorial Coming Soon
+
+Guide the ancient serpent to consume food and grow longer.
+
+**What You'll Build:**
+- Snake with growing segments
+- Grid-based movement
+- Food spawning system
+- Self-collision detection
+- High score tracking
+
+**Key Concepts:**
+- Grid movement (not pixel-perfect)
+- Array-based body segments
+- Queue/deque for growth
+- Collision with self
+- Random food placement
+
+**Files:**
+- 📄 Tutorial: Coming Soon
+- 💾 [Source Code: projects/Day_04/](projects/Day_04/)
+
+---
+
+### Quest 5: Pong Tournament {#quest-5}
+**Status:** 🚧 Tutorial Coming Soon
+
+Classic two-player pong with AI opponent option.
+
+**What You'll Build:**
+- Two paddles (player + AI/player 2)
+- Ball physics with angle variation
+- Scoring system
+- AI opponent with adjustable difficulty
+- Two-player mode
+
+**Key Concepts:**
+- Two-player input handling
+- Basic AI (following ball position)
+- Ball angle calculation based on hit position
+- Score display and win conditions
+- Game state (menu, playing, game over)
+
+**Files:**
+- 📄 Tutorial: Coming Soon
+- 💾 [Source Code: projects/Day_05/](projects/Day_05/)
+
+---
+
+### Quest 6: Asteroid Defense Station {#quest-6}
+**Status:** 🚧 Tutorial Coming Soon
+
+Defend your space station from incoming asteroids.
+
+**What You'll Build:**
+- Rotating spaceship
+- Shooting mechanics (bullets)
+- Asteroids with varied sizes
+- Explosion effects
+- Wave system with increasing difficulty
+
+**Key Concepts:**
+- Rotation and angular movement
+- Trigonometry (sin/cos for direction)
+- Projectile systems
+- Multiple game objects (sprite groups)
+- Collision between bullets and asteroids
+- Particle effects
+
+**Files:**
+- 📄 Tutorial: Coming Soon
+- 💾 [Source Code: projects/Day_06/](projects/Day_06/)
+
+---
+
+### Quest 7: Dungeon Crawler Legend {#quest-7}
+**Status:** 🚧 Tutorial Coming Soon
+
+Explore a procedural dungeon, fight enemies, and collect treasure.
+
+**What You'll Build:**
+- Procedurally generated dungeon rooms
+- Hero with health and inventory
+- Multiple enemy types with AI
+- Item collection (keys, potions, weapons)
+- Camera system (following player)
+- Sound effects and music
+
+**Key Concepts:**
+- Room/level generation
+- Camera systems (viewport)
+- Enemy AI behaviors (patrol, chase, attack)
+- Inventory management
+- Health systems
+- State machines
+- Audio integration
+- Save/load system
+
+**Files:**
+- 📄 Tutorial: Coming Soon
+- 💾 [Source Code: projects/Day_07/](projects/Day_07/)
+
+---
+
+## 🛠️ Tools & Setup
+
+### Required Tools
+- **Python 3.7+**
+- **Pygame 2.0+**
+- **Code Editor** (VS Code recommended)
+
+### Installation
+```bash
+# Install Pygame
+pip install pygame
+
+# Verify installation
+python -c "import pygame; print(pygame.version.ver)"
+```
+
+[Full Setup Guide →](../../setup.qmd#pygame-track-setup)
+
+---
+
+## 📥 Download All Projects
+
+All source code is available for download:
+
+- [Download Individual Projects](../../downloads.qmd#pygame-projects)
+- [Clone Full Repository](https://github.com/YOUR_USERNAME/CS_Quest_Adventures)
+
+---
+
+## 🎓 Learning Tips
+
+### Before Starting
+✅ Complete Python fundamentals (variables, functions, loops, classes)  
+✅ Understand basic Python data structures (lists, dictionaries)  
+✅ Have Pygame installed and tested
+
+### During Quests
+✅ Type code manually (don't copy-paste) to build muscle memory  
+✅ Experiment with values (colors, speeds, sizes)  
+✅ Read error messages carefully — Pygame errors are informative  
+✅ Test frequently — run your game after every few changes
+
+### After Completing Quests
+✅ Modify games with your own features  
+✅ Combine concepts from multiple quests  
+✅ Create original games using learned techniques  
+✅ Share your creations with others
+
+---
+
+## 🚀 Getting Started
+
+### Complete Beginner?
+1. [Review Python Fundamentals](../../tracks/python/index.qmd) first
+2. Install Pygame ([Setup Guide](../../setup.qmd))
+3. Start with [Quest 1: Maze Explorer](quests/01-maze-explorer.qmd)
+4. Progress through quests in order
+
+### Some Experience?
+1. Review [Quest Overview](#quest-overview) table
+2. Pick a quest matching your skill level
+3. Download and explore source code first
+4. Follow tutorial to understand concepts
+5. Modify to make it your own
+
+### Want a Challenge?
+1. Try building a quest without the tutorial
+2. Check source code when stuck
+3. Add new features beyond the tutorial
+4. Combine concepts from multiple quests
+5. Create an original game
+
+---
+
+## 📚 Additional Resources
+
+### Pygame Documentation
+- [Official Pygame Docs](https://www.pygame.org/docs/)
+- [Pygame Tutorial (official)](https://www.pygame.org/wiki/tutorials)
+- [Pygame Cheat Sheet](https://www.pygame.org/wiki/GettingStarted)
+
+### Game Development Concepts
+- [Game Programming Patterns](https://gameprogrammingpatterns.com/)
+- [Pygame Tutorials (Real Python)](https://realpython.com/pygame-a-primer/)
+- [Game Dev Stack Exchange](https://gamedev.stackexchange.com/)
+
+### Asset Resources
+- [OpenGameArt.org](https://opengameart.org/) - Free game assets
+- [Kenney.nl](https://kenney.nl/) - Free game assets
+- [FreeSFX](https://www.freesfx.co.uk/) - Free sound effects
+
+---
+
+## 💬 Need Help?
+
+- 📧 **Email:** obonhamcarter@allegheny.edu
+- 📖 **FAQ:** [Common Questions](../../sitedocs/faq.md)
+- 🐛 **Report Bug:** Open GitHub issue
+
+---
+
+## 🎯 Ready to Start?
+
+[🚀 Begin Quest 1: Maze Explorer](quests/01-maze-explorer.qmd){.btn .btn-success .btn-lg}
+
+[← Back to Pygame Track](index.qmd) | [← Back to Home](../../index.qmd)

@@ -1,0 +1,70 @@
+---
+title: "Quest 18: Wrappers - Add Behavior Around Functions"
+subtitle: "Decorator-Like Patterns in Rust"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+🎁 QUEST 18 | Difficulty: Beginner | Time: 10 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/18-decorators.ipynb)
+- 📥 [Download Notebook](../files/lessons/18-decorators.ipynb)
+:::
+
+## 📖 Introduction
+Rust does not have Python decorators directly, but we can wrap behavior.
+This gives you a clean way to add repeated setup/teardown logic.
+
+## 💡 Wrapper Pattern
+
+```rust
+fn with_logging<F>(name: &str, action: F)
+where
+    F: Fn(),
+{
+    println!("[start] {}", name);
+    action();
+    println!("[end] {}", name);
+}
+
+fn main() {
+    with_logging("greet", || {
+        println!("Hello from wrapped function");
+    });
+}
+```
+
+## 🎯 Gentle Challenge
+Wrap a function that prints a study reminder and include start/end messages.
+Pick your own label and message to personalize it.
+
+## ✅ One Possible Solution
+
+```rust
+fn with_logging<F>(name: &str, action: F)
+where
+    F: Fn(),
+{
+    println!("[start] {}", name);
+    action();
+    println!("[end] {}", name);
+}
+
+fn main() {
+    with_logging("reminder", || {
+        println!("Take a break, then continue coding.");
+    });
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 18 Complete
+You learned a practical Rust wrapper pattern.
+Next: [Quest 19: Structs and Impl](19-classes.qmd)
+:::

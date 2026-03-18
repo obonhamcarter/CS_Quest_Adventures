@@ -1,0 +1,87 @@
+---
+title: "Quest 1: Variables - Your Starter Toolkit"
+subtitle: "Learn How Rust Stores Values Safely"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+🎒 QUEST 1 | Difficulty: Beginner | Time: 8 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/01-variables.ipynb)
+- 📥 [Download Notebook](../files/lessons/01-variables.ipynb)
+:::
+
+## 📖 Introduction
+
+Welcome to Rust! A variable is a named place to store a value. Rust starts with **immutable** variables, which means values do not change unless you explicitly allow it.
+
+## 💡 Core Idea
+
+```rust
+fn main() {
+    let player_name = "Ari";
+    let score = 10;
+    println!("{} has {} points", player_name, score);
+}
+```
+
+To change a variable, add `mut`:
+
+```rust
+fn main() {
+    let mut hearts = 3;
+    hearts += 1;
+    println!("Hearts: {}", hearts);
+}
+```
+
+## 👨‍💻 Example
+
+```rust
+fn main() {
+    let name = "Nova";
+    let mut coins = 0;
+
+    coins += 5;
+    coins += 10;
+
+    println!("{} collected {} coins", name, coins);
+}
+```
+
+## 🎯 Gentle Challenge
+
+Create variables for:
+1. Your name
+2. Your starting energy (number)
+3. Whether you have a key (`true` or `false`)
+
+Then increase energy by 2 and print all values.
+
+## ✅ One Possible Solution
+
+```rust
+fn main() {
+    let name = "Sam";
+    let mut energy = 5;
+    let has_key = false;
+
+    energy += 2;
+
+    println!("Name: {}", name);
+    println!("Energy: {}", energy);
+    println!("Has key: {}", has_key);
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 1 Complete
+You learned `let`, `mut`, and simple printing with `println!`.
+Next: [Quest 2: Data Types](02-data-types.qmd)
+:::

@@ -1,0 +1,77 @@
+name: Deploy CS Quest Adventures
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python -m ipykernel install --user --name=python3
+      
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: '1.7.33'
+      
+      - name: Render Quarto site
+        env:
+          QUARTO_PYTHON: python
+        run: quarto render
+      
+      - name: Build JupyterLite environment
+        run: |
+          if [ -d "jupyterlite" ]; then
+            echo "Building JupyterLite..."
+            cd jupyterlite
+            jupyter lite build --contents content --output-dir ../_site/jupyterlite
+            cd ..
+          else
+            echo "JupyterLite directory not found, skipping..."
+          fi
+        continue-on-error: true
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+  
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

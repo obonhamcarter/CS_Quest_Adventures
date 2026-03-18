@@ -1,0 +1,304 @@
+---
+title: "Try It Now!"
+subtitle: "Write Your First Code in 30 Seconds"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+🎮 INTRO | Difficulty: None | Time: 5 minutes | **Perfect for College Fair Visitors**
+:::
+
+::: {.tip-box}
+**💻 Interactive Options:**
+
+- 📓 **[Open in JupyterLite](../jupyterlite/lab/index.html?path=try-it-now.ipynb)** - Full Jupyter environment in your browser
+- ▶️ **Run code directly below** - All code cells on this page are editable and runnable
+- 📥 **[Download Notebook](../files/intro/try-it-now.ipynb)** - For use in local Jupyter or Google Colab
+:::
+
+## 🚀 Your First Code - Right Now!
+
+::: {.hero}
+The best way to understand Computer Science is to **try it**. No experience needed—just click the ▶️ button and see what happens!
+:::
+
+::: {.highlight-box .highlight-info}
+**✨ How it works:**
+1. Read the description
+2. Click the **▶️ Run Code** button (or press Shift+Enter)
+3. See the magic happen!
+4. Edit the code and run it again to see what changes!
+:::
+
+## 🎨 Demo 1: Draw with Code
+
+See how code can create art! This program draws a colorful spiral.
+
+```{pyodide-python}
+# Draw a spiral with Python!
+# Try changing the colors below:
+colors = ['red', 'yellow', 'blue']  # Change these!
+
+import turtle
+turtle.speed('fastest')
+turtle.bgcolor('black')
+
+for i in range(50):
+    turtle.color(colors[i % len(colors)])
+    turtle.forward(i * 4)
+    turtle.right(59)  # Try changing this number!
+
+turtle.hideturtle()
+print("🎨 Art created with code!")
+```
+
+::: {.challenge-box}
+**🎯 Try This:**
+1. Change the colors to your favorites (try: 'purple', 'green', 'orange', 'pink', 'gold')
+2. Change the number `59` to `90` or `45` - what happens?
+3. Change `i * 4` to `i * 6` to make it bigger!
+:::
+
+## 💬 Demo 2: Make a Smart Chatbot
+
+Create a program that talks to you!
+
+```{pyodide-python}
+# Your first AI chatbot (sort of!)
+print("🤖 WELCOME TO CS BOT!")
+print("=" * 30)
+
+# Edit these values to customize the chatbot's responses!
+name = "Alex"  # <-- Change this to your name!
+hobby = "reading"  # <-- Change this to your hobby!
+
+print(f"\n✨ Hi {name}! That's an awesome name!")
+print(f"🎯 {hobby} sounds amazing!")
+print(f"💡 You know what? You could build an app about {hobby}!")
+print(f"📱 Imagine: The ultimate {hobby} tracker app!")
+print(f"\n🚀 With CS skills, you can build anything you imagine!")
+```
+
+::: {.challenge-box}
+**🎯 Try This:**
+
+1. Change the `name` variable to your own name
+2. Change the `hobby` variable to your favorite hobby
+3. Run the code to see the customized message!
+4. Try different values and run it multiple times!
+:::
+
+## 🎲 Demo 3: Random Adventure Generator
+
+Every run creates a different adventure!
+
+```{pyodide-python}
+# Generate a random adventure!
+import random
+
+adjectives = ['Ancient', 'Mysterious', 'Enchanted', 'Forgotten', 'Legendary']
+places = ['Castle', 'Forest', 'Cave', 'Temple', 'Island']
+treasures = ['Dragon Egg', 'Magic Sword', 'Golden Crown', 'Spell Book', 'Time Crystal']
+monsters = ['Dragon', 'Goblin', 'Wizard', 'Ghost', 'Minotaur']
+
+print("🗺️  RANDOM ADVENTURE GENERATOR")
+print("=" * 40)
+print()
+
+adj = random.choice(adjectives)
+place = random.choice(places)
+treasure = random.choice(treasures)
+monster = random.choice(monsters)
+
+print(f"📖 YOUR QUEST:")
+print(f"   Journey to the {adj} {place}")
+print(f"   Search for the legendary {treasure}")
+print(f"   But beware the {monster}!")
+print()
+print("🎮 Click 'Run Code' again for a new adventure!")
+```
+
+::: {.challenge-box}
+**🎯 Try This:**
+
+1. Run the code multiple times—each adventure is different!
+2. Add your own words to the lists (just put them in quotes with commas)
+3. Can you add a list of heroes? (Hint: copy one of the lists and change the words)
+:::
+
+## 🎉 Demo 4: Birthday Calculator
+
+Calculate how many days until your next birthday!
+
+```{pyodide-python}
+# Birthday Calculator
+from datetime import datetime, timedelta
+
+print("🎂 BIRTHDAY COUNTDOWN")
+print("=" * 30)
+
+# Get today's date
+today = datetime.now()
+current_year = today.year
+
+# Enter your birthday (change these numbers!)
+birth_month = 7   # <- Change this (1-12)
+birth_day = 15    # <- Change this (1-31)
+
+# Calculate next birthday
+try:
+    next_birthday = datetime(current_year, birth_month, birth_day)
+    
+    # If birthday already passed this year, use next year
+    if next_birthday < today:
+        next_birthday = datetime(current_year + 1, birth_month, birth_day)
+    
+    days_until = (next_birthday - today).days
+    
+    print(f"📅 Today: {today.strftime('%B %d, %Y')}")
+    print(f"🎉 Next Birthday: {next_birthday.strftime('%B %d, %Y')}")
+    print(f"⏰ Days until birthday: {days_until}")
+    
+    if days_until == 0:
+        print("🎊 HAPPY BIRTHDAY! 🎊")
+    elif days_until < 7:
+        print("🎈 Your birthday is this week!")
+    elif days_until < 30:
+        print("🎁 Your birthday is this month!")
+    
+except ValueError:
+    print("❌ Invalid date! Check month (1-12) and day (1-31)")
+```
+
+::: {.challenge-box}
+**🎯 Try This:**
+
+1. Change `birth_month` and `birth_day` to your actual birthday
+2. Run the code to see how many days until your birthday!
+3. Try your friend's birthday too!
+:::
+
+## 🧮 Demo 5: Password Strength Checker
+
+Is your password strong enough? Let's check!
+
+```{pyodide-python}
+# Password Strength Checker
+def check_password_strength(password):
+    """Check how strong a password is"""
+    score = 0
+    feedback = []
+    
+    # Check length
+    if len(password) >= 8:
+        score += 2
+        feedback.append("✅ Good length (8+ characters)")
+    else:
+        feedback.append("❌ Too short (needs 8+ characters)")
+    
+    # Check for numbers
+    if any(char.isdigit() for char in password):
+        score += 1
+        feedback.append("✅ Contains numbers")
+    else:
+        feedback.append("⚠️  Add some numbers")
+    
+    # Check for uppercase
+    if any(char.isupper() for char in password):
+        score += 1
+        feedback.append("✅ Contains uppercase letters")
+    else:
+        feedback.append("⚠️  Add uppercase letters")
+    
+    # Check for lowercase
+    if any(char.islower() for char in password):
+        score += 1
+        feedback.append("✅ Contains lowercase letters")
+    
+    # Check for special characters
+    special_chars = "!@#$%^&*()_+-=[]{}|;:',.<>?"
+    if any(char in special_chars for char in password):
+        score += 1
+        feedback.append("✅ Contains special characters")
+    else:
+        feedback.append("⚠️  Add special characters (!@#$)")
+    
+    return score, feedback
+
+# Test some passwords
+print("🔐 PASSWORD STRENGTH CHECKER")
+print("=" * 40)
+
+test_passwords = [
+    "password",
+    "Password123",
+    "MyP@ssw0rd!",
+]
+
+for pwd in test_passwords:
+    score, feedback = check_password_strength(pwd)
+    
+    print(f"\n🔑 Testing: '{pwd}'")
+    print(f"💪 Strength: {score}/6")
+    
+    if score <= 2:
+        print("🔴 Status: WEAK")
+    elif score <= 4:
+        print("🟡 Status: MODERATE")
+    else:
+        print("🟢 Status: STRONG")
+    
+    print("\nFeedback:")
+    for item in feedback:
+        print(f"  {item}")
+
+print("\n" + "=" * 40)
+print("🛡️  This is how real apps check password strength!")
+```
+
+::: {.challenge-box}
+**🎯 Try This:**
+Add your own test password to the `test_passwords` list to see how strong it is!
+:::
+
+## 🎓 What Just Happened?
+
+::: {.concept-box}
+**You just wrote and ran real Python code!** 🎉
+
+In these few minutes, you:
+
+- 🎨 Created art with loops and colors
+- 💬 Built an interactive chatbot
+- 🎲 Used randomness to generate content
+- 📅 Calculated dates with logic
+- 🔐 Analyzed password security
+
+**And this is just the beginning!** Everything on your phone, computer, and the internet works because someone wrote code like this (but more complex).
+:::
+
+## 🚀 Want to Learn More?
+
+::: {.tip-box}
+**Keep Going!**
+
+Now that you've seen what code can do, you're ready to start learning:
+
+1. 🎒 **[Quest 1: Variables](../lessons/01-variables.qmd)** - Start your journey!
+2. 📋 **[Why Study CS?](why-study-cs.qmd)** - Learn about career opportunities
+3. 🎯 **[Major vs Minor](major-vs-minor.qmd)** - Choose your path
+4. 🏠 **[All Quests](../index.qmd)** - See the full adventure map
+:::
+
+---
+
+::: {.highlight-box .highlight-info}
+**🎓 Questions about CS at Allegheny College?**
+
+📧 Contact: obonhamcarter@allegheny.edu  
+🌐 Website: [https://cs.allegheny.edu](https://cs.allegheny.edu)
+
+We'd love to hear from you!
+:::

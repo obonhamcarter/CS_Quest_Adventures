@@ -1,0 +1,330 @@
+---
+title: "Major vs Minor"
+subtitle: "Which Computer Science Path is Right for You?"
+format:
+  live-html:
+    toc: false
+---
+
+::: {.quest-badge}
+🎯 INTRO | Difficulty: None | Time: 5 minutes | **Perfect for College Fair Visitors**
+:::
+
+::: {.tip-box}
+**💻 Interactive Options:**
+
+- 📓 **[Open in JupyterLite](../jupyterlite/lab/index.html?path=major-vs-minor.ipynb)** - Full Jupyter environment in your browser
+- 📥 **[Download Notebook](../files/intro/major-vs-minor.ipynb)** - For use in local Jupyter or Google Colab
+:::
+
+## 🎓 Computer Science at Allegheny College
+
+::: {.hero}
+Whether you want to **dive deep** into computing or **enhance** another major with tech skills, Allegheny has a path for you!
+:::
+
+## 📊 Quick Comparison
+
+| Feature | CS Major 🎯 | CS Minor 💡 |
+|---------|------------|------------|
+| **Best For** | Future software engineers, researchers, tech leaders | Anyone wanting tech skills + another field |
+| **Time Commitment** | ~12-14 courses | ~6-7 courses |
+| **Depth** | Deep dive into CS theory and practice | Solid foundation + focused specialization |
+| **Career Path** | Software Engineer, Data Scientist, Research | Field Specialist with Tech Skills |
+| **Sample Combo** | CS Major + Math Minor | Biology Major + CS Minor |
+
+## 🎯 The Computer Science Major
+
+::: {.highlight-box .highlight-info}
+**For students who want to become professional software developers, researchers, or tech leaders.**
+:::
+
+### What You'll Learn
+
+<div class="quest-grid">
+
+::: {.quest-card}
+### 🧱 Foundations
+
+- Programming (Python, Java, C++)
+- Data Structures & Algorithms
+- Computer Architecture
+- Operating Systems
+:::
+
+::: {.quest-card}
+### 🤖 Advanced Topics
+
+- Artificial Intelligence
+- Machine Learning
+- Database Systems
+- Software Engineering
+:::
+
+::: {.quest-card}
+### 🎨 Specializations
+
+- Web Development
+- Mobile Apps
+- Computer Graphics
+- Cybersecurity
+:::
+
+::: {.quest-card}
+### 🔬 Research
+
+- Independent Study
+- Senior Thesis
+- Faculty Collaboration
+- Conference Presentations
+:::
+
+</div>
+
+### Sample Course Sequence
+
+::: {.concept-box}
+**First Year:**
+
+- CMPSC 100: Computational Expression
+- CMPSC 101: Data Abstraction
+- Math courses (Discrete Structures, Calculus)
+
+**Second Year:**
+
+- Data Structures
+- Computer Organization
+- Web Development
+- Choose electives aligned with interests
+
+**Third Year:**
+
+- Algorithm Analysis
+- Software Engineering
+- Database Systems
+- Specialized electives (AI, Graphics, etc.)
+
+**Fourth Year:**
+
+- Advanced electives
+- Senior Thesis/Capstone Project
+- Internship opportunities
+:::
+
+### Career Outcomes
+
+**CS Majors typically become:**
+
+- **Software Engineers** at companies like Google, Microsoft, Amazon, Meta
+- **Data Scientists** at healthcare, finance, and tech companies
+- **AI/ML Engineers** developing intelligent systems
+- **Cybersecurity Specialists** protecting organizations
+- **Graduate Students** pursuing MS or PhD in CS
+- **Tech Entrepreneurs** starting their own companies
+- **Research Scientists** at universities or labs
+
+::: {.story-box}
+**💼 Average Starting Salary for CS Majors: $75,000 - $120,000**
+
+*Note: Varies by location, company, and specialization*
+:::
+
+---
+
+## 💡 The Computer Science Minor
+
+::: {.highlight-box .highlight-info}
+**Perfect for students who want to combine CS skills with another major to create unique career opportunities!**
+:::
+
+### Why Choose a CS Minor?
+
+**CS skills are valuable in EVERY field:**
+
+- 🧬 **Biology + CS** = Bioinformatics, Genomics Research, Medical Software
+- 💼 **Business + CS** = Tech Entrepreneurship, Data Analytics, Product Management
+- 🎨 **Art + CS** = Game Design, Digital Art, UX/UI Design, Animation
+- 🌍 **Environmental Science + CS** = Climate Modeling, Conservation Tech
+- 📚 **Education + CS** = EdTech Development, Digital Learning Platforms
+- ⚖️ **Political Science + CS** = Policy Analysis, Civic Tech, Data Journalism
+- 🎵 **Music + CS** = Audio Software, Music Production Apps, Sound Design
+
+### What You'll Learn
+
+::: {.concept-box}
+**Core Requirements (Foundation):**
+
+- Programming fundamentals (Python, Java)
+- Data Structures
+- One or two intermediate CS courses
+
+**Electives (Choose Based on Your Interests):**
+
+- Web Development → Build websites and web apps
+- Database Systems → Manage and analyze data
+- AI/Machine Learning → Create intelligent systems
+- Mobile App Development → Build iOS/Android apps
+- Computer Graphics → Create visual applications
+- Data Science → Analyze and visualize data
+:::
+
+### Sample Combinations & Careers
+
+<div class="quest-grid">
+
+::: {.quest-card}
+### 🧬 Biology + CS Minor
+**Career:** Bioinformatics Scientist
+
+**Use CS to:**
+
+- Analyze genomic data
+- Model biological systems
+- Develop medical software
+- Conduct computational research
+
+**Real Companies:** 23andMe, Illumina, Moderna
+:::
+
+::: {.quest-card}
+### 💼 Business + CS Minor
+**Career:** Product Manager / Tech Entrepreneur
+
+**Use CS to:**
+
+- Understand technical constraints
+- Communicate with engineers
+- Analyze business data
+- Build your own startup
+
+**Real Companies:** Any tech company, startups, consulting
+:::
+
+::: {.quest-card}
+### 🎨 Art + CS Minor
+**Career:** Game Designer / Digital Artist
+
+**Use CS to:**
+
+- Create interactive experiences
+- Build game mechanics
+- Develop art tools
+- Combine creativity + tech
+
+**Real Companies:** Epic Games, Pixar, Adobe, game studios
+:::
+
+::: {.quest-card}
+### 📊 Psychology + CS Minor
+**Career:** UX Researcher / HCI Specialist
+
+**Use CS to:**
+
+- Design user interfaces
+- Conduct usability research
+- Build accessible software
+- Understand user behavior
+
+**Real Companies:** Google UX, Apple, Meta, design agencies
+:::
+
+</div>
+
+::: {.story-box}
+**🌟 Success Story:**
+
+*"I majored in Environmental Science with a CS minor. Now I work for a nonprofit developing software that helps track deforestation using satellite imagery. I never would have found this career without CS skills!"*
+
+— Sam, Environmental Science Major + CS Minor → Conservation Tech Developer
+:::
+
+---
+
+## 🤔 How Do I Choose?
+
+### Choose the CS MAJOR if you:
+
+- ✅ Want to become a professional software developer
+- ✅ Are fascinated by how computers work
+- ✅ Want to pursue graduate school in CS
+- ✅ Love problem-solving and building things with code
+- ✅ Want maximum flexibility in tech careers
+
+### Choose the CS MINOR if you:
+
+- ✅ Have a primary passion in another field
+- ✅ Want to enhance your major with tech skills
+- ✅ Want to be competitive in any career (data skills are universal!)
+- ✅ Are interested in interdisciplinary work
+- ✅ Want to understand technology without becoming a full-time developer
+
+::: {.concept-box}
+**💡 Can't Decide?**
+
+**Start with introductory CS courses!** You can always:
+
+- Begin as a CS minor and upgrade to a major
+- Take a few CS courses just to explore
+- Double major (yes, it's possible!)
+- Talk to current students and faculty
+
+**The important thing is to START LEARNING!**
+:::
+
+## 📚 Course Load & Time Commitment
+
+### CS Major
+
+- **~12-14 CS courses** + supporting math courses
+- **3-4 CS courses per year** (manageable with any major/minor combo)
+- **Senior Thesis/Project** (meaningful capstone experience)
+
+### CS Minor
+
+- **~6-7 CS courses** 
+- **1-2 CS courses per year** (easy to fit with any major)
+- **No thesis required** (but research opportunities available)
+
+::: {.tip-box}
+**Both options are designed to fit comfortably with:**
+
+- Other majors/minors
+- Study abroad
+- Athletics
+- Research opportunities
+- Internships
+- Campus involvement
+:::
+
+## 🚀 Next Steps
+
+::: {.highlight-box .highlight-info}
+**Ready to Explore CS?**
+
+1. 🎮 **[Try Coding Now!](try-it-now.qmd)** - Get hands-on experience
+2. 🎒 **[Start Quest 1](../lessons/01-variables.qmd)** - Begin learning Python
+3. 💬 **Talk to Current Students** - Ask about their experience
+4. 📧 **Contact the Department** - obonhamcarter@allegheny.edu
+
+**No matter which path you choose, you'll gain valuable skills that open doors to amazing careers!**
+:::
+
+---
+
+## 📞 Have Questions?
+
+::: {.concept-box}
+**We're here to help!**
+
+**Computer Science Department**
+
+- 📧 Email: obonhamcarter@allegheny.edu
+- 🌐 Website: [https://cs.allegheny.edu](https://cs.allegheny.edu)
+- 📍 Location: Alden Hall, Allegheny College
+- 💬 Schedule a visit: See campus, meet faculty, sit in on a class!
+
+**General Website**
+
+- 🌐 [https://www.allegheny.edu/](https://www.allegheny.edu/)
+
+:::

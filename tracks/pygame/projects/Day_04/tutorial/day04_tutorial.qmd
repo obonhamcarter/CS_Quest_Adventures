@@ -1,0 +1,669 @@
+---
+title: "Day 04: Snake Game 🐍"
+subtitle: "Master Grid-Based Movement and Data Structures!"
+author: "Pygame Tutorial Series"
+format:
+  html:
+    theme: light
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    css: ../../shared/styles/tutorial.css
+execute:
+  enabled: true
+  cache: false
+---
+
+::: {.hero-banner}
+# 🐍 Welcome to Day 04!
+
+Create the **classic Snake game**! Learn about grid-based movement, deques, game states, and self-collision. This is where things get interesting!
+
+**Time Required:** ~45 minutes  
+**Difficulty:** Intermediate 🌟🌟
+:::
+
+---
+
+## 🎯 What You'll Learn
+
+- ✅ **Grid-based movement** systems
+- ✅ **Deque data structure** for efficient snake body
+- ✅ **Self-collision detection**
+- ✅ **Direction control** (preventing 180° turns)
+- ✅ **Food spawning** algorithms
+
+---
+
+## 🧠 Understanding Data Structures
+
+### Why Use a Deque?
+
+::: {.callout-note}
+## 🐍 Understanding Snake's Body
+
+Imagine a train:
+- **Head (front)** - The engine, always moving forward
+- **Body** - All the connected cars following
+- **Tail (back)** - The last car
+
+When the snake moves:
+1. **Add a new head** in the direction it's moving
+2. **Remove the tail** to maintain length
+3. When eating food, **don't remove tail** = snake grows!
+
+**Deque ("deck")** is perfect because:
+- `appendleft()` adds new head instantly
+- `pop()` removes tail instantly
+- Unlike lists, both operations are super fast!
+:::
+
+```{python}
+from collections import deque
+
+# Deque = Double-Ended Queue (pronounced "deck")
+# Think of it as a line where you can add/remove from BOTH ends
+# Perfect for Snake because:
+# 1. Add new head position (O(1) - instant!)
+# 2. Remove tail (O(1) - instant!)
+
+snake = deque([(5, 5), (5, 6), (5, 7)])
+print("Snake body:", list(snake))
+
+# Snake moves up
+new_head = (5, 4)
+snake.appendleft(new_head)  # Add new head
+snake.pop()  # Remove tail
+
+print("After moving:", list(snake))
+print(f"Head: {snake[0]}, Tail: {snake[-1]}")
+```
+
+::: {.callout-important}
+## 📖 How Snake Movement Works
+
+**What happened in the code:**
+
+**Before moving:**
+- Snake body: `[(5, 5), (5, 6), (5, 7)]`
+- Head is at (5, 5), tail at (5, 7)
+- Snake is 3 units long, moving vertically
+
+**After moving up:**
+- New head position: (5, 4) - one unit up (smaller Y)
+- `appendleft((5, 4))` - adds new head to front
+- `pop()` - removes old tail (5, 7)
+- Result: `[(5, 4), (5, 5), (5, 6)]`
+
+**Key insight:** The snake "moves" by adding a head and removing a tail!
+- It looks like the whole snake moved
+- But we only changed the ends
+- This is **efficient** - we don't move every body part
+
+**When snake eats food:** Skip the `pop()` step, and the snake grows longer!
+
+**Try thinking:** What would happen if we called `appendleft()` twice but `pop()` only once?
+:::
+
+### Grid Coordinate System
+
+::: {.callout-note}
+## 📊 Why Use a Grid?
+
+**Two coordinate systems:**
+
+1. **Pixel coordinates** - Exact screen positions (0-600 pixels)
+   - Hard to work with: "Is (287, 443) the same cell as (291, 455)?"
+   
+2. **Grid coordinates** - Discrete cells (0-30 cells)
+   - Easy: "Cell (10, 15) is different from cell (11, 15)"
+
+**Grid benefits for Snake:**
+- Snake moves one **cell** at a time, not one pixel
+- Easy to check: "Is head in same cell as food?"
+- No floating-point math, just clean integers
+
+**The conversion:**
+- Each grid cell = 20x20 pixels
+- Grid (10, 15) = Pixels (200, 300)
+- We **multiply** to go grid→pixel, **divide** to go pixel→grid
+:::
+
+```{python}
+# Understanding grid positions
+# Grid makes Snake logic much simpler!
+
+CELL_SIZE = 20
+GRID_WIDTH = 30
+GRID_HEIGHT = 20
+
+def grid_to_pixel(grid_x, grid_y):
+    """Convert grid coordinates to pixel coordinates"""
+    pixel_x = grid_x * CELL_SIZE
+    pixel_y = grid_y * CELL_SIZE
+    return pixel_x, pixel_y
+
+def pixel_to_grid(pixel_x, pixel_y):
+    """Convert pixel coordinates to grid coordinates"""
+    grid_x = pixel_x // CELL_SIZE
+    grid_y = pixel_y // CELL_SIZE
+    return grid_x, grid_y
+
+# Test conversions
+print("Grid (10, 15) in pixels:", grid_to_pixel(10, 15))
+print("Pixel (250, 350) in grid:", pixel_to_grid(250, 350))
+```
+
+::: {.callout-important}
+## 📖 Understanding Coordinate Conversion
+
+**The output shows:**
+1. **Grid (10, 15) → Pixels (200, 300)**
+   - Grid X=10 × 20 pixels = 200
+   - Grid Y=15 × 20 pixels = 300
+   - This is the **top-left corner** of that grid cell
+
+2. **Pixels (250, 350) → Grid (12, 17)**
+   - 250 ÷ 20 = 12.5, but `//` (integer division) = 12
+   - 350 ÷ 20 = 17.5, becomes 17
+   - Any pixel in cell (12, 17) converts to same grid position
+
+**Why this matters:**
+- Snake's logic uses **grid coordinates** (simple integers)
+- Drawing uses **pixel coordinates** (screen positions)
+- We convert between them as needed
+
+**In the game:**
+- Snake head at grid (10, 15)
+- We convert to pixels (200, 300) to draw it
+- If you click pixel (250, 350), that's grid cell (12, 17)
+
+**Try it:** What grid cell contains pixel (99, 199)?
+:::
+
+---
+
+## 🎮 Building the Snake Game
+
+### Step 1: Setup and Constants
+
+```python
+import pygame
+import sys
+import random
+from collections import deque
+
+pygame.init()
+
+# Grid settings
+CELL_SIZE = 20
+GRID_WIDTH = 30
+GRID_HEIGHT = 20
+WINDOW_WIDTH = GRID_WIDTH * CELL_SIZE
+WINDOW_HEIGHT = GRID_HEIGHT * CELL_SIZE
+FPS = 10  # Slower = easier to play
+
+# Colors
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+DARK_GREEN = (0, 180, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
+
+# Directions (using tuples for easy math)
+UP = (0, -1)
+DOWN = (0, 1)
+LEFT = (-1, 0)
+RIGHT = (1, 0)
+```
+
+### Step 2: Create the Snake Class
+
+```python
+class Snake:
+    """Represents the snake with grid-based movement."""
+    
+    def __init__(self):
+        """Initialize snake in center of grid."""
+        center_x = GRID_WIDTH // 2
+        center_y = GRID_HEIGHT // 2
+        
+        # Snake body as deque of (x, y) grid positions
+        self.body = deque([
+            (center_x, center_y),
+            (center_x - 1, center_y),
+            (center_x - 2, center_y)
+        ])
+        
+        self.direction = RIGHT  # Start moving right
+        self.next_direction = RIGHT  # Queued direction
+        self.growing = False
+        
+    def change_direction(self, new_direction):
+        """
+        Change snake direction (prevent 180° turns).
+        
+        Args:
+            new_direction: Tuple representing direction
+        """
+        # Get current direction
+        current = self.direction
+        
+        # Prevent reversing direction
+        opposite = (-current[0], -current[1])
+        if new_direction != opposite:
+            self.next_direction = new_direction
+    
+    def move(self):
+        """Move snake one step in current direction."""
+        # Update direction
+        self.direction = self.next_direction
+        
+        # Calculate new head position
+        head_x, head_y = self.body[0]
+        dx, dy = self.direction
+        new_head = (head_x + dx, head_y + dy)
+        
+        # Add new head
+        self.body.appendleft(new_head)
+        
+        # Remove tail (unless growing)
+        if not self.growing:
+            self.body.pop()
+        else:
+            self.growing = False
+    
+    def grow(self):
+        """Mark snake to grow on next move."""
+        self.growing = True
+    
+    def check_collision(self):
+        """Check if snake hit wall or itself."""
+        head_x, head_y = self.body[0]
+        
+        # Check wall collision
+        if (head_x < 0 or head_x >= GRID_WIDTH or
+            head_y < 0 or head_y >= GRID_HEIGHT):
+            return True
+        
+        # Check self-collision (head hits body)
+        if self.body[0] in list(self.body)[1:]:
+            return True
+        
+        return False
+    
+    def draw(self, surface):
+        """Draw the snake."""
+        for i, (x, y) in enumerate(self.body):
+            pixel_x = x * CELL_SIZE
+            pixel_y = y * CELL_SIZE
+            
+            # Head is brighter
+            color = GREEN if i == 0 else DARK_GREEN
+            pygame.draw.rect(surface, color, 
+                           (pixel_x, pixel_y, CELL_SIZE, CELL_SIZE))
+            
+            # Add border for better visibility
+            pygame.draw.rect(surface, BLACK,
+                           (pixel_x, pixel_y, CELL_SIZE, CELL_SIZE), 1)
+```
+
+::: {.callout-consider}
+## 🤔 Consider This Corner
+
+**Why prevent 180° turns?**
+
+If the snake is moving RIGHT and you press LEFT, it would immediately run into itself! This check prevents that instant game over.
+
+Try removing this check to see what happens!
+:::
+
+### Step 3: Create Food System
+
+```python
+class Food:
+    """Represents the food that snake eats."""
+    
+    def __init__(self, snake_body):
+        """Initialize food at random position not on snake."""
+        self.position = self.spawn(snake_body)
+    
+    def spawn(self, snake_body):
+        """
+        Spawn food at random empty position.
+        
+        Args:
+            snake_body: Deque of snake body positions to avoid
+            
+        Returns:
+            Tuple of (x, y) grid position
+        """
+        while True:
+            x = random.randint(0, GRID_WIDTH - 1)
+            y = random.randint(0, GRID_HEIGHT - 1)
+            
+            # Make sure food isn't on snake
+            if (x, y) not in snake_body:
+                return (x, y)
+    
+    def draw(self, surface):
+        """Draw the food."""
+        x, y = self.position
+        pixel_x = x * CELL_SIZE
+        pixel_y = y * CELL_SIZE
+        
+        # Draw apple
+        pygame.draw.circle(surface, RED,
+                         (pixel_x + CELL_SIZE // 2, 
+                          pixel_y + CELL_SIZE // 2),
+                         CELL_SIZE // 2 - 2)
+```
+
+### Step 4: Main Game Loop
+
+```python
+def main():
+    """Main game loop."""
+    screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+    pygame.display.set_caption("Day 04: Snake Game")
+    clock = pygame.time.Clock()
+    
+    # Create game objects
+    snake = Snake()
+    food = Food(snake.body)
+    
+    # Game state
+    score = 0
+    game_over = False
+    
+    # Font
+    font = pygame.font.Font(None, 36)
+    large_font = pygame.font.Font(None, 72)
+    
+    # Main game loop
+    running = True
+    while running:
+        # Handle events
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            
+            elif event.type == pygame.KEYDOWN:
+                if game_over and event.key == pygame.K_SPACE:
+                    # Restart game
+                    snake = Snake()
+                    food = Food(snake.body)
+                    score = 0
+                    game_over = False
+                
+                elif not game_over:
+                    # Direction controls
+                    if event.key == pygame.K_UP or event.key == pygame.K_w:
+                        snake.change_direction(UP)
+                    elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
+                        snake.change_direction(DOWN)
+                    elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
+                        snake.change_direction(LEFT)
+                    elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
+                        snake.change_direction(RIGHT)
+        
+        # Update game state
+        if not game_over:
+            snake.move()
+            
+            # Check food collision
+            if snake.body[0] == food.position:
+                snake.grow()
+                food.position = food.spawn(snake.body)
+                score += 10
+            
+            # Check collisions
+            if snake.check_collision():
+                game_over = True
+        
+        # Draw everything
+        screen.fill(BLACK)
+        
+        # Draw grid (optional)
+        for x in range(0, WINDOW_WIDTH, CELL_SIZE):
+            pygame.draw.line(screen, (30, 30, 30), (x, 0), (x, WINDOW_HEIGHT))
+        for y in range(0, WINDOW_HEIGHT, CELL_SIZE):
+            pygame.draw.line(screen, (30, 30, 30), (0, y), (WINDOW_WIDTH, y))
+        
+        # Draw game objects
+        snake.draw(screen)
+        food.draw(screen)
+        
+        # Draw score
+        score_text = font.render(f"Score: {score}", True, YELLOW)
+        screen.blit(score_text, (10, 10))
+        
+        # Draw game over
+        if game_over:
+            game_over_text = large_font.render("GAME OVER", True, RED)
+            restart_text = font.render("Press SPACE to restart", True, WHITE)
+            screen.blit(game_over_text, 
+                       (WINDOW_WIDTH // 2 - game_over_text.get_width() // 2, 
+                        WINDOW_HEIGHT // 2 - 50))
+            screen.blit(restart_text,
+                       (WINDOW_WIDTH // 2 - restart_text.get_width() // 2,
+                        WINDOW_HEIGHT // 2 + 30))
+        
+        pygame.display.flip()
+        clock.tick(FPS)
+    
+    pygame.quit()
+    sys.exit()
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+## 🧪 Understanding the Algorithm
+
+### Direction Control Demo
+
+```{python}
+# Demonstrating direction logic
+
+def can_turn(current_direction, new_direction):
+    """Check if turn is valid (not 180° reversal)"""
+    opposite = (-current_direction[0], -current_direction[1])
+    return new_direction != opposite
+
+# Test all combinations
+directions = {
+    'UP': (0, -1),
+    'DOWN': (0, 1),
+    'LEFT': (-1, 0),
+    'RIGHT': (1, 0)
+}
+
+print("Valid turns from each direction:")
+for current_name, current_dir in directions.items():
+    print(f"\nFrom {current_name}:")
+    for new_name, new_dir in directions.items():
+        valid = can_turn(current_dir, new_dir)
+        status = "✓" if valid else "✗"
+        print(f"  {status} to {new_name}")
+```
+
+---
+
+## 🎯 Challenges
+
+### 🌟 Easy
+1. Change snake and food colors
+2. Adjust game speed (change FPS)
+3. Make grid larger/smaller
+
+### 🌟🌟 Medium
+4. Add obstacles that end the game
+5. Create "portal" walls (snake wraps to other side)
+6. Add multiple food types with different scores
+
+### 🌟🌟🌟 Hard
+7. Implement levels with increasing difficulty
+8. Add special power-up foods (speed boost, slow time)
+9. Create multiplayer with two snakes
+
+---
+
+## 📚 Key Concepts
+
+- **Deque**: Double-ended queue for O(1) operations
+- **Grid System**: Discrete positions instead of smooth movement
+- **Direction Vectors**: Using tuples for clean direction math
+- **Event-Based Input**: Responding to key presses, not continuous states
+
+---
+
+## 📋 Complete Code - Ready to Copy!
+
+For the full working code with all features, see `Day_04/src_instr/snake_game.py` in your project files.
+
+Here's a simplified complete version you can start with:
+
+```python
+import pygame
+import sys
+import random
+from collections import deque
+
+pygame.init()
+
+WINDOW_WIDTH = 600
+WINDOW_HEIGHT = 600
+CELL_SIZE = 20
+GRID_WIDTH = WINDOW_WIDTH // CELL_SIZE
+GRID_HEIGHT = WINDOW_HEIGHT // CELL_SIZE
+FPS = 10
+
+BLACK = (0, 0, 0)
+GREEN = (0, 255, 0)
+DARK_GREEN = (0, 180, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
+
+UP = (0, -1)
+DOWN = (0, 1)
+LEFT = (-1, 0)
+RIGHT = (1, 0)
+
+class Snake:
+    def __init__(self):
+        center = GRID_WIDTH // 2
+        self.body = deque([(center, center), (center-1, center), (center-2, center)])
+        self.direction = RIGHT
+        self.growing = False
+        
+    def move(self):
+        head_x, head_y = self.body[0]
+        new_head = (head_x + self.direction[0], head_y + self.direction[1])
+        self.body.appendleft(new_head)
+        if not self.growing:
+            self.body.pop()
+        else:
+            self.growing = False
+    
+    def grow(self):
+        self.growing = True
+    
+    def change_direction(self, new_dir):
+        opposite = {UP: DOWN, DOWN: UP, LEFT: RIGHT, RIGHT: LEFT}
+        if new_dir != opposite.get(self.direction):
+            self.direction = new_dir
+    
+    def check_collision(self):
+        head = self.body[0]
+        if not (0 <= head[0] < GRID_WIDTH and 0 <= head[1] < GRID_HEIGHT):
+            return True
+        return head in list(self.body)[1:]
+    
+    def draw(self, surface):
+        for i, (x, y) in enumerate(self.body):
+            color = GREEN if i == 0 else DARK_GREEN
+            pygame.draw.rect(surface, color, (x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE))
+
+class Food:
+    def __init__(self, snake_body):
+        self.position = self.spawn(snake_body)
+    
+    def spawn(self, snake_body):
+        while True:
+            pos = (random.randint(0, GRID_WIDTH-1), random.randint(0, GRID_HEIGHT-1))
+            if pos not in snake_body:
+                return pos
+    
+    def draw(self, surface):
+        x, y = self.position
+        pygame.draw.circle(surface, RED, (x*CELL_SIZE + CELL_SIZE//2, y*CELL_SIZE + CELL_SIZE//2), CELL_SIZE//2-2)
+
+def main():
+    screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+    pygame.display.set_caption("Snake Game")
+    clock = pygame.time.Clock()
+    
+    snake = Snake()
+    food = Food(snake.body)
+    score = 0
+    game_over = False
+    font = pygame.font.Font(None, 36)
+    
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN and not game_over:
+                if event.key in (pygame.K_UP, pygame.K_w):
+                    snake.change_direction(UP)
+                elif event.key in (pygame.K_DOWN, pygame.K_s):
+                    snake.change_direction(DOWN)
+                elif event.key in (pygame.K_LEFT, pygame.K_a):
+                    snake.change_direction(LEFT)
+                elif event.key in (pygame.K_RIGHT, pygame.K_d):
+                    snake.change_direction(RIGHT)
+        
+        if not game_over:
+            snake.move()
+            
+            if snake.body[0] == food.position:
+                snake.grow()
+                food.position = food.spawn(snake.body)
+                score += 10
+            
+            if snake.check_collision():
+                game_over = True
+        
+        screen.fill(BLACK)
+        snake.draw(screen)
+        food.draw(screen)
+        
+        score_text = font.render(f"Score: {score}", True, YELLOW)
+        screen.blit(score_text, (10, 10))
+        
+        if game_over:
+            game_over_text = font.render("GAME OVER", True, RED)
+            screen.blit(game_over_text, (WINDOW_WIDTH//2-100, WINDOW_HEIGHT//2))
+        
+        pygame.display.flip()
+        clock.tick(FPS)
+    
+    pygame.quit()
+    sys.exit()
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+::: {.hero-banner}
+# See you on Day 05! 🐦
+
+Next up: Flappy Bird with infinite scrolling!
+:::

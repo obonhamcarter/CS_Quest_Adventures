@@ -1,0 +1,9 @@
+[project]
+name = "pygame-day07-dungeon-crawler"
+version = "0.1.0"
+description = "Day 07: Dungeon Crawler - Tile-based RPG adventure"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "pygame==2.5.2",
+    "pytest>=7.4.0",
+]

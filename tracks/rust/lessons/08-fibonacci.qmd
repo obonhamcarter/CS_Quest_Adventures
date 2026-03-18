@@ -1,0 +1,83 @@
+---
+title: "Quest 8: Fibonacci - Pattern Practice"
+subtitle: "Combine Loops, Variables, and Functions"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+🌟 QUEST 8 | Difficulty: Beginner | Time: 10 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/08-fibonacci.ipynb)
+- 📥 [Download Notebook](../files/lessons/08-fibonacci.ipynb)
+:::
+
+## 📖 Introduction
+Fibonacci is great practice for Rust fundamentals.
+
+## 💡 Sequence Rule
+Start with `0, 1`. Every next number is the sum of the previous two.
+
+## 👨‍💻 Example
+
+```rust
+fn fibonacci(n: usize) -> Vec<u64> {
+    let mut seq = vec![0, 1];
+
+    while seq.len() < n {
+        let len = seq.len();
+        let next = seq[len - 1] + seq[len - 2];
+        seq.push(next);
+    }
+
+    seq
+}
+
+fn main() {
+    let result = fibonacci(10);
+    println!("{:?}", result);
+}
+```
+
+## 🎯 Gentle Challenge
+1. Change the program to generate 15 values.
+2. Print only the final value.
+3. Try printing each value with its index.
+
+## ✅ One Possible Solution
+
+```rust
+fn fibonacci(n: usize) -> Vec<u64> {
+    let mut seq = vec![0, 1];
+
+    while seq.len() < n {
+        let len = seq.len();
+        let next = seq[len - 1] + seq[len - 2];
+        seq.push(next);
+    }
+
+    seq
+}
+
+fn main() {
+    let result = fibonacci(15);
+
+    for (i, value) in result.iter().enumerate() {
+        println!("F({}) = {}", i, value);
+    }
+
+    if let Some(last) = result.last() {
+        println!("Final value: {}", last);
+    }
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 8 Complete
+Great work—you combined major Rust basics into one small program.
+:::

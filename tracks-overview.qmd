@@ -1,0 +1,133 @@
+---
+title: "All Learning Tracks Overview"
+subtitle: "Choose Your Adventure Through Computer Science"
+format:
+  live-html:
+    toc: true
+---
+
+# 🗺️ All Learning Tracks
+
+CS Quest Adventures offers multiple learning paths, each designed to teach different aspects of Computer Science through engaging, interactive quests.
+
+---
+
+## 🐍 Python Quest Track
+
+**Perfect for:** Absolute beginners, first-time programmers  
+**Difficulty:** Beginner  
+**Total Quests:** 19  
+**Estimated Time:** ~20 hours  
+
+### What You'll Learn
+Master Python programming from fundamentals to advanced concepts including variables, data structures, algorithms, and object-oriented programming.
+
+### Features
+- ✅ In-browser code execution (Pyodide)
+- ✅ JupyterLite environment
+- ✅ Downloadable notebooks
+- ✅ Interactive challenges
+
+[Explore Python Track →](tracks/python/index.qmd){.btn .btn-primary}
+
+---
+
+## 🦀 Rust Quest Track
+
+**Perfect for:** Those with programming experience, systems enthusiasts  
+**Difficulty:** Intermediate  
+**Total Quests:** 19  
+**Estimated Time:** ~25 hours
+
+### What You'll Learn
+Learn Rust's unique approach to systems programming, including ownership, borrowing, and zero-cost abstractions.
+
+### Features
+- ✅ Rust Playground integration
+- ✅ Parallel to Python track structure
+- ✅ Memory safety concepts
+- ✅ Performance-focused learning
+
+[Explore Rust Track →](tracks/rust/index.qmd){.btn .btn-primary}
+
+---
+
+## 🎮 Pygame Quest Track
+
+**Perfect for:** Python programmers ready to build games  
+**Difficulty:** Intermediate  
+**Total Quests:** 7 complete games  
+**Estimated Time:** ~30 hours
+
+### What You'll Build
+Create 7 complete, playable games from Maze Explorer to Dungeon Crawler, learning game development patterns along the way.
+
+### Features
+- ✅ Complete working games
+- ✅ Progressive difficulty
+- ✅ Full source code
+- ✅ UV package manager
+
+[Explore Pygame Track →](tracks/pygame/index.qmd){.btn .btn-primary}
+
+---
+
+## 🎯 Recommended Learning Paths
+
+### Path 1: Complete Beginner → Game Developer
+1. [Getting Started](intro/what-is-cs.qmd)
+2. [Python Track](tracks/python/index.qmd) (19 quests)
+3. [Pygame Track](tracks/pygame/index.qmd) (7 games)
+
+**Total Time:** ~50 hours
+
+---
+
+### Path 2: Python → Systems Programming
+1. [Python Track](tracks/python/index.qmd) (19 quests)
+2. [Rust Track](tracks/rust/index.qmd) (19 quests)
+
+**Total Time:** ~45 hours
+
+---
+
+### Path 3: Quick Start for Experienced Programmers
+Jump directly to the track that interests you:
+- Already know a language? Try [Rust Track](tracks/rust/index.qmd)
+- Want to build games? Start [Pygame Track](tracks/pygame/index.qmd)
+- Need fundamentals? Begin [Python Track](tracks/python/index.qmd)
+
+---
+
+## 🔮 Future Tracks
+
+More adventures coming soon:
+
+- ⚡ **JavaScript Track** - Web development fundamentals
+- 📊 **Data Science Track** - Analytics and visualization
+- 🌐 **Web Development Track** - Full-stack web apps
+- ⚙️ **C++ Track** - Advanced systems programming
+
+[Learn about adding new tracks →](sitedocs/ADDING_NEW_TRACKS.md)
+
+---
+
+## 📊 Track Comparison
+
+| Track | Difficulty | Quests | Time | Prerequisites |
+|-------|-----------|--------|------|---------------|
+| Python 🐍 | Beginner | 19 | ~20h | None |
+| Rust 🦀 | Intermediate | 19 | ~25h | Programming basics |
+| Pygame 🎮 | Intermediate | 7 | ~30h | Python knowledge |
+
+---
+
+## 🚀 Ready to Start?
+
+Choose your adventure:
+
+[🐍 Python](tracks/python/index.qmd){.btn .btn-success}
+[🦀 Rust](tracks/rust/index.qmd){.btn .btn-warning}
+[🎮 Pygame](tracks/pygame/index.qmd){.btn .btn-danger}
+
+Or [learn about CS first →](intro/what-is-cs.qmd)

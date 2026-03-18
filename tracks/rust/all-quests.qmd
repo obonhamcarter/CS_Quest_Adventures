@@ -1,0 +1,64 @@
+---
+title: "All Quests"
+subtitle: "Your Complete Rust Adventure Collection"
+---
+
+## 🗺️ Complete Quest List
+
+Here is the complete Rust Quest collection. Each quest is practical, beginner-friendly, and challenge-based.
+
+### 🌱 Rust Beginner Quests
+
+1. **[Variables - Your Starter Toolkit](lessons/01-variables.qmd)** - Immutability and `mut`
+2. **[Data Types - The Shape of Data](lessons/02-data-types.qmd)** - Rust primitive and string types
+3. **[Conditionals - Choose Your Path](lessons/03-conditionals.qmd)** - `if`, `else if`, and boolean logic
+4. **[Loops - Repeat with Confidence](lessons/04-loops.qmd)** - `loop`, `while`, and `for`
+5. **[Vectors - Collecting Data](lessons/05-lists.qmd)** - `Vec<T>` for growing collections
+6. **[Functions - Reusable Steps](lessons/06-functions.qmd)** - Parameters and return values
+7. **[HashMaps - Keys and Values](lessons/07-dictionaries.qmd)** - Fast lookups with key-value pairs
+8. **[Fibonacci - Pattern Practice](lessons/08-fibonacci.qmd)** - Build confidence with sequence generation
+
+### 🌿 Skill-Building Quests
+
+9. **[Sorting - Organizing Data](lessons/09-sorting.qmd)** - Order vectors with built-ins
+10. **[Number Game - Guess and Check](lessons/10-number-game.qmd)** - Use loops and conditionals together
+11. **[Recursion - Functions Calling Themselves](lessons/11-recursion.qmd)** - Solve with smaller subproblems
+12. **[Complexity - Why Speed Matters](lessons/12-complexity.qmd)** - Compare growth patterns
+13. **[Iterative Loops - Pick the Right Loop](lessons/13-iterative-loops.qmd)** - Select the right repetition tool
+
+### 🌳 Rust Patterns Quests
+
+14. **[Functions Part 2 - Non-Returning](lessons/14-functions-non-returning.qmd)** - Action-oriented functions
+15. **[Functions Part 3 - Returning Values](lessons/15-functions-returning.qmd)** - Compute and return results
+16. **[Closures - Quick Function Tools](lessons/16-lambda-functions.qmd)** - Inline anonymous behavior
+17. **[Higher-Order Functions](lessons/17-higher-order-functions.qmd)** - Pass behavior into functions
+18. **[Wrappers - Add Behavior Around Functions](lessons/18-decorators.qmd)** - Decorator-like patterns
+19. **[Structs and Impl - Rust Blueprints](lessons/19-classes.qmd)** - Class-equivalent modeling in Rust
+
+---
+
+## 📈 Track Your Progress
+
+- [ ] Quest 1: Variables
+- [ ] Quest 2: Data Types
+- [ ] Quest 3: Conditionals
+- [ ] Quest 4: Loops
+- [ ] Quest 5: Vectors
+- [ ] Quest 6: Functions
+- [ ] Quest 7: HashMaps
+- [ ] Quest 8: Fibonacci
+- [ ] Quest 9: Sorting
+- [ ] Quest 10: Number Game
+- [ ] Quest 11: Recursion
+- [ ] Quest 12: Complexity
+- [ ] Quest 13: Iterative Loops
+- [ ] Quest 14: Functions Part 2
+- [ ] Quest 15: Functions Part 3
+- [ ] Quest 16: Closures
+- [ ] Quest 17: Higher-Order Functions
+- [ ] Quest 18: Wrappers
+- [ ] Quest 19: Structs and Impl
+
+::: {.tip-box}
+**🎯 Challenge**: Can you complete all 19 Rust quests and re-type each example from memory?
+:::

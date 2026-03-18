@@ -1,0 +1,9 @@
+[project]
+name = "pygame-day04-snake"
+version = "0.1.0"
+description = "Day 04: Snake Game - Classic grid-based game"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "pygame==2.5.2",
+    "pytest>=7.4.0",
+]

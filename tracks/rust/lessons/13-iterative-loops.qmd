@@ -1,0 +1,55 @@
+---
+title: "Quest 13: Iterative Loops - Pick the Right Loop"
+subtitle: "Choose Between loop, while, and for"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+🔄 QUEST 13 | Difficulty: Beginner | Time: 8 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/13-iterative-loops.ipynb)
+- 📥 [Download Notebook](../files/lessons/13-iterative-loops.ipynb)
+:::
+
+## 📖 Introduction
+Rust offers multiple loop styles for different goals.
+Picking the right one becomes easier with practice.
+
+## 💡 Practical Pattern
+
+```rust
+fn main() {
+    let names = vec!["Ada", "Lin", "Noor"];
+    for name in names {
+        println!("Hi, {}", name);
+    }
+}
+```
+
+## 🎯 Gentle Challenge
+Use `while` to print countdown `3, 2, 1`.
+After that, try printing `Lift off!` once the loop finishes.
+
+## ✅ One Possible Solution
+
+```rust
+fn main() {
+    let mut n = 3;
+    while n > 0 {
+        println!("{}", n);
+        n -= 1;
+    }
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 13 Complete
+You selected loop styles intentionally.
+Next: [Quest 14: Non-Returning Functions](14-functions-non-returning.qmd)
+:::

@@ -1,0 +1,215 @@
+---
+title: "Quest 1: Variables - Your Coding Backpack"
+subtitle: "Learn to Store and Use Information in Python"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+🎒 QUEST 1 | Difficulty: Beginner | Time: 5 minutes
+:::
+
+::: {.concept-box}
+**📊 Complexity Level: Beginner ⭐**
+
+Perfect for students with **no programming experience**. This lesson introduces fundamental concepts that are essential for all programming. Great for college fair visitors and first-time coders!
+:::
+
+::: {.tip-box}
+**💻 Interactive Options:**
+
+- 📓 **[Open in JupyterLite](../jupyterlite/lab/index.html?path=01-variables.ipynb)** - Full Jupyter environment in your browser
+- ▶️ **Run code directly below** - All code cells on this page are editable and runnable
+- 📥 **[Download Notebook](../files/lessons/01-variables.ipynb)** - For use in local Jupyter or Google Colab
+:::
+
+## 📖 Introduction: The Adventurer's Backpack
+
+Imagine you're an adventurer setting out on a journey. You have a magical backpack that can hold anything you need—water bottles, maps, treasure, even the number of monsters you've defeated! Each pocket in your backpack has a label, so you always know what's inside.
+
+In Python, **variables** are just like those labeled pockets in your backpack. They help you store information that you can use later in your program!
+
+::: {.story-box}
+**🗺️ Story Time**: You're starting your quest and need to track important information. You have 3 health points, your name is "Hero", and you've collected 0 gold coins so far. How do you remember all this? With variables!
+:::
+
+## 💡 Explanation: What are Variables?
+
+A **variable** is a container that stores a value. Think of it as a labeled box:
+- The **label** is the variable name (like `health`)
+- The **contents** is the value (like `3`)
+
+In Python, creating a variable is super simple:
+
+```python
+health = 3
+player_name = "Hero"
+gold = 0
+```
+
+That's it! You just:
+1. Choose a meaningful name
+2. Use the `=` sign (we call this "assignment")
+3. Provide a value
+
+::: {.concept-box}
+**📝 Key Rules for Variable Names:**
+
+✅ **Good names**: `health`, `player_name`, `total_score`
+- Use lowercase letters
+- Use underscores to separate words
+- Make them descriptive
+
+❌ **Bad names**: `x`, `asdf`, `123name`
+- Too short and unclear
+- Random letters
+- Can't start with numbers
+:::
+
+## 🎮 Activity: Create Your Character
+
+Let's create variables for your own game character! Try editing the code below to customize your character, then run it to see the results.
+
+```{pyodide-python}
+# Create your character's stats
+character_name = "Robin"
+character_level = 1
+health_points = 100
+magic_power = 15
+is_wizard = True
+
+# Display your character
+print("=== CHARACTER SHEET ===")
+print(f"Name: {character_name}")
+print(f"Level: {character_level}")
+print(f"Health: {health_points} HP")
+print(f"Magic: {magic_power} MP")
+print(f"Is Wizard: {is_wizard}")
+print("=" * 23)
+
+# Try changing these values!
+# What happens if you change health_points to 150?
+# What happens if you change is_wizard to False?
+```
+
+::: {.challenge-box}
+**🎯 Challenge**: Modify the code above to:
+
+1. Change the character name to your own name
+2. Set the level to 5
+3. Give your character 200 health points
+4. Change the magic power to 50
+
+Then run the code to see your custom character!
+:::
+
+## 👨‍💻 Code Example: Variables in Action
+
+Variables become really powerful when you use them in calculations:
+
+```{pyodide-python}
+# Starting values
+gold = 10
+enemies_defeated = 0
+
+print(f"Starting gold: {gold}")
+print(f"Enemies defeated: {enemies_defeated}")
+print()
+
+# You found a treasure chest!
+gold = gold + 25
+print("🎁 You found a treasure chest! +25 gold")
+print(f"Gold now: {gold}")
+print()
+
+# You defeated an enemy!
+enemies_defeated = enemies_defeated + 1
+print("⚔️ You defeated an enemy!")
+print(f"Enemies defeated: {enemies_defeated}")
+print()
+
+# Another battle!
+enemies_defeated = enemies_defeated + 1
+gold = gold + 5
+print("⚔️ Another enemy defeated! +5 gold")
+print(f"Total enemies defeated: {enemies_defeated}")
+print(f"Total gold: {gold}")
+```
+
+::: {.tip-box}
+**💡 Cool Trick**: Instead of writing `gold = gold + 25`, you can use a shortcut: `gold += 25`. Both do the same thing!
+:::
+
+## 🧩 Puzzle Time!
+
+Figure out what this code will print **before** you run it:
+
+```{pyodide-python}
+# Can you predict the output?
+x = 5
+y = 10
+z = x + y
+
+x = 20
+
+print(f"x = {x}")
+print(f"y = {y}")
+print(f"z = {z}")
+
+# Why is z still 15 and not 30?
+# Think about it, then run to check!
+```
+
+::: {.solution-box}
+**🔑 Solution Explained**:
+
+The answer is:
+```
+x = 20
+y = 10
+z = 15
+```
+
+**Why?** When we calculated `z = x + y`, x was 5 and y was 10, so z became 15. 
+
+When we later changed `x = 20`, it **didn't** change z! The variable z still holds the original calculation result. Variables don't automatically update—you have to assign new values to them explicitly.
+
+This is important: **variables store values, not formulas**!
+:::
+
+## 🎯 Key Takeaways
+
+::: {.quest-complete}
+### ✨ Quest 1 Complete! ✨
+
+You've learned:
+
+✅ Variables are labeled containers that store values  
+✅ Use the `=` sign to assign values to variables  
+✅ Variable names should be descriptive and follow naming rules  
+✅ You can update variables by assigning new values  
+✅ Variables store values, not formulas
+
+**Next Quest**: Ready to learn about different types of data? Try [Quest 2: Data Types](02-data-types.qmd)!
+:::
+
+## 🚀 Try This at Home!
+
+Create variables for your favorite video game character or superhero. Track their name, power level, special abilities, and anything else you can think of. Practice makes perfect!
+
+```python
+# Your turn! Create variables for your favorite character
+favorite_hero = "Spider-Man"
+power_level = 9000
+can_fly = False
+catchphrase = "With great power comes great responsibility"
+
+# Add more and have fun!
+```
+
+---
+
+::: {.tip-box}
+**📱 Share Your Progress!** Completed Quest 1? Amazing! Move on to the next quest or try the challenge again with different values.
+:::

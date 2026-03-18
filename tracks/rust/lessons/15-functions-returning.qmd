@@ -1,0 +1,57 @@
+---
+title: "Quest 15: Functions Part 3 - Returning Values"
+subtitle: "Compute and Return Results"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+🎁 QUEST 15 | Difficulty: Beginner | Time: 8 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/15-functions-returning.ipynb)
+- 📥 [Download Notebook](../files/lessons/15-functions-returning.ipynb)
+:::
+
+## 📖 Introduction
+Returning values keeps code reusable and testable.
+This makes programs easier to reason about.
+
+## 💡 Example
+
+```rust
+fn area(width: i32, height: i32) -> i32 {
+    width * height
+}
+
+fn main() {
+    let room_area = area(5, 4);
+    println!("Area: {}", room_area);
+}
+```
+
+## 🎯 Gentle Challenge
+Create `is_even(n)` that returns `true` or `false`.
+Try it with both odd and even inputs.
+
+## ✅ One Possible Solution
+
+```rust
+fn is_even(n: i32) -> bool {
+    n % 2 == 0
+}
+
+fn main() {
+    println!("8 even? {}", is_even(8));
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 15 Complete
+You used return types to compute reusable results.
+Next: [Quest 16: Closures](16-lambda-functions.qmd)
+:::

@@ -1,0 +1,403 @@
+---
+title: "Day 05: Flappy Bird 🐦"
+subtitle: "Infinite Scrolling and Jump Mechanics!"
+author: "Pygame Tutorial Series"
+format:
+  html:
+    theme: light
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    css: ../../shared/styles/tutorial.css
+execute:
+  enabled: true
+  cache: false
+---
+
+::: {.hero-banner}
+# 🐦 Welcome to Day 05!
+
+Build **Flappy Bird** with infinite scrolling pipes! Learn procedural generation, jump mechanics, and challenging game design.
+
+**Time Required:** ~45 minutes | **Difficulty:** Intermediate 🌟🌟
+:::
+
+## 🎯 What You'll Learn
+- ✅ **Jump mechanics** with acceleration
+- ✅ **Infinite scrolling** generation
+- ✅ **Procedural pipe placement**
+- ✅ **Gap collision** detection
+- ✅ **Game state management**
+
+## 🎮 Core Concepts
+
+### Jump Physics
+
+::: {.callout-note}
+## 🐦 How Birds "Fly" in Games
+
+**The Flappy Bird mechanic:**
+1. **Gravity constantly pulls down** - bird always wants to fall
+2. **Jump gives upward velocity** - but only when you press spacebar
+3. **Velocity gradually increases downward** - gravity wins over time
+
+**Key difference from Day 02:**
+- Day 02: Ball bounces automatically off ground
+- Day 05: Bird never bounces - you must keep jumping to stay up!
+
+**The challenge:** Timing your jumps to navigate through gaps. Too many jumps = hit ceiling, too few = hit ground!
+:::
+
+```{python}
+# Understanding jump vs gravity
+# Watch how one jump affects the bird over time
+
+class JumpSimulation:
+    def __init__(self):
+        self.y = 300
+        self.velocity = 0
+        self.gravity = 0.5
+        self.jump_strength = -10
+    
+    def jump(self):
+        self.velocity = self.jump_strength
+    
+    def update(self):
+        self.velocity += self.gravity
+        self.y += self.velocity
+        if self.y > 600: self.y = 600  # Ground
+    
+    def __str__(self):
+        return f"Y: {self.y:.1f}, Velocity: {self.velocity:.1f}"
+
+# Simulate 10 frames
+bird = JumpSimulation()
+for frame in range(10):
+    if frame == 0: bird.jump()
+    bird.update()
+    if frame % 3 == 0: print(f"Frame {frame}: {bird}")
+```
+
+::: {.callout-important}
+## 📖 Analyzing the Jump Arc
+
+**What the output shows:**
+
+**Frame 0:** Bird jumps!
+- Velocity becomes -10 (strong upward push)
+- Y = 290.0 (moved up 10 pixels)
+
+**Frame 3:**
+- Velocity = -8.5 (still going up, but slowing)
+- Y = 263.5 (moved up more, but slower)
+- **Gravity is fighting the jump!**
+
+**Frame 6:**
+- Velocity = -7.0 (barely going up now)
+- Y = 242.5 (almost at peak height)
+
+**Frame 9:**
+- Velocity = -5.5 (still technically going up)
+- Y = 226.0 (reached peak, about to fall)
+
+**The pattern:**
+1. Jump gives instant -10 velocity (strong upward)
+2. Each frame, gravity adds +0.5 (weakening the jump)
+3. Eventually velocity becomes positive (starts falling)
+4. Without another jump, bird will fall faster and faster!
+
+**This creates the "tappy" gameplay** - you must repeatedly jump to fight gravity!
+:::
+
+## 🏗️ Building the Game
+
+### Bird Class with Jump
+
+::: {.callout-note}
+## 📝 Bird Class Breakdown
+
+**What each part does:**
+
+**Attributes (data bird remembers):**
+- `x, y` - Bird's position on screen
+- `velocity` - How fast bird is moving up/down
+- `gravity` - Constant 0.5 pulling downward
+- `jump_strength` - How much velocity a jump gives (-10 = strong upward)
+- `radius` - How big to draw the bird (20 pixels)
+
+**Methods (actions bird can do):**
+- `jump()` - Sets velocity to -10 (instant upward boost)
+- `update()` - Applies gravity and moves bird
+- `draw()` - Renders bird as yellow circle on screen
+
+**Terminal velocity:** We cap velocity at +10 so bird doesn't fall ridiculously fast!
+:::
+
+```python
+class Bird:
+    def __init__(self):
+        self.x = 100
+        self.y = 300
+        self.velocity = 0
+        self.gravity = 0.5
+        self.jump_strength = -10
+        self.radius = 20
+        self.color = YELLOW
+    
+    def jump(self):
+        self.velocity = self.jump_strength
+    
+    def update(self):
+        self.velocity += self.gravity
+        self.y += self.velocity
+        # Terminal velocity
+        if self.velocity > 10:
+            self.velocity = 10
+    
+    def draw(self, surface):
+        pygame.draw.circle(surface, self.color, 
+                         (int(self.x), int(self.y)), self.radius)
+```
+
+### Pipe System
+
+::: {.callout-note}
+## 🔧 How Infinite Scrolling Works
+
+**The trick:** We don't create infinite pipes!
+
+Instead:
+1. **Create 3-4 pipes** visible on screen
+2. **Move them left** each frame (they scroll)
+3. **When one leaves screen** - remove it
+4. **Add a new pipe on the right** - maintains 3-4 visible
+
+**Procedural generation:**
+- Each pipe has **random gap height**
+- Gap size stays same (player can fit through)
+- Gap position varies (creates challenge!)
+
+**This creates endless gameplay** from just a few objects being recycled!
+:::
+
+```python
+class Pipe:
+    def __init__(self, x):
+        self.x = x
+        self.width = 60
+        self.gap = 150
+        self.top_height = random.randint(100, 400)
+        self.speed = 3
+    
+    def update(self):
+        self.x -= self.speed
+    
+    def draw(self, surface):
+        # Top pipe
+        pygame.draw.rect(surface, GREEN, 
+                        (self.x, 0, self.width, self.top_height))
+        # Bottom pipe
+        bottom_y = self.top_height + self.gap
+        pygame.draw.rect(surface, GREEN,
+                        (self.x, bottom_y, self.width, 600 - bottom_y))
+    
+    def collides_with(self, bird):
+        if not (self.x < bird.x + bird.radius and 
+                self.x + self.width > bird.x - bird.radius):
+            return False
+        if (bird.y - bird.radius < self.top_height or 
+            bird.y + bird.radius > self.top_height + self.gap):
+            return True
+        return False
+```
+
+### Main Game Loop
+```python
+def main():
+    screen = pygame.display.set_mode((800, 600))
+    clock = pygame.time.Clock()
+    
+    bird = Bird()
+    pipes = [Pipe(800 + i * 300) for i in range(3)]
+    score = 0
+    game_over = False
+    
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE and not game_over:
+                    bird.jump()
+        
+        if not game_over:
+            bird.update()
+            
+            # Update pipes
+            for pipe in pipes:
+                pipe.update()
+                if pipe.collides_with(bird):
+                    game_over = True
+                if pipe.x + pipe.width < bird.x and not hasattr(pipe, 'scored'):
+                    score += 1
+                    pipe.scored = True
+            
+            # Remove and add pipes
+            if pipes[0].x < -pipes[0].width:
+                pipes.pop(0)
+                pipes.append(Pipe(pipes[-1].x + 300))
+            
+            # Check bounds
+            if bird.y < 0 or bird.y > 600:
+                game_over = True
+        
+        # Draw
+        screen.fill(SKY_BLUE)
+        bird.draw(screen)
+        for pipe in pipes:
+            pipe.draw(screen)
+        
+        # Score
+        font = pygame.font.Font(None, 48)
+        score_text = font.render(str(score), True, WHITE)
+        screen.blit(score_text, (400, 50))
+        
+        if game_over:
+            game_over_text = font.render("GAME OVER", True, RED)
+            screen.blit(game_over_text, (300, 300))
+        
+        pygame.display.flip()
+        clock.tick(60)
+```
+
+## 📋 Complete Code - Copy & Paste Ready!
+
+See `Day_05/src_instr/flappy_bird.py` for the full version with all features.
+
+```python
+import pygame
+import sys
+import random
+
+pygame.init()
+
+WIDTH, HEIGHT = 400, 600
+FPS = 60
+
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+YELLOW = (255, 255, 0)
+GREEN = (0, 200, 0)
+SKY_BLUE = (135, 206, 235)
+
+class Bird:
+    def __init__(self):
+        self.x, self.y = 100, 300
+        self.velocity = 0
+        self.gravity = 0.5
+        self.jump_power = -10
+        self.radius = 20
+    
+    def jump(self):
+        self.velocity = self.jump_power
+    
+    def update(self):
+        self.velocity += self.gravity
+        self.y += self.velocity
+        if self.velocity > 10:
+            self.velocity = 10
+    
+    def draw(self, screen):
+        pygame.draw.circle(screen, YELLOW, (int(self.x), int(self.y)), self.radius)
+
+class Pipe:
+    def __init__(self, x):
+        self.x = x
+        self.width = 60
+        self.gap = 150
+        self.top_height = random.randint(100, 400)
+        self.speed = 3
+        self.scored = False
+    
+    def update(self):
+        self.x -= self.speed
+    
+    def draw(self, screen):
+        pygame.draw.rect(screen, GREEN, (self.x, 0, self.width, self.top_height))
+        pygame.draw.rect(screen, GREEN, (self.x, self.top_height + self.gap, self.width, HEIGHT))
+    
+    def collides(self, bird):
+        if not (self.x < bird.x + bird.radius and self.x + self.width > bird.x - bird.radius):
+            return False
+        if bird.y - bird.radius < self.top_height or bird.y + bird.radius > self.top_height + self.gap:
+            return True
+        return False
+
+def main():
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    clock = pygame.time.Clock()
+    
+    bird = Bird()
+    pipes = [Pipe(WIDTH + i * 300) for i in range(3)]
+    score = 0
+    game_over = False
+    font = pygame.font.Font(None, 48)
+    
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE and not game_over:
+                bird.jump()
+        
+        if not game_over:
+            bird.update()
+            
+            for pipe in pipes:
+                pipe.update()
+                if pipe.collides(bird):
+                    game_over = True
+                if pipe.x + pipe.width < bird.x and not pipe.scored:
+                    score += 1
+                    pipe.scored = True
+            
+            if pipes[0].x < -pipes[0].width:
+                pipes.pop(0)
+                pipes.append(Pipe(pipes[-1].x + 300))
+            
+            if bird.y < 0 or bird.y > HEIGHT:
+                game_over = True
+        
+        screen.fill(SKY_BLUE)
+        bird.draw(screen)
+        for pipe in pipes:
+            pipe.draw(screen)
+        
+        score_text = font.render(str(score), True, WHITE)
+        screen.blit(score_text, (WIDTH//2, 50))
+        
+        if game_over:
+            text = font.render("GAME OVER", True, (255, 0, 0))
+            screen.blit(text, (WIDTH//2-100, HEIGHT//2))
+        
+        pygame.display.flip()
+        clock.tick(FPS)
+    
+    pygame.quit()
+    sys.exit()
+
+if __name__ == "__main__":
+    main()
+```
+
+## 🎯 Challenges
+1. Add difficulty progression (pipes speed up)
+2. Create different bird skins
+3. Add background scrolling
+4. Implement high score system
+
+::: {.hero-banner}
+# Day 06: Frogger awaits! 🐸
+:::

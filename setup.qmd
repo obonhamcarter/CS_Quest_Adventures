@@ -1,0 +1,299 @@
+---
+title: "Setup Guide"
+subtitle: "Get Your Quest Environment Ready"
+---
+
+# ⚙️ Setup Guide
+
+Welcome, Code Warrior! This guide will help you set up your local development environment for all three quest tracks.
+
+---
+
+## 🐍 Python Track Setup
+
+### Option 1: No Installation (Recommended for Beginners)
+Use the in-browser execution — **no setup required**!
+
+- Code cells execute directly on quest pages
+- [JupyterLite](jupyterlite.qmd) provides full Jupyter environment
+- Perfect for learning and experimentation
+
+### Option 2: Local Python Installation
+
+#### Install Python
+1. Download Python from [python.org](https://www.python.org/downloads/)
+2. Version 3.9 or higher recommended
+3. Check installation:
+   ```bash
+   python --version
+   ```
+
+#### Install UV (Modern Package Manager)
+```bash
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+#### Install Jupyter
+```bash
+# Using pip
+pip install jupyter
+
+# Using uv
+uv pip install jupyter
+```
+
+#### Clone & Run Notebooks
+```bash
+git clone https://github.com/YOUR_USERNAME/CS_Quest_Adventures
+cd CS_Quest_Adventures
+jupyter lab
+```
+
+---
+
+## 🦀 Rust Track Setup
+
+### Install Rust
+```bash
+# Download and install rustup
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# Verify installation
+rustc --version
+cargo --version
+```
+
+### Configure Editor (Optional but Recommended)
+**VS Code:**
+```bash
+# Install rust-analyzer extension
+code --install-extension rust-lang.rust-analyzer
+```
+
+### Try a Quick Program
+```bash
+# Create new project
+cargo new hello_quest
+cd hello_quest
+
+# Run it
+cargo run
+```
+
+### Online Alternative
+Use [Rust Playground](https://play.rust-lang.org/) — no installation needed!
+
+---
+
+## 🎮 Pygame Track Setup
+
+### Install Python (if not already)
+See [Python Track Setup](#option-2-local-python-installation) above.
+
+### Install Pygame
+```bash
+# Using pip
+pip install pygame
+
+# Using uv
+uv pip install pygame
+```
+
+### Test Installation
+```python
+import pygame
+print(pygame.version.ver)
+```
+
+### Download Quest Projects
+```bash
+# Clone repository
+git clone https://github.com/YOUR_USERNAME/CS_Quest_Adventures
+cd CS_Quest_Adventures/tracks/pygame/projects
+
+# Run a quest
+cd Day_01
+python main.py
+```
+
+### System Requirements
+- Python 3.7+
+- 50MB disk space
+- Graphics support (OpenGL for some effects)
+
+---
+
+## 🔧 Recommended Tools
+
+### Code Editors
+
+**Visual Studio Code** (All Tracks)
+- Download: [code.visualstudio.com](https://code.visualstudio.com/)
+- Extensions:
+  - Python (by Microsoft)
+  - Rust Analyzer
+  - Jupyter
+
+**PyCharm** (Python/Pygame)
+- Download: [jetbrains.com/pycharm](https://www.jetbrains.com/pycharm/)
+- Community Edition is free
+
+**IntelliJ IDEA** (Rust)
+- Download: [jetbrains.com/idea](https://www.jetbrains.com/idea/)
+- Install Rust plugin
+
+### Terminal/Shell
+
+**macOS/Linux:**
+- Built-in terminal works great
+- Consider [iTerm2](https://iterm2.com/) (macOS)
+
+**Windows:**
+- Windows Terminal (recommended)
+- PowerShell
+- Git Bash
+
+---
+
+## 📦 Complete Environment Setup
+
+For all three tracks simultaneously:
+
+```bash
+# Clone repository
+git clone https://github.com/YOUR_USERNAME/CS_Quest_Adventures
+cd CS_Quest_Adventures
+
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Install Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# Install Pygame
+pip install pygame
+
+# Verify everything
+python --version
+rustc --version
+pip list | grep pygame
+```
+
+---
+
+## 🆘 Troubleshooting
+
+### Python Issues
+
+**"python not found"**
+```bash
+# Try python3 instead
+python3 --version
+
+# Or add Python to PATH
+```
+
+**Package installation fails**
+```bash
+# Upgrade pip
+pip install --upgrade pip
+
+# Use --user flag
+pip install --user jupyter
+```
+
+### Rust Issues
+
+**"cargo not found"**
+```bash
+# Source the cargo environment
+source $HOME/.cargo/env
+
+# Or restart terminal
+```
+
+**Compilation errors**
+```bash
+# Update Rust
+rustup update
+
+# Clean build
+cargo clean
+cargo build
+```
+
+### Pygame Issues
+
+**No sound on Linux**
+```bash
+# Install dependencies
+sudo apt-get install python3-pygame
+```
+
+**Import error**
+```bash
+# Reinstall pygame
+pip uninstall pygame
+pip install pygame --upgrade
+```
+
+---
+
+## 🌐 Cloud Development Options
+
+### GitHub Codespaces
+- Full VS Code in browser
+- Pre-configured environments
+- Free tier available
+
+### GitPod
+- Similar to Codespaces
+- Works with any Git repository
+
+### Google Colab (Python only)
+- Free Jupyter notebooks
+- GPU support
+- Great for data analysis
+
+---
+
+## 📚 Additional Resources
+
+### Python
+- [Python Official Tutorial](https://docs.python.org/3/tutorial/)
+- [Real Python](https://realpython.com/)
+- [Python Documentation](https://docs.python.org/)
+
+### Rust
+- [The Rust Book](https://doc.rust-lang.org/book/)
+- [Rust by Example](https://doc.rust-lang.org/rust-by-example/)
+- [Rustlings Exercises](https://github.com/rust-lang/rustlings)
+
+### Pygame
+- [Pygame Documentation](https://www.pygame.org/docs/)
+- [Pygame Tutorials](https://www.pygame.org/wiki/tutorials)
+- [Real Python Pygame Guide](https://realpython.com/pygame-a-primer/)
+
+---
+
+## ✅ Ready to Quest!
+
+Once setup is complete:
+
+- [Start Python Quests →](tracks/python/index.qmd)
+- [Start Rust Quests →](tracks/rust/index.qmd)
+- [Start Pygame Quests →](tracks/pygame/index.qmd)
+
+---
+
+## 💬 Need Help?
+
+- Check our [FAQ](sitedocs/faq.md)
+- Open an issue on GitHub
+- Contact: obonhamcarter@allegheny.edu
+
+[← Back to Home](index.qmd)

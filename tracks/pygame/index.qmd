@@ -1,0 +1,402 @@
+---
+title: "Pygame Quest Track"
+subtitle: "Master Game Development Through 7 Epic Adventures"
+track-id: "pygame"
+track-icon: "🎮"
+track-color: "#ec4899"
+difficulty: "Intermediate"
+total-quests: 7
+estimated-hours: 30
+format:
+  live-html:
+    toc: false
+---
+
+::: {.hero}
+# 🎮 Welcome to the Pygame Quest Track!
+
+*Transform your Python skills into playable games! Build 7 complete games from scratch.*
+:::
+
+## 🎯 About This Track
+
+Ready to see your code come to life? This track takes you from game development novice to confident game creator. You'll build 7 complete, playable games using Pygame, each introducing new concepts and techniques.
+
+### What You'll Build
+
+- ✅ **Maze Explorer** - Game loops, collision detection, input handling
+- ✅ **Bouncing Ball** - Physics simulation, velocity, gravity
+- ✅ **Pong Game** - Two-player mechanics, AI opponents
+- ✅ **Snake Game** - Grid-based movement, data structures
+- ✅ **Flappy Bird** - Infinite scrolling, jump mechanics
+- ✅ **Frogger** - Multi-lane systems, platform riding
+- ✅ **Dungeon Crawler** - Tile maps, camera systems, AI pathfinding
+
+### Prerequisites
+
+::: {.callout-note}
+## Before You Begin
+
+**Python knowledge required** - You should be comfortable with:
+- Variables, loops, and functions
+- Basic data structures (lists, dictionaries)
+- Object-oriented programming basics
+
+**Recommended preparation:**
+- [Python Quest Track](../python/index.qmd) (highly recommended)
+- Or equivalent Python experience
+
+**New to Python?** [Start with Python Track](../python/index.qmd) first!
+:::
+
+---
+
+## 🗺️ Your Game Development Journey
+
+This track contains **7 progressive game projects**, each building on previous skills.
+
+<div class="quest-grid">
+
+::: {.quest-card}
+### 🌟 Beginner Games (Quests 1-2)
+Learn the fundamentals
+
+**Quest 1: Maze Explorer**
+- Game loop basics
+- Keyboard input
+- Collision detection
+
+**Quest 2: Bouncing Ball**
+- Physics simulation
+- Velocity and gravity
+- Multiple objects
+
+**Estimated time:** 8 hours
+:::
+
+::: {.quest-card}
+### 🎯 Intermediate Games (Quests 3-5)
+Build classic games
+
+**Quest 3: Pong**
+- Two-player mechanics
+- AI opponents
+- Scoring systems
+
+**Quest 4: Snake**
+- Grid-based movement
+- Data structures (deques)
+- Self-collision
+
+**Quest 5: Flappy Bird**
+- Infinite scrolling
+- Jump mechanics
+- Procedural generation
+
+**Estimated time:** 12 hours
+:::
+
+::: {.quest-card}
+### 🚀 Advanced Games (Quests 6-7)
+Master complex systems
+
+**Quest 6: Frogger**
+- Multi-lane systems
+- Platform riding
+- Zone collision
+
+**Quest 7: Dungeon Crawler**
+- Tile-based maps
+- Camera systems
+- AI pathfinding
+- Inventory systems
+
+**Estimated time:** 10 hours
+:::
+
+</div>
+
+---
+
+## 🚀 Quick Start
+
+Ready to build games? Choose your path:
+
+::: {.highlight-box .highlight-info}
+### Option 1: Start Quest 1 → (Recommended!)
+
+Jump right into building your first game. We'll guide you through setup.
+
+[Begin Quest 1: Maze Explorer →](quests/01-maze-explorer.qmd){.btn .btn-primary}
+:::
+
+::: {.highlight-box .highlight-success}
+### Option 2: Setup First
+
+Want to prepare your environment before starting? Get everything ready.
+
+[Setup Guide →](setup.qmd){.btn .btn-success}
+:::
+
+::: {.highlight-box .highlight-warning}
+### Option 3: Browse All Games
+
+See the complete game development curriculum.
+
+[View All Quests →](all-quests.qmd){.btn .btn-warning}
+:::
+
+---
+
+## 💻 What You Need
+
+::: {.feature-grid}
+
+::: {.feature-card}
+### 🐍 Python 3.12+
+Recent Python version for best Pygame compatibility
+:::
+
+::: {.feature-card}
+### 🎮 Pygame 2.5.2
+The game development framework we'll use
+:::
+
+::: {.feature-card}
+### ⚡ UV Package Manager
+Fast, modern Python dependency management
+:::
+
+::: {.feature-card}
+### 💻 Code Editor
+VS Code, PyCharm, or any Python-friendly editor
+:::
+
+:::
+
+---
+
+## 🎓 Who Is This Track For?
+
+::: {.audience-grid}
+
+::: {.audience-card}
+### 🐍 Python Developers
+Know Python? Ready to build games? Perfect!
+:::
+
+::: {.audience-card}
+### 🎮 Aspiring Game Devs
+Want to break into game development? Start here.
+:::
+
+::: {.audience-card}
+### 👨‍🎓 Students
+Learn programming concepts through fun projects.
+:::
+
+::: {.audience-card}
+### 🧑‍🏫 Educators
+Engage students with interactive game projects.
+:::
+
+:::
+
+---
+
+## 🎮 Why Pygame?
+
+::: {.advantage-grid}
+
+**🐍 Python-Based**  
+Use familiar Python syntax — no new language to learn
+
+**📚 Great for Learning**  
+Perfect balance of power and simplicity
+
+**🎨 2D Focus**  
+Master fundamentals before 3D complexity
+
+**🆓 Free & Open**  
+Active community, extensive documentation
+
+**🚀 Rapid Prototyping**  
+Create games quickly — see results fast
+
+**📦 Cross-Platform**  
+Your games run on Windows, Mac, Linux
+
+:::
+
+---
+
+## 🗺️ Learning Path
+
+Your game development journey:
+
+```{mermaid}
+graph TB
+    A[Python Basics] --> B[Quest 1: Maze Explorer]
+    B --> C[Quest 2: Bouncing Ball]
+    C --> D[Quest 3: Pong]
+    D --> E[Quest 4: Snake]
+    E --> F[Quest 5: Flappy Bird]
+    F --> G[Quest 6: Frogger]
+    G --> H[Quest 7: Dungeon Crawler]
+    H --> I[Your Own Games!]
+    
+    style A fill:#10b981
+    style B fill:#3b82f6
+    style C fill:#8b5cf6
+    style D fill:#ec4899
+    style E fill:#f59e0b
+    style F fill:#ef4444
+    style G fill:#06b6d4
+    style H fill:#a855f7
+    style I fill:#10b981
+```
+
+---
+
+## 📚 Track Resources
+
+::: {.resource-links}
+- [📖 All Game Quests](all-quests.qmd)
+- [🔧 Setup & Installation](setup.qmd)
+- [📥 Download Projects](downloads.qmd)
+- [🎮 Game Assets](assets.qmd)
+- [❓ Pygame FAQ](faq.qmd)
+- [📘 Pygame Documentation](https://www.pygame.org/docs/)
+:::
+
+---
+
+## 🎯 Learning Tips
+
+::: {.tip-box}
+### 💡 Master Game Development
+
+1. **Type the code** - Don't copy/paste, type it yourself
+2. **Run frequently** - Test after each change
+3. **Experiment** - Modify values, add features
+4. **Complete games** - Finish each before moving on
+5. **Add your ideas** - Make games your own
+6. **Debug patiently** - Game bugs are great teachers
+7. **Play your games** - Test thoroughly, iterate
+:::
+
+---
+
+## 🏆 What Makes Games Tick?
+
+Every game (even triple-A titles) follows these core patterns you'll learn:
+
+::: {.game-patterns}
+
+### The Game Loop 🔁
+```
+Input → Update → Render → Repeat
+```
+
+### Collision Detection 💥
+```
+Check if objects overlap → Respond
+```
+
+### State Management 🎮
+```
+Menu → Playing → Paused → Game Over
+```
+
+### Event Handling ⌨️
+```
+Listen → Detect → React
+```
+
+:::
+
+---
+
+## 🗺️ After This Track
+
+Once you complete the Pygame track:
+
+::: {.next-steps}
+
+### 🎨 Add Art & Sound
+Learn to create or integrate:
+- Custom sprites and animations
+- Sound effects and music
+- Particle systems
+- Visual effects
+
+---
+
+### 🌐 Publish Your Games
+Share with the world:
+- Upload to itch.io
+- Create web versions with Pygbag
+- Package for distribution
+- Join game jams
+
+---
+
+### 🚀 Advanced Game Dev
+Level up to:
+- 3D games with Pygame-gl or Panda3D
+- Godot Engine (excellent 2D/3D)
+- Unity or Unreal (industry standard)
+- Game design patterns
+
+:::
+
+---
+
+## 🤝 Community & Support
+
+::: {.callout-tip}
+## Need Help?
+
+- 📧 [Email Support](mailto:obonhamcarter@allegheny.edu)
+- 📖 [FAQ](faq.qmd) - Common Pygame questions
+- 💬 [Pygame Community](https://www.pygame.org/wiki/about)
+- 🐛 [Report Issues](https://github.com/obonhamcarter/CS_Quest_Adventures/issues)
+:::
+
+---
+
+## ⚠️ Important Notes
+
+::: {.callout-warning}
+### About Pygame Games
+
+**Browser Limitations:** Unlike Python code, Pygame games cannot run directly in your browser. You must:
+1. Install Python and Pygame locally
+2. Download and run the game files
+3. Or use experimental tools like Pygbag (for web export)
+
+**The good news:** Setup is straightforward, and you'll have complete game projects you can run, modify, and share!
+:::
+
+---
+
+## ➡️ Ready to Build Games?
+
+Your game development quest awaits! Click below to start:
+
+::: {.cta-large}
+[🚀 Start Quest 1: The Maze of Ancient Wisdom](quests/01-maze-explorer.qmd){.btn .btn-primary .btn-lg}
+:::
+
+Or [view all game quests →](all-quests.qmd) to see what you'll build.
+
+---
+
+::: {.footer-note}
+**About This Track**
+
+Created by [Oliver Bonham-Carter](https://www.oliverbonhamcarter.com)  
+Department of Computer and Information Science, Allegheny College  
+
+Questions? [obonhamcarter@allegheny.edu](mailto:obonhamcarter@allegheny.edu)
+:::

@@ -1,0 +1,395 @@
+---
+title: "CS Quest Adventures"
+subtitle: "Epic Journeys Through Computer Science"
+format:
+  live-html:
+    toc: false
+---
+
+::: {.hero-main}
+# 🏰 Welcome to CS Quest Adventures! ⚔️
+
+**Embark on epic journeys through the realm of Computer Science**
+
+Learn programming languages, build games, master algorithms — all through engaging, quest-based adventures. No prior experience required!
+:::
+
+---
+
+## 🌟 New to Computer Science?
+
+::: {.highlight-box .highlight-info}
+### Start Your Adventure Here!
+
+Not sure what Computer Science is or if it's for you? Begin with our introductory quests:
+
+<div class="intro-links">
+
+- [🤔 What is Computer Science?](intro/what-is-cs.qmd)
+- [💼 Why Study CS? Career Opportunities](intro/why-study-cs.qmd)
+- [✨ Try It Now! Your First Program](intro/try-it-now.qmd)
+- [🎯 Visiting from College Fair?](intro/college-fair.qmd)
+
+</div>
+
+[Explore Introduction →](intro/what-is-cs.qmd){.btn .btn-primary}
+
+:::
+
+---
+
+## 🗺️ Choose Your Learning Track
+
+<div class="track-grid-main">
+
+::: {.track-card .track-python}
+### 🐍 Python Quest Track
+
+**The Perfect Starting Point**
+
+Master Python through 19 engaging quests. Learn programming fundamentals with interactive, in-browser coding.
+
+**What You'll Learn:**
+- Variables, loops, functions
+- Data structures & algorithms
+- Object-oriented programming
+- Real-world problem solving
+
+**Features:**
+- ✅ In-browser code execution (Pyodide)
+- ✅ JupyterLite environment
+- ✅ Downloadable notebooks
+- ✅ 19 progressive quests
+
+**Difficulty:** Beginner  
+**Time:** ~20 hours  
+**Prerequisites:** None
+
+[Start Python Track →](tracks/python/index.qmd){.btn .btn-primary}
+[View All Quests →](tracks/python/all-quests.qmd){.btn .btn-outline}
+:::
+
+::: {.track-card .track-rust}
+### 🦀 Rust Quest Track
+
+**Systems Programming Mastery**
+
+Journey through Rust's powerful features. Learn memory safety, ownership, and building efficient systems.
+
+**What You'll Learn:**
+- Rust fundamentals & syntax
+- Ownership and borrowing
+- Pattern matching
+- Systems programming concepts
+
+**Features:**
+- ✅ Rust Playground integration
+- ✅ Parallel to Python track
+- ✅ Interactive examples
+- ✅ 19 comprehensive quests
+
+**Difficulty:** Intermediate  
+**Time:** ~25 hours  
+**Prerequisites:** Programming basics recommended
+
+[Start Rust Track →](tracks/rust/index.qmd){.btn .btn-primary}
+[View All Quests →](tracks/rust/all-quests.qmd){.btn .btn-outline}
+:::
+
+::: {.track-card .track-pygame}
+### 🎮 Pygame Quest Track
+
+**Game Development Adventures**
+
+Create 7 complete games! Progress from simple maze explorers to complex dungeon crawlers.
+
+**What You'll Build:**
+- Maze Explorer game
+- Bouncing ball physics
+- Classic Pong
+- Snake game
+- Flappy Bird clone
+- Frogger platformer
+- Dungeon Crawler RPG
+
+**Features:**
+- ✅ Complete working games
+- ✅ Progressive difficulty
+- ✅ UV package manager
+- ✅ Full source code
+
+**Difficulty:** Intermediate  
+**Time:** ~30 hours  
+**Prerequisites:** Python basics
+
+[Start Pygame Track →](tracks/pygame/index.qmd){.btn .btn-primary}
+[View All Games →](tracks/pygame/all-quests.qmd){.btn .btn-outline}
+:::
+
+</div>
+
+---
+
+## 🎯 Recommended Learning Paths
+
+::: {.learning-paths-section}
+
+### Path 1: Complete Beginner → Game Developer
+
+Perfect for absolute beginners who want to build games:
+
+```{mermaid}
+graph LR
+    A[🌟 Getting Started] --> B[🐍 Python Track]
+    B --> C[🎮 Pygame Track]
+    C --> D[🏆 Your Own Games!]
+    
+    style A fill:#6366f1
+    style B fill:#10b981
+    style C fill:#ec4899
+    style D fill:#f59e0b
+```
+
+1. **Start:** [Introduction to CS](intro/what-is-cs.qmd)
+2. **Foundation:** Complete [Python Track](tracks/python/index.qmd)
+3. **Apply:** Build games in [Pygame Track](tracks/pygame/index.qmd)
+4. **Create:** Design your own games!
+
+**Total Time:** ~50 hours | **Difficulty:** Beginner → Intermediate
+
+---
+
+### Path 2: Python → Systems Programming
+
+For those interested in performance and systems:
+
+```{mermaid}
+graph LR
+    A[🐍 Python Track] --> B[🦀 Rust Track]
+    B --> C[⚙️ Systems Projects]
+    
+    style A fill:#10b981
+    style B fill:#f97316
+    style C fill:#ef4444
+```
+
+1. **Foundation:** [Python Track](tracks/python/index.qmd) - Learn programming
+2. **Level Up:** [Rust Track](tracks/rust/index.qmd) - Master efficiency
+3. **Build:** Create high-performance applications
+
+**Total Time:** ~45 hours | **Difficulty:** Beginner → Advanced
+
+---
+
+### Path 3: Quick Start for Programmers
+
+Already code? Jump to what interests you:
+
+- **Python Developer** → [Rust Track](tracks/rust/index.qmd)
+- **Want to Build Games** → [Pygame Track](tracks/pygame/index.qmd)
+- **Learn Fundamentals** → [Python Track](tracks/python/index.qmd)
+
+:::
+
+---
+
+## ✨ Why CS Quest Adventures?
+
+::: {.features-grid}
+
+::: {.feature-card}
+### 🎮 Engaging Quest Format
+Learn through story-driven adventures, not boring lectures. Each lesson is a quest with challenges and rewards!
+:::
+
+::: {.feature-card}
+### 💻 Interactive Learning
+Code directly in your browser. No installation needed to get started with Python quests!
+:::
+
+::: {.feature-card}
+### 📊 Progressive Difficulty
+Start simple, level up gradually. Each quest builds on previous knowledge systematically.
+:::
+
+::: {.feature-card}
+### 🏰 Medieval Theme
+Consistent, fun theming makes learning memorable. You're not just a student — you're a code warrior!
+:::
+
+::: {.feature-card}
+### 📚 Complete Curriculum
+From "Hello World" to game development. Everything you need in one place.
+:::
+
+::: {.feature-card}
+### 📱 Mobile Friendly
+Learn anywhere with QR codes and responsive design. Quest on the go!
+:::
+
+::: {.feature-card}
+### 🎓 Educator Friendly
+Perfect for college fairs, classrooms, and self-study. Comprehensive and tested.
+:::
+
+::: {.feature-card}
+### 🆓 Free & Open
+All content is freely available. Learn at your own pace, forever.
+:::
+
+:::
+
+---
+
+## 📊 Track Comparison
+
+Choose the right track for your goals:
+
+| Feature | Python 🐍 | Rust 🦀 | Pygame 🎮 |
+|---------|----------|---------|-----------|
+| **Difficulty** | Beginner | Intermediate | Intermediate |
+| **Quests** | 19 | 19 | 7 |
+| **Time** | ~20 hrs | ~25 hrs | ~30 hrs |
+| **Browser Coding** | ✅ Yes | 🔗 External | ❌ Download |
+| **Prerequisites** | None | Basic coding | Python basics |
+| **Best For** | First language | Systems programming | Game development |
+| **Career Path** | Web, Data, AI | Systems, Backend | Gaming, Graphics |
+
+---
+
+## 🎓 What Students Say
+
+::: {.testimonials}
+
+> "I went from never coding to building my own game in 8 weeks! The quest format kept me motivated."
+> — Sarah, College Sophomore
+
+> "The medieval theme is actually fun. Makes learning feel like an adventure instead of homework."
+> — Mike, High School Student
+
+> "Perfect for my intro CS course. Students love the interactive Python exercises."
+> — Dr. Johnson, CS Professor
+
+:::
+
+---
+
+## 🚀 Quick Start Guide
+
+### Option 1: Jump Right In
+
+Ready to code? Start immediately:
+
+1. Click [Python Track](tracks/python/index.qmd)
+2. Begin Quest 1
+3. Code in your browser
+4. Complete challenges
+5. Level up!
+
+[Start Now →](tracks/python/index.qmd){.btn .btn-primary .btn-lg}
+
+---
+
+### Option 2: Learn About CS First
+
+Not sure if CS is for you? Start here:
+
+1. [What is Computer Science?](intro/what-is-cs.qmd)
+2. [Why Study CS?](intro/why-study-cs.qmd)
+3. [Try Your First Program](intro/try-it-now.qmd)
+4. Choose a track above
+
+[Introduction →](intro/what-is-cs.qmd){.btn .btn-info .btn-lg}
+
+---
+
+### Option 3: Explore All Content
+
+Browse everything available:
+
+- [All Learning Tracks](tracks-overview.qmd)
+- [Downloads & Resources](downloads.qmd)
+- [Setup Guides](setup.qmd)
+- [FAQ](sitedocs/faq.md)
+
+[Explore →](tracks-overview.qmd){.btn .btn-secondary .btn-lg}
+
+---
+
+## 📥 Resources & Downloads
+
+::: {.resources-section}
+
+### Interactive Tools
+- [🚀 JupyterLite](jupyterlite.qmd) - Full Python environment in browser
+- [🔧 Setup Guides](setup.qmd) - Install tools for local development
+
+### Downloadable Materials
+- [📓 All Python Notebooks](files/python/)
+- [📓 All Rust Notebooks](files/rust/)
+- [🎮 Game Project Files](files/pygame/)
+
+### Documentation
+- [💡 Teaching Guide](sitedocs/teaching-guide.md)
+- [❓ FAQ](sitedocs/faq.md)
+- [🤝 Contributing](sitedocs/contributing.md)
+
+:::
+
+---
+
+## 🎯 More Tracks Coming Soon!
+
+CS Quest Adventures is designed to grow. Future tracks in development:
+
+- ⚡ **JavaScript Quest Track** - Web development
+- 📊 **Data Science Quest Track** - Analytics with Python
+- 🌐 **Web Development Quest Track** - HTML, CSS, JavaScript
+- ⚙️ **C++ Quest Track** - Advanced systems programming
+
+Want to contribute a track? [See our guide](sitedocs/ADDING_NEW_TRACKS.md)
+
+---
+
+## 🤝 About & Contact
+
+**CS Quest Adventures** is created and maintained by:
+
+**Oliver Bonham-Carter**  
+Department of Computer and Information Science  
+Allegheny College
+
+- 🌐 Website: [oliverbonhamcarter.com](https://www.oliverbonhamcarter.com)
+- 📧 Email: [obonhamcarter@allegheny.edu](mailto:obonhamcarter@allegheny.edu)
+- 🏫 Department: [cs.allegheny.edu](https://cs.allegheny.edu)
+
+::: {.callout-tip}
+## Questions? Feedback? Ideas?
+
+We love hearing from learners and educators!
+- 💬 [Start a discussion](https://github.com/obonhamcarter/CS_Quest_Adventures/discussions)
+- 🐛 [Report an issue](https://github.com/obonhamcarter/CS_Quest_Adventures/issues)
+- 📧 [Email us](mailto:obonhamcarter@allegheny.edu)
+:::
+
+---
+
+## 🏁 Begin Your Adventure!
+
+Your quest awaits! Choose your path:
+
+::: {.cta-buttons}
+[🐍 Python Track](tracks/python/index.qmd){.btn .btn-success .btn-lg}
+[🦀 Rust Track](tracks/rust/index.qmd){.btn .btn-warning .btn-lg}
+[🎮 Pygame Track](tracks/pygame/index.qmd){.btn .btn-danger .btn-lg}
+:::
+
+::: {.cta-secondary}
+[🌟 New to CS? Start Here](intro/what-is-cs.qmd){.btn .btn-outline-primary}
+:::
+
+---
+
+::: {.footer-main}
+*Embark on your coding quest today. From absolute beginner to game developer — all in one epic adventure.* 🏰⚔️
+:::

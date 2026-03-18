@@ -1,0 +1,103 @@
+---
+title: "Rust Practice Tools"
+subtitle: "Practice Rust in Browser and Locally"
+---
+
+## 🎯 Two Friendly Ways to Practice Rust
+
+### Option 1: Rust Playground (Fastest Start)
+
+The official Rust Playground is the fastest way to run Rust with no installation.
+
+<div style="text-align: center; margin: 2rem 0;">
+  <a href="https://play.rust-lang.org/" class="btn btn-primary btn-lg" style="padding: 1rem 2rem; font-size: 1.2rem; text-decoration: none; background: linear-gradient(135deg, #6366f1, #ec4899); border-radius: 0.5rem; color: white; display: inline-block;">
+    🦀 Open Rust Playground
+  </a>
+</div>
+
+**Features:**
+- ✨ Instant compilation and run
+- 🔄 Edit and run code repeatedly
+- 📎 Share code by URL
+- 🌐 No installation or account required
+
+### Option 2: Local Rust Toolchain (Best for Growth)
+
+Install Rust once and build everything with Cargo.
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustc --version
+cargo --version
+```
+
+Then create and run your first project:
+
+```bash
+cargo new hello_rust
+cd hello_rust
+cargo run
+```
+
+### Option 3: Local Jupyter + Rust Kernel (`evcxr_jupyter`)
+
+Yes—this is the best notebook-style Rust workflow beyond Rust Playground.
+
+Install Rust first, then:
+
+```bash
+cargo install evcxr_jupyter
+evcxr_jupyter --install
+jupyter lab
+```
+
+In JupyterLab, select the **Rust** kernel when creating/opening notebooks.
+
+Notes:
+- This is a local setup (not fully browser-only like Rust Playground).
+- It gives a real Rust REPL notebook experience with cells.
+
+## 📚 Lesson Notebooks in This Project
+
+This Rust Quest includes notebooks for Quests 1-19:
+
+1. [Quest 1 Notebook](jupyterlite/content/01-variables.ipynb)
+2. [Quest 2 Notebook](jupyterlite/content/02-data-types.ipynb)
+3. [Quest 3 Notebook](jupyterlite/content/03-conditionals.ipynb)
+4. [Quest 4 Notebook](jupyterlite/content/04-loops.ipynb)
+5. [Quest 5 Notebook](jupyterlite/content/05-lists.ipynb)
+6. [Quest 6 Notebook](jupyterlite/content/06-functions.ipynb)
+7. [Quest 7 Notebook](jupyterlite/content/07-dictionaries.ipynb)
+8. [Quest 8 Notebook](jupyterlite/content/08-fibonacci.ipynb)
+9. [Quest 9 Notebook](jupyterlite/content/09-sorting.ipynb)
+10. [Quest 10 Notebook](jupyterlite/content/10-number-game.ipynb)
+11. [Quest 11 Notebook](jupyterlite/content/11-recursion.ipynb)
+12. [Quest 12 Notebook](jupyterlite/content/12-complexity.ipynb)
+13. [Quest 13 Notebook](jupyterlite/content/13-iterative-loops.ipynb)
+14. [Quest 14 Notebook](jupyterlite/content/14-functions-non-returning.ipynb)
+15. [Quest 15 Notebook](jupyterlite/content/15-functions-returning.ipynb)
+16. [Quest 16 Notebook](jupyterlite/content/16-lambda-functions.ipynb)
+17. [Quest 17 Notebook](jupyterlite/content/17-higher-order-functions.ipynb)
+18. [Quest 18 Notebook](jupyterlite/content/18-decorators.ipynb)
+19. [Quest 19 Notebook](jupyterlite/content/19-classes.ipynb)
+
+Each notebook includes Rust examples and gentle challenge prompts. Since JupyterLite typically runs Python kernels, treat the Rust cells as guided reading/practice snippets and run them in Rust Playground or local Rust.
+
+## 💡 Tips for First-Time Rust Learners
+
+- Read the compiler error message all the way through.
+- Start tiny: print values, then add one feature at a time.
+- Use `println!("{:?}", value)` for quick debugging.
+- Keep one browser tab open to Rust Playground.
+
+## 🌐 Works Great on Student Devices
+
+All content is web-based and readable on laptops, tablets, and phones. For actually running Rust code, prefer the Rust Playground link.
+
+---
+
+<div style="text-align: center; padding: 2rem;">
+  <a href="https://play.rust-lang.org/" style="font-size: 1.5rem; text-decoration: none;">
+    🦀 **Open Rust Playground Now** →
+  </a>
+</div>

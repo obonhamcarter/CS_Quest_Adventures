@@ -1,0 +1,288 @@
+---
+title: "Python Quest Track"
+subtitle: "Master Python Through Interactive Adventures"
+track-id: "python"
+track-icon: "🐍"
+track-color: "#10b981"
+difficulty: "Beginner"
+total-quests: 19
+estimated-hours: 20
+format:
+  live-html:
+    toc: false
+---
+
+::: {.hero}
+# 🐍 Welcome to the Python Quest Track!
+
+*Master the most popular programming language through engaging, interactive quests!*
+:::
+
+## 🎯 About This Track
+
+Python is the perfect first programming language — powerful, readable, and used everywhere from web development to artificial intelligence. This track takes you from absolute beginner to confident programmer through 19 carefully crafted quests.
+
+### What You'll Master
+
+- ✅ **Programming Fundamentals** - Variables, data types, control flow
+- ✅ **Data Structures** - Lists, dictionaries, and how to use them
+- ✅ **Functions & Modularity** - Write reusable, elegant code
+- ✅ **Algorithms** - Sorting, searching, recursion, and complexity
+- ✅ **Object-Oriented Programming** - Classes and design patterns
+- ✅ **Real-World Problem Solving** - Build actual programs
+
+### Prerequisites
+
+::: {.callout-note}
+## Before You Begin
+
+**No programming experience required!** This track starts from scratch.
+
+**Helpful (but not required):**
+- Comfort using a computer
+- Curiosity and willingness to experiment
+- High school math (algebra level)
+
+**Brand new to Computer Science?** [Start here](../../intro/what-is-cs.qmd)!
+:::
+
+---
+
+## 🗺️ Your Learning Path
+
+This track contains **19 quests** organized into progressive sections.
+
+<div class="quest-grid">
+
+::: {.quest-card}
+### 📚 Foundation (Quests 1-8)
+Master the core concepts
+
+- Variables and data types
+- Conditionals and loops
+- Lists and dictionaries
+- Functions basics
+- Fibonacci sequences
+
+**Estimated time:** 8 hours
+:::
+
+::: {.quest-card}
+### 🎯 Practice (Quests 9-12)
+Apply your knowledge
+
+- Sorting algorithms
+- Build a number game
+- Recursion techniques
+- Algorithm complexity
+
+**Estimated time:** 6 hours
+:::
+
+::: {.quest-card}
+### 🚀 Mastery (Quests 13-19)
+Advanced techniques
+
+- Advanced functions
+- Lambda expressions
+- Higher-order functions
+- Decorators
+- Object-oriented design
+
+**Estimated time:** 6 hours
+:::
+
+</div>
+
+---
+
+## 🚀 Quick Start
+
+Ready to begin your adventure? Choose your path:
+
+::: {.highlight-box .highlight-info}
+### Option 1: Start Quest 1 → (Recommended!)
+
+Jump right in! Our interactive lessons let you code in your browser — no installation needed.
+
+[Begin Quest 1: Variables →](lessons/01-variables.qmd){.btn .btn-primary}
+:::
+
+::: {.highlight-box .highlight-success}
+### Option 2: Use JupyterLite
+
+Full Python environment in your browser with all features.
+
+[Launch JupyterLite →](interactive.qmd){.btn .btn-success}
+:::
+
+::: {.highlight-box .highlight-warning}
+### Option 3: Explore All Quests
+
+See the complete curriculum before starting.
+
+[View All Python Quests →](all-quests.qmd){.btn .btn-warning}
+:::
+
+---
+
+## 💻 Interactive Features
+
+::: {.feature-grid}
+
+::: {.feature-card}
+### 🎮 In-Browser Execution
+Code runs instantly using Pyodide. No setup required!
+:::
+
+::: {.feature-card}
+### 📓 JupyterLite
+Full Jupyter environment in browser for deeper practice
+:::
+
+::: {.feature-card}
+### 📥 Downloadable Notebooks
+Practice offline in local Jupyter or Google Colab
+:::
+
+::: {.feature-card}
+### 🎯 Challenges & Solutions
+Test your skills with guided exercises
+:::
+
+:::
+
+---
+
+## 🎓 Who Is This Track For?
+
+::: {.audience-grid}
+
+::: {.audience-card}
+### 🌟 Complete Beginners
+First time coding? Perfect! We assume zero experience.
+:::
+
+::: {.audience-card}
+### 📚 Students
+Supplement CS courses with interactive practice.
+:::
+
+::: {.audience-card}
+### 💼 Career Switchers
+Build foundational skills for tech careers.
+:::
+
+::: {.audience-card}
+### 🔧 Hobbyists
+Learn to automate tasks and build personal projects.
+:::
+
+:::
+
+---
+
+## 🏆 What You'll Build
+
+By completing this track, you'll create:
+
+1. **Type Converter** - Handle different data types
+2. **Decision Maker** - Complex conditional logic
+3. **List Processor** - Manipulate collections
+4. **Function Library** - Reusable code modules
+5. **Number Guessing Game** - Interactive program
+6. **Sorting Algorithm** - Efficient data organization
+7. **Fibonacci Calculator** - Mathematical sequences
+8. **Recursion Solver** - Self-referencing problems
+9. **Decorator System** - Function enhancement
+10. **Class Hierarchy** - Object-oriented design
+
+---
+
+## 📚 Track Resources
+
+::: {.resource-links}
+- [📖 All Quests Overview](all-quests.qmd)
+- [🚀 JupyterLite Environment](interactive.qmd)
+- [📥 Download All Notebooks](../../files/python/lessons/)
+- [🔧 Setup Local Python](setup.qmd)
+- [❓ Python FAQ](faq.qmd)
+:::
+
+---
+
+## 🎯 Learning Tips
+
+::: {.tip-box}
+### 💡 Make the Most of This Track
+
+1. **Code along** - Type every example yourself (don't just read!)
+2. **Experiment** - Try modifying code to see what happens
+3. **Do challenges** - Attempt puzzles before checking solutions
+4. **Practice daily** - Even 10 minutes helps build momentum
+5. **Build projects** - Apply concepts to your own ideas
+6. **Help others** - Teaching reinforces your understanding
+:::
+
+---
+
+## 🗺️ After This Track
+
+Once you complete the Python track, continue your journey:
+
+::: {.next-steps}
+
+### 🦀 Rust Track
+Learn systems programming with Rust — build on Python foundations with performance-focused language.
+
+[Explore Rust →](../rust/index.qmd)
+
+---
+
+### 🎮 Pygame Track
+Apply your Python skills to game development! Create 7 complete games.
+
+[Build Games →](../pygame/index.qmd)
+
+---
+
+### 📊 Data Science (Coming Soon!)
+Use Python for data analysis, visualization, and machine learning.
+
+:::
+
+---
+
+## 🤝 Community & Support
+
+::: {.callout-tip}
+## Need Help?
+
+- 📧 [Email Support](mailto:obonhamcarter@allegheny.edu)
+- 📖 [FAQ](faq.qmd) - Common questions answered
+- 💬 [Discussion Forum](https://github.com/obonhamcarter/CS_Quest_Adventures/discussions)
+- 🐛 [Report Issues](https://github.com/obonhamcarter/CS_Quest_Adventures/issues)
+:::
+
+---
+
+## ➡️ Ready to Begin?
+
+Your Python quest awaits! Click below to start your first adventure:
+
+::: {.cta-large}
+[🚀 Start Quest 1: Variables - Your Coding Backpack](lessons/01-variables.qmd){.btn .btn-primary .btn-lg}
+:::
+
+Or [view all quests →](all-quests.qmd) to see the complete learning path.
+
+---
+
+::: {.footer-note}
+**About This Track**
+
+Created by [Oliver Bonham-Carter](https://www.oliverbonhamcarter.com)  
+Department of Computer and Information Science, Allegheny College  
+
+Questions? [obonhamcarter@allegheny.edu](mailto:obonhamcarter@allegheny.edu)
+:::

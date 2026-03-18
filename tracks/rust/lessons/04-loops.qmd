@@ -1,0 +1,73 @@
+---
+title: "Quest 4: Loops - Repeat with Confidence"
+subtitle: "Use loop, while, and for"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+🔄 QUEST 4 | Difficulty: Beginner | Time: 8 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/04-loops.ipynb)
+- 📥 [Download Notebook](../files/lessons/04-loops.ipynb)
+:::
+
+## 📖 Introduction
+Loops help you repeat work without copy-pasting code.
+
+## 💡 Three Common Loops
+
+```rust
+fn main() {
+    for n in 1..=3 {
+        println!("for loop: {}", n);
+    }
+
+    let mut count = 0;
+    while count < 2 {
+        println!("while loop: {}", count);
+        count += 1;
+    }
+}
+```
+
+## 👨‍💻 Example with `loop`
+
+```rust
+fn main() {
+    let mut n = 0;
+
+    loop {
+        n += 1;
+        println!("n = {}", n);
+
+        if n == 3 {
+            break;
+        }
+    }
+}
+```
+
+## 🎯 Gentle Challenge
+Use a `for` loop to print numbers 1 through 5 and their squares.
+
+## ✅ One Possible Solution
+
+```rust
+fn main() {
+    for n in 1..=5 {
+        println!("{} squared is {}", n, n * n);
+    }
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 4 Complete
+You practiced three Rust loop styles.
+Next: [Quest 5: Vectors](05-lists.qmd)
+:::

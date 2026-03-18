@@ -1,0 +1,832 @@
+---
+title: "Day 02: Bouncing Ball Physics 🏀"
+subtitle: "Discover the Magic of Velocity and Gravity!"
+author: "Pygame Tutorial Series"
+format:
+  html:
+    theme: light
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    css: ../../shared/styles/tutorial.css
+execute:
+  enabled: true
+  cache: false
+---
+
+::: {.hero-banner}
+# 🏀 Welcome to Day 02!
+
+Today, you'll create a **physics simulation** with bouncing balls! You'll learn about velocity, acceleration, gravity, and friction. By the end of this tutorial, you'll have balls bouncing realistically around your screen!
+
+**Time Required:** ~45 minutes  
+**Difficulty:** Beginner 🌟
+:::
+
+---
+
+## 🎯 What You'll Learn Today
+
+By the end of this tutorial, you will be able to:
+
+- ✅ Understand **velocity** and **acceleration**
+- ✅ Implement **gravity** in your games
+- ✅ Create **realistic bouncing** with energy loss
+- ✅ Work with **multiple objects** at once
+- ✅ Add **interactive elements** (spawn balls with mouse clicks)
+
+---
+
+## 📚 Quick Recap: What We Learned in Day 01
+
+Yesterday, we covered:
+- Setting up a Pygame project with UV
+- Creating game windows and the game loop
+- Handling keyboard input
+- Basic collision detection
+
+Today builds on these concepts with physics!
+
+---
+
+## 🎓 Part 1: Understanding Physics in Games (10 minutes)
+
+### What is Velocity?
+
+**Velocity** describes how fast something is moving and in what direction.
+
+- **Horizontal velocity (vx)**: How fast something moves left/right
+- **Vertical velocity (vy)**: How fast something moves up/down
+
+::: {.callout-note}
+## 🎯 What This Code Demonstrates
+
+This example shows how **velocity changes position over time**. We'll:
+1. Create an object at position (100, 100)
+2. Give it velocity: moving right (+5) and up (-3) each frame
+3. Update its position 5 times and watch it move!
+
+**Key idea:** Position changes by velocity amount every frame. After 5 frames with vx=5, the object moves 25 pixels right!
+:::
+
+```{python}
+# Let's explore velocity!
+# Think of velocity as "how many pixels to move each frame"
+
+class SimpleObject:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.vx = 5   # Moving right at 5 pixels/frame
+        self.vy = -3  # Moving up at 3 pixels/frame
+    
+    def update(self):
+        """Update position based on velocity"""
+        self.x += self.vx
+        self.y += self.vy
+        
+    def __str__(self):
+        return f"Position: ({self.x:.1f}, {self.y:.1f})"
+
+# Create object and simulate 5 frames
+obj = SimpleObject(100, 100)
+print("Starting:", obj)
+
+for frame in range(1, 6):
+    obj.update()
+    print(f"Frame {frame}:", obj)
+
+print(f"\nTotal distance moved: X={obj.vx * 5}, Y={obj.vy * 5}")
+```
+
+::: {.callout-important}
+## 📖 What The Output Tells Us
+
+**Reading the results:**
+- **Starting:** (100.0, 100.0)
+- **Frame 1:** (105.0, 97.0) - moved 5 right, 3 up
+- **Frame 2:** (110.0, 94.0) - moved another 5 right, 3 up
+- **Frame 5:** (125.0, 85.0) - total of 25 right, 15 up
+
+**How it works:**
+1. Each `update()` call adds velocity to position
+2. Positive vx (+5) moves right, negative vy (-3) moves up
+3. After 5 frames: x increased by 25 (5×5), y decreased by 15 (3×5)
+
+**Real game example:** This is how a bouncing ball or flying bird moves across the screen! The game calls `update()` 60 times per second, creating smooth motion.
+
+**Try mentally:** If vx was 10, where would x be after 5 frames?
+:::
+
+::: {.callout-consider}
+## 🤔 Consider This Corner
+
+**Why use negative velocity for "up"?**
+
+Remember from Day 01: In Pygame, Y=0 is at the **top** of the screen, and Y increases **downward**. So to move up, we need negative Y velocity!
+:::
+
+### What is Acceleration?
+
+**Acceleration** is the change in velocity over time. Gravity is a constant downward acceleration!
+
+::: {.callout-note}
+## 🌎 Understanding Gravity in Code
+
+Gravity is what makes objects fall! In our simulation:
+1. **Start with zero velocity** - object isn't moving yet
+2. **Each frame, gravity increases velocity** - the object speeds up
+3. **Velocity changes position** - the faster it falls, the more distance it covers
+
+**Real world:** When you drop a ball, it starts slow but gets faster as it falls. That's acceleration!
+:::
+
+```{python}
+# Simulating gravity
+# Watch how velocity increases over time, making the object fall faster!
+
+class FallingObject:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.vy = 0  # Start with no velocity
+        self.gravity = 0.5  # Acceleration due to gravity
+    
+    def update(self):
+        """Apply gravity and update position"""
+        self.vy += self.gravity  # Velocity increases
+        self.y += self.vy        # Position changes by velocity
+        
+    def __str__(self):
+        return f"Y: {self.y:.1f}, Velocity: {self.vy:.1f}"
+
+# Simulate falling for 10 frames
+obj = FallingObject(0, 0)
+print("Falling object:")
+for frame in range(10):
+    print(f"Frame {frame}: {obj}")
+    obj.update()
+```
+
+::: {.callout-important}
+## 📖 Analyzing the Falling Motion
+
+**What the numbers show:**
+- **Frame 0:** Y=0.0, Velocity=0.0 (not moving yet)
+- **Frame 1:** Y=0.5, Velocity=0.5 (started falling slowly)
+- **Frame 2:** Y=1.5, Velocity=1.0 (falling faster - velocity doubled!)
+- **Frame 9:** Y=22.5, Velocity=4.5 (really fast now)
+
+**The pattern:**
+1. Velocity increases by 0.5 each frame (that's our gravity value)
+2. As velocity increases, position changes more each frame
+3. This creates **accelerating motion** - getting faster over time
+
+**How the code does it:**
+```python
+self.vy += self.gravity  # Add 0.5 to velocity each frame
+self.y += self.vy         # Move by current velocity
+```
+
+**Real game use:** This makes jumping feel realistic - your character slows down as they go up, then speeds up as they fall back down!
+:::
+
+Notice how the velocity increases each frame, making the object fall faster and faster!
+
+### Understanding Friction and Energy Loss
+
+When a ball bounces, it doesn't bounce back to the same height because it loses energy. We simulate this with a **friction coefficient**.
+
+::: {.callout-note}
+## ⚽ How Bouncing Works
+
+In real life, balls lose energy when they hit the ground:
+- Some energy becomes **sound** (the bounce noise)
+- Some becomes **heat** (friction)
+- The rest stays as **motion energy**
+
+We use a **friction value of 0.8** meaning the ball keeps 80% of its energy each bounce (loses 20%).
+
+**Watch how:** Each bounce has less velocity than the last!
+:::
+
+```{python}
+# Simulating bouncing with energy loss
+# Each bounce will be weaker than the last
+
+def simulate_bounce(initial_velocity, num_bounces=5):
+    """Simulate a bouncing ball"""
+    velocity = initial_velocity
+    height = 0
+    friction = 0.8  # Ball loses 20% energy per bounce
+    
+    print(f"Starting velocity: {velocity}")
+    print("-" * 40)
+    
+    for bounce in range(1, num_bounces + 1):
+        # Bounce: reverse direction and apply friction
+        velocity = -velocity * friction
+        print(f"Bounce {bounce}: velocity = {velocity:.2f}")
+    
+    print("-" * 40)
+    print(f"Final velocity: {velocity:.2f}")
+    print(f"Energy remaining: {(velocity/initial_velocity)*100:.1f}%")
+
+simulate_bounce(-15)
+```
+
+The ball keeps bouncing but each bounce is weaker!
+
+---
+
+## 🎨 Part 2: Building the Bouncing Ball Simulator (25 minutes)
+
+### Step 1: Set Up the Project
+
+First, let's understand our constants:
+
+```python
+import pygame
+import sys
+import random
+
+# Initialize Pygame
+pygame.init()
+
+# Constants
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
+FPS = 60
+
+# Colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 100, 100)
+BLUE = (100, 150, 255)
+GREEN = (100, 255, 150)
+PURPLE = (200, 100, 255)
+YELLOW = (255, 255, 100)
+ORANGE = (255, 165, 100)
+
+COLORS = [RED, BLUE, GREEN, PURPLE, YELLOW, ORANGE]
+
+# Physics constants
+GRAVITY = 0.5              # Acceleration (pixels/frame²)
+FRICTION = 0.99            # Energy kept after bounce (99%)
+MIN_BOUNCE_VELOCITY = 0.5  # Stop bouncing if too slow
+```
+
+::: {.callout-tip}
+## 💡 Pro Tip
+
+Notice `FRICTION = 0.99` means the ball keeps 99% of its energy. Try different values:
+- `1.0` = Perfect bounce (no energy loss)
+- `0.8` = Bouncy ball (loses 20% energy)
+- `0.5` = Clay ball (loses 50% energy)
+:::
+
+### Step 2: Create the Ball Class
+
+```python
+class Ball:
+    """Represents a bouncing ball with physics."""
+    
+    def __init__(self, x, y, radius, color):
+        """
+        Initialize a ball.
+        
+        Args:
+            x: Initial x position
+            y: Initial y position
+            radius: Ball radius
+            color: Ball color (RGB tuple)
+        """
+        self.x = x
+        self.y = y
+        self.radius = radius
+        self.color = color
+        
+        # Velocity (speed and direction)
+        self.vx = random.uniform(-10, 10)  # Random horizontal
+        self.vy = random.uniform(-15, -5)  # Launch upward
+```
+
+The ball starts with:
+- Random horizontal velocity (left or right)
+- Negative vertical velocity (shoots upward)
+
+### Step 3: Implement Physics Update
+
+This is where the magic happens!
+
+```python
+    def update(self):
+        """Update ball position and apply physics."""
+        # STEP 1: Apply gravity
+        self.vy += GRAVITY
+        
+        # STEP 2: Update position based on velocity
+        self.x += self.vx
+        self.y += self.vy
+        
+        # STEP 3: Bounce off left and right walls
+        if self.x - self.radius <= 0:
+            self.x = self.radius
+            self.vx = abs(self.vx) * FRICTION
+        elif self.x + self.radius >= WINDOW_WIDTH:
+            self.x = WINDOW_WIDTH - self.radius
+            self.vx = -abs(self.vx) * FRICTION
+        
+        # STEP 4: Bounce off floor
+        if self.y + self.radius >= WINDOW_HEIGHT:
+            self.y = WINDOW_HEIGHT - self.radius
+            
+            # Only bounce if moving fast enough
+            if abs(self.vy) > MIN_BOUNCE_VELOCITY:
+                self.vy = -abs(self.vy) * FRICTION
+            else:
+                self.vy = 0  # Stop bouncing
+                
+            # Apply friction to horizontal movement
+            self.vx *= 0.95
+        
+        # STEP 5: Bounce off ceiling
+        if self.y - self.radius <= 0:
+            self.y = self.radius
+            self.vy = abs(self.vy) * FRICTION
+```
+
+::: {.callout-consider}
+## 🤔 Consider This Corner
+
+**Why do we use `abs(self.vy)` when bouncing?**
+
+`abs()` makes the number positive. When hitting the floor, we want the ball to go up (negative vy), so we make it positive and then negate it: `-abs(self.vy)`.
+
+When hitting the right wall, we want it to go left (negative vx), so we make it positive: `abs(self.vx)`.
+
+This ensures the ball always bounces in the correct direction!
+:::
+
+### Step 4: Draw the Ball with Velocity Vector
+
+```python
+    def draw(self, surface):
+        """Draw the ball on the given surface."""
+        # Draw the ball
+        pygame.draw.circle(surface, self.color, 
+                          (int(self.x), int(self.y)), 
+                          self.radius)
+        
+        # Draw velocity vector (shows movement direction)
+        end_x = int(self.x + self.vx * 3)
+        end_y = int(self.y + self.vy * 3)
+        pygame.draw.line(surface, WHITE, 
+                        (int(self.x), int(self.y)), 
+                        (end_x, end_y), 2)
+```
+
+The white line shows which way the ball is moving and how fast!
+
+### Step 5: Create the Main Game Loop
+
+```python
+def main():
+    """Main game loop."""
+    # Create window
+    screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+    pygame.display.set_caption("Day 02: Bouncing Ball Physics")
+    
+    # Create clock
+    clock = pygame.time.Clock()
+    
+    # List to store all balls
+    balls = []
+    
+    # Create some initial balls
+    for _ in range(5):
+        x = random.randint(50, WINDOW_WIDTH - 50)
+        y = random.randint(50, 200)
+        radius = random.randint(15, 40)
+        color = random.choice(COLORS)
+        balls.append(Ball(x, y, radius, color))
+    
+    # Font for instructions
+    font = pygame.font.Font(None, 36)
+    
+    # Main game loop
+    running = True
+    while running:
+        # Handle events
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            
+            # Add ball on mouse click
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                radius = random.randint(15, 40)
+                color = random.choice(COLORS)
+                balls.append(Ball(x, y, radius, color))
+        
+        # Update all balls
+        for ball in balls:
+            ball.update()
+        
+        # Draw everything
+        screen.fill(BLACK)
+        
+        # Draw all balls
+        for ball in balls:
+            ball.draw(screen)
+        
+        # Draw instructions
+        text = font.render("Click to add balls!", True, WHITE)
+        screen.blit(text, (10, 10))
+        
+        # Update display
+        pygame.display.flip()
+        clock.tick(FPS)
+    
+    pygame.quit()
+    sys.exit()
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+## 🎮 Try It Yourself!
+
+### Complete Code
+
+Create a new file `bouncing_ball.py` and copy the complete code from above, or use the provided template!
+
+### Running Your Game
+
+```bash
+cd Day_02
+uv sync
+uv run python src_instr/bouncing_ball.py
+```
+
+### What to Expect
+
+- Multiple colorful balls bouncing around
+- Each ball has a white line showing its velocity
+- Click anywhere to spawn new balls!
+- Balls gradually slow down due to friction
+
+---
+
+## 🧪 Understanding the Physics
+
+### Gravity Simulation
+
+```{python}
+# Let's simulate different gravity values
+
+def test_gravity(gravity, frames=20):
+    """Test how objects fall with different gravity"""
+    y = 0
+    vy = 0
+    
+    print(f"\nGravity = {gravity}")
+    print("Frame | Y Position | Velocity")
+    print("-" * 35)
+    
+    for frame in range(frames):
+        if frame % 5 == 0:  # Print every 5th frame
+            print(f"{frame:5} | {y:10.1f} | {vy:8.2f}")
+        vy += gravity
+        y += vy
+
+# Test different gravity values
+test_gravity(0.5)   # Our game's gravity
+test_gravity(1.0)   # Double gravity
+test_gravity(0.25)  # Moon gravity!
+```
+
+### Velocity Over Time
+
+```{python}
+import matplotlib.pyplot as plt
+
+# Simulate a bouncing ball
+def simulate_bouncing_ball(initial_vy=-15, friction=0.8, gravity=0.5, frames=100):
+    """Simulate and plot ball position over time"""
+    y_positions = []
+    velocities = []
+    y = 300  # Start at middle
+    vy = initial_vy
+    
+    for _ in range(frames):
+        # Apply gravity
+        vy += gravity
+        y += vy
+        
+        # Bounce off ground (y=600)
+        if y >= 600:
+            y = 600
+            vy = -abs(vy) * friction
+        
+        y_positions.append(y)
+        velocities.append(vy)
+    
+    # Create plots
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 6))
+    
+    # Plot position
+    ax1.plot(y_positions, color='blue', linewidth=2)
+    ax1.set_ylabel('Y Position (pixels)')
+    ax1.set_title('Ball Position Over Time')
+    ax1.invert_yaxis()  # Flip so down is positive
+    ax1.grid(True, alpha=0.3)
+    
+    # Plot velocity
+    ax2.plot(velocities, color='red', linewidth=2)
+    ax2.set_xlabel('Frame')
+    ax2.set_ylabel('Velocity (pixels/frame)')
+    ax2.set_title('Ball Velocity Over Time')
+    ax2.axhline(y=0, color='black', linestyle='--', alpha=0.3)
+    ax2.grid(True, alpha=0.3)
+    
+    plt.tight_layout()
+    plt.show()
+    
+    return y_positions, velocities
+
+# Run simulation
+positions, velocities = simulate_bouncing_ball()
+print(f"Ball bounced {sum(1 for v in velocities if v < 0 and velocities[velocities.index(v)-1] > 0)} times")
+```
+
+Notice how the bounces get smaller and smaller!
+
+---
+
+## 🎯 Challenges
+
+### 🌟 Easy Challenges
+
+1. **Change Gravity**: Make gravity stronger (1.0) or weaker (0.25)
+2. **Modify Friction**: Make balls bouncier (0.95) or less bouncy (0.7)
+3. **Add More Colors**: Create new color options
+
+### 🌟🌟 Medium Challenges
+
+4. **Add Ball Collisions**: Make balls bounce off each other
+5. **Size Matters**: Make smaller balls bounce higher than large ones
+6. **Wind Effect**: Add horizontal force to simulate wind
+
+### 🌟🌟🌟 Hard Challenges
+
+7. **Trail Effect**: Show the path balls have traveled
+8. **Energy Display**: Show total energy in the system
+9. **Sticky Floor**: Make balls stick after bouncing a few times
+
+---
+
+## 💡 Code Variations to Try
+
+### Different Ball Behaviors
+
+```python
+# Super bouncy ball
+FRICTION = 1.0
+MIN_BOUNCE_VELOCITY = 0
+
+# Heavy ball (less bouncy)
+FRICTION = 0.6
+GRAVITY = 0.8
+
+# Moon physics
+GRAVITY = 0.1
+FRICTION = 0.95
+```
+
+### Random Spawn Positions
+
+```python
+# In main(), instead of clicking, spawn balls automatically
+import time
+
+last_spawn_time = time.time()
+
+# In game loop:
+current_time = time.time()
+if current_time - last_spawn_time > 0.5:  # Every 0.5 seconds
+    x = random.randint(50, WINDOW_WIDTH - 50)
+    y = 50
+    radius = random.randint(15, 40)
+    color = random.choice(COLORS)
+    balls.append(Ball(x, y, radius, color))
+    last_spawn_time = current_time
+```
+
+---
+
+## 📚 Key Terms to Remember
+
+- **Velocity**: Speed and direction of movement
+- **Acceleration**: Rate of change of velocity (gravity is constant acceleration)
+- **Gravity**: Downward acceleration (makes things fall)
+- **Friction/Restitution**: Energy loss during collisions
+- **Vector**: A quantity with both magnitude (size) and direction
+- **Frame**: One update cycle of the game (60 FPS = 60 updates/second)
+
+---
+
+## 🔬 Physics Fun Facts
+
+::: {.callout-consider}
+## 🤔 Real World Physics
+
+**Did you know?**
+
+- On Earth, gravity accelerates objects at 9.8 m/s² (about 32 ft/s²)
+- On the Moon, gravity is only 1.62 m/s² (about 1/6 of Earth's)
+- A real tennis ball has a coefficient of restitution around 0.75
+- No ball bounces perfectly (friction = 1.0) due to energy loss to heat and sound!
+
+In our game, 1 pixel/frame² is like our unit of "game gravity". Try different values to simulate different planets!
+:::
+
+---
+
+## 💡 Tips for Better Physics Games
+
+1. **Keep Frame Rate Consistent**: Use `clock.tick(FPS)` to ensure smooth physics
+2. **Start with Simple Physics**: Get basic movement working before adding complexity
+3. **Use Small Gravity Values**: Large values make movement look unrealistic
+4. **Test Edge Cases**: What happens with very large velocities? Very small balls?
+5. **Visual Feedback**: The velocity vectors help debug physics issues
+
+---
+
+## 🏁 Wrapping Up
+
+Amazing work! You've created a physics simulation with realistic bouncing, gravity, and friction. You now understand how games create realistic movement!
+
+### What You Accomplished
+
+✅ Implemented velocity and acceleration  
+✅ Created gravity simulation  
+✅ Built realistic bouncing with energy loss  
+✅ Managed multiple objects  
+✅ Added interactive spawning  
+
+### What's Coming Next?
+
+**Day 03: Pong Game** - We'll use our physics knowledge to create a classic two-player game with paddles and a ball!
+
+::: {.callout-important}
+## 📝 Homework (Optional)
+
+Before Day 03:
+1. Experiment with different friction and gravity values
+2. Try adding wind (constant horizontal acceleration)
+3. Create a "pool table" simulation with multiple balls
+4. Make balls change color when they bounce
+:::
+
+---
+
+## � Complete Code - Ready to Copy!
+
+```python
+"""
+Day 02: Bouncing Ball Physics - Complete Working Version
+"""
+
+import pygame
+import sys
+import random
+
+pygame.init()
+
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
+FPS = 60
+
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 100, 100)
+BLUE = (100, 150, 255)
+GREEN = (100, 255, 150)
+PURPLE = (200, 100, 255)
+YELLOW = (255, 255, 100)
+ORANGE = (255, 165, 100)
+
+COLORS = [RED, BLUE, GREEN, PURPLE, YELLOW, ORANGE]
+
+GRAVITY = 0.5
+FRICTION = 0.99
+MIN_BOUNCE_VELOCITY = 0.5
+
+
+class Ball:
+    def __init__(self, x, y, radius, color):
+        self.x = x
+        self.y = y
+        self.radius = radius
+        self.color = color
+        self.vx = random.uniform(-10, 10)
+        self.vy = random.uniform(-15, -5)
+        
+    def update(self):
+        self.vy += GRAVITY
+        self.x += self.vx
+        self.y += self.vy
+        
+        if self.x - self.radius <= 0:
+            self.x = self.radius
+            self.vx = abs(self.vx) * FRICTION
+        elif self.x + self.radius >= WINDOW_WIDTH:
+            self.x = WINDOW_WIDTH - self.radius
+            self.vx = -abs(self.vx) * FRICTION
+        
+        if self.y + self.radius >= WINDOW_HEIGHT:
+            self.y = WINDOW_HEIGHT - self.radius
+            if abs(self.vy) > MIN_BOUNCE_VELOCITY:
+                self.vy = -abs(self.vy) * FRICTION
+            else:
+                self.vy = 0
+            self.vx *= 0.95
+        
+        if self.y - self.radius <= 0:
+            self.y = self.radius
+            self.vy = abs(self.vy) * FRICTION
+            
+    def draw(self, surface):
+        pygame.draw.circle(surface, self.color, (int(self.x), int(self.y)), self.radius)
+        end_x = int(self.x + self.vx * 3)
+        end_y = int(self.y + self.vy * 3)
+        pygame.draw.line(surface, WHITE, (int(self.x), int(self.y)), (end_x, end_y), 2)
+
+
+def main():
+    screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+    pygame.display.set_caption("Day 02: Bouncing Ball Physics")
+    clock = pygame.time.Clock()
+    
+    balls = []
+    for _ in range(5):
+        x = random.randint(50, WINDOW_WIDTH - 50)
+        y = random.randint(50, 200)
+        radius = random.randint(15, 40)
+        color = random.choice(COLORS)
+        balls.append(Ball(x, y, radius, color))
+    
+    font = pygame.font.Font(None, 36)
+    
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                radius = random.randint(15, 40)
+                color = random.choice(COLORS)
+                balls.append(Ball(x, y, radius, color))
+        
+        for ball in balls:
+            ball.update()
+        
+        screen.fill(BLACK)
+        for ball in balls:
+            ball.draw(screen)
+        
+        text = font.render("Click to add balls!", True, WHITE)
+        screen.blit(text, (10, 10))
+        
+        pygame.display.flip()
+        clock.tick(FPS)
+    
+    pygame.quit()
+    sys.exit()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+## �📖 Additional Resources
+
+- [Physics in Games (Khan Academy)](https://www.khanacademy.org/computing/computer-programming/programming-games-visualizations)
+- [Pygame Physics Tutorial](https://www.pygame.org/wiki/tutorials)
+- [Understanding Velocity and Acceleration](https://www.khanacademy.org/science/physics/one-dimensional-motion)
+
+---
+
+::: {.hero-banner}
+# See you on Day 03! 🏓
+
+You're becoming a game developer! Keep experimenting and having fun!
+
+*"Physics is like sex: sure, it may give some practical results, but that's not why we do it."* - Richard Feynman
+:::

@@ -1,0 +1,69 @@
+---
+title: "Quest 10: Number Game - Guess and Check"
+subtitle: "Build a Simple Interactive Rust Program"
+format:
+  live-html:
+    code-tools: true
+---
+
+::: {.quest-badge}
+🎲 QUEST 10 | Difficulty: Beginner | Time: 10 minutes
+:::
+
+::: {.tip-box}
+**💻 Practice Options:**
+- 🦀 [Open Rust Playground](https://play.rust-lang.org/)
+- 📓 [View Notebook](../files/lessons/10-number-game.ipynb)
+- 📥 [Download Notebook](../files/lessons/10-number-game.ipynb)
+:::
+
+## 📖 Introduction
+Small games are great practice for conditionals and loops.
+Small improvements each run add up quickly.
+
+## 💡 Core Game Logic
+
+```rust
+fn main() {
+    let secret = 7;
+    let guess = 5;
+
+    if guess == secret {
+        println!("Correct!");
+    } else if guess < secret {
+        println!("Too low");
+    } else {
+        println!("Too high");
+    }
+}
+```
+
+## 🎯 Gentle Challenge
+Track how many guesses were used and stop after 3 attempts.
+If that works, try one new secret number and test again.
+
+## ✅ One Possible Solution
+
+```rust
+fn main() {
+    let secret = 7;
+    let guesses = vec![4, 7, 9];
+
+    for (turn, guess) in guesses.iter().enumerate() {
+        if *guess == secret {
+            println!("Turn {}: correct!", turn + 1);
+            break;
+        } else if *guess < secret {
+            println!("Turn {}: too low", turn + 1);
+        } else {
+            println!("Turn {}: too high", turn + 1);
+        }
+    }
+}
+```
+
+::: {.quest-complete}
+### ✨ Quest 10 Complete
+You built a tiny game loop using Rust control flow.
+Next: [Quest 11: Recursion](11-recursion.qmd)
+:::
