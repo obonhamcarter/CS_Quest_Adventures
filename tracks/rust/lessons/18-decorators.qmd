@@ -13,8 +13,6 @@ format:
 ::: {.tip-box}
 **💻 Practice Options:**
 - 🦀 [Open Rust Playground](https://play.rust-lang.org/)
-- 📓 [View Notebook](../files/lessons/18-decorators.ipynb)
-- 📥 [Download Notebook](../files/lessons/18-decorators.ipynb)
 :::
 
 ## 📖 Introduction

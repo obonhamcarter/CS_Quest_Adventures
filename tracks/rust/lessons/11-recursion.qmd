@@ -13,8 +13,6 @@ format:
 ::: {.tip-box}
 **💻 Practice Options:**
 - 🦀 [Open Rust Playground](https://play.rust-lang.org/)
-- 📓 [View Notebook](../files/lessons/11-recursion.ipynb)
-- 📥 [Download Notebook](../files/lessons/11-recursion.ipynb)
 :::
 
 ## 📖 Introduction
